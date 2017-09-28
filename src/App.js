@@ -7,6 +7,7 @@ import RemoveVehicle from "./RemoveVehicle";
 import EditVehicle from "./EditVehicle";
 import Menu from "./Menu";
 import BookVehicle from "./BookVehicle";
+import placeholderData from "./data.json";
 
 class App extends Component {
   constructor(props) {
@@ -25,19 +26,22 @@ class App extends Component {
         price: 298,
         image: "https://linktofile.jpg",
         bookable: true,
-        bookDates: []
-      }
+        bookDates: [],
+        notes: 'String'
+      },
+      database: ''
     }
   }
-
   componentDidMount() {
     window.addEventListener("hashchange", () => {
       this.checkUrl()
+    });
+    this.setState({
+      database: placeholderData
     })
   }
 
   checkUrl() {
-    console.log('sdöklfjsdlkjf');
     switch (window.location.hash) {
       case '#add':
         this.setState({
@@ -89,7 +93,9 @@ class App extends Component {
           handleLogin={this.handleLogin.bind(this)}
         />
         {this.state.location === 'show' &&
-        <AllVehicles/>
+        <AllVehicles
+          data={this.state.database}
+        />
         }
         {this.state.location === 'cancel' &&
         <CancelBooking/>
