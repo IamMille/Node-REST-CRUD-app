@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 export default class BookVehicle extends Component {
   render() {
     return (
-      <div>
+      <section className={"book-vehicle"}>
         {console.log(this.props.data)}
         <img src="http://via.placeholder.com/150x150" alt="bild"/>
         <p>Fordonstyp: {this.props.data.type}</p>
@@ -15,7 +15,8 @@ export default class BookVehicle extends Component {
         <p>Dagshyra: {this.props.data.price}</p>
         <p>Anteckningar: {this.props.data.notes}</p>
         <p>test: {this.props.data.typeasda || 'Unknown'}</p>
-      </div>
+        <button className={"button"}>Boka</button>
+      </section>
     );
   }
 }

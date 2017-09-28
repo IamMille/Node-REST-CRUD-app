@@ -32,7 +32,8 @@
     "license": "B",
     "brand": "Volkswagen",
     "model": "LT 46b",
-    "year": 1999
+    "year": 1999,
+    "price": 498
   },
   {
     "type": "personbil",

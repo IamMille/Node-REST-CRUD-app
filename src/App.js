@@ -32,7 +32,9 @@ class App extends Component {
       database: ''
     }
   }
+
   componentDidMount() {
+    this.checkUrl();
     window.addEventListener("hashchange", () => {
       this.checkUrl()
     });
@@ -122,6 +124,7 @@ class App extends Component {
     );
   }
 }
+
 /*
   data.forEach(el => {
     var x = "gearbox" in el ? el.gearbox : 'unknown'
