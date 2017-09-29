@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 export default class AllVehicles extends Component {
   render() {
@@ -6,7 +7,9 @@ export default class AllVehicles extends Component {
       <section className={"all-vehicles"}>
         {console.log(this.props.data)}
         <h1 className={"section-heading"}>Alla fordon</h1>
-        <p>filter här kommer här</p>
+        <div className="filter-container">
+          <p>filter här kommer här</p>
+        </div>
         <div className={"vehicle-search-head"}>
           <span>Bild</span>
           <span>Märke</span>
@@ -18,12 +21,12 @@ export default class AllVehicles extends Component {
           {this.props.data.map((vehicle, index) => {
             console.log(vehicle);
             return (
-              <li key={index} data-id={vehicle._id}>
+              <li key={index} data-id={vehicle._id} onClick={this.props.vehicleBooking}>
                 <div className={"image-container"}>
-                  <img src={vehicle.imgLink || "http://via.placeholder.com/150x150"} alt="" width="150"/>
+                  <img src={vehicle.photo || "http://via.placeholder.com/150x150"} alt="" width="120"/>
                 </div>
                 <span>{vehicle.brand}</span> <span>{vehicle.model}</span>
-                <span>{vehicle.type}</span> <span className={"price"}>{vehicle.price}:-</span>
+                <span>{vehicle.type}</span> <span>{vehicle.price}:-</span>
               </li>
             );
           })}
@@ -34,5 +37,8 @@ export default class AllVehicles extends Component {
 }
 //bild, brand, model, (typ av bil), pris
 
-//hämta med fetch i lokal json-fil
+AllVehicles.propTypes = {
+  data: PropTypes.array.isRequired,
+  vehicleBooking: PropTypes.func.isRequired
+};
 

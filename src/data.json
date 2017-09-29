@@ -17,7 +17,7 @@
     "year": 1997,
     "price": 349,
     "gearbox": "manuell",
-    "imgLink": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Volvo-V40.jpg"
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Volvo-V40.jpg"
   },
   {
     "type": "lätt lastbil",
@@ -33,7 +33,7 @@
     "brand": "Volkswagen",
     "model": "LT 46b",
     "year": 1999,
-    "price": 498
+    "price": 299
   },
   {
     "type": "personbil",
@@ -43,7 +43,7 @@
     "model": "308",
     "year": 2007,
     "price": 298,
-    "imgLink": "https://upload.wikimedia.org/wikipedia/commons/4/40/Peugeot_308_5-T%C3%BCrer_front.JPG"
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/4/40/Peugeot_308_5-T%C3%BCrer_front.JPG"
   },
   {
     "type": "tung lastbil",
@@ -52,7 +52,7 @@
     "model": "Atego 8 16 L 4 x 2",
     "year": 1995,
     "price": 850,
-    "photoLink": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Mercedes-Benz_Atego_white_strasbourg.JPG",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Mercedes-Benz_Atego_white_strasbourg.JPG",
     "notes": [
       "Skada: Större reva på högersida skåp."
     ]
@@ -65,7 +65,7 @@
     "gearbox": "automat",
     "year": 2000,
     "price": 398,
-    "imgLink": "https://upload.wikimedia.org/wikipedia/commons/7/79/Audi_A4_B7_Avant_2.0_TDI.JPG",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/7/79/Audi_A4_B7_Avant_2.0_TDI.JPG",
     "fuel": "95"
   },
   {
@@ -76,7 +76,7 @@
     "year": 2005,
     "gearbox": "manuell",
     "price": 498,
-    "imgLink": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Volvo_V50_--_04-20-2010.jpg"
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Volvo_V50_--_04-20-2010.jpg"
   },
   {
     "type": "motorcykel",
@@ -92,7 +92,7 @@
     "brand": "Toyota",
     "model": "Aygo",
     "price": 198,
-    "imgLink": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Toyota_Aygo_front_20071204.jpg"
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Toyota_Aygo_front_20071204.jpg"
   },
   {
     "type": "ATV",
@@ -118,7 +118,7 @@
     "model": "Spyder Roadster",
     "year": 2015,
     "price": 798,
-    "imgLink": "https://upload.wikimedia.org/wikipedia/commons/5/52/BRP_Can-Am_Spyder_Roadster_20100810c.JPG"
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/5/52/BRP_Can-Am_Spyder_Roadster_20100810c.JPG"
   },
   {
     "type": "personbil",
@@ -128,7 +128,7 @@
     "model": "Optima kombi",
     "year": 2001,
     "price": 498,
-    "imgLink": "https://upload.wikimedia.org/wikipedia/commons/e/eb/2011_Kia_Optima_Hybrid_--_05-19-2011.jpg"
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/e/eb/2011_Kia_Optima_Hybrid_--_05-19-2011.jpg"
   },
   {
     "type": "lätt lastbil",
@@ -154,9 +154,7 @@
     "model": "c30",
     "price": 225,
     "fuel": "diesel",
-    "notes": {
-      "skador": "Backen är väldigt trög att få i."
-    }
+    "notes": "Backen är väldigt trög att få i."
   },
   {
     "type": "personbil",

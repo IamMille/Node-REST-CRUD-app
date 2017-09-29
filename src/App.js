@@ -15,7 +15,7 @@ class App extends Component {
     this.state = {
       admin: true,
       location: '',
-      bookVehicle: true,
+      bookVehicle: false,
       vehicleData: {
         type: "personbil",
         license: "B",
@@ -86,6 +86,31 @@ class App extends Component {
     })
   }
 
+  vehicleBooking(event) {
+    //för att se till att oavsett vad vi klickar på i listan så är event.target alltid ett li element
+    let target = event.target;
+    if (event.target.localName === 'span' || event.target.localName === 'div') {
+      target = event.target.parentElement;
+    } else if (event.target.localName === 'img') {
+      target = event.target.parentElement.parentElement;
+    }
+
+    const model = target.children[2].innerText.toLowerCase();
+    const findCarInDatabase = this.state.database.filter(a => a.model.toLowerCase().indexOf(model) > -1);
+    console.log(findCarInDatabase);
+    this.setState({
+      vehicleData: findCarInDatabase,
+      bookVehicle: true
+    })
+  };
+
+  handleModal() {
+    console.log('asd')
+    this.setState({
+      bookVehicle: !this.state.bookVehicle
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -97,6 +122,7 @@ class App extends Component {
         {this.state.location === 'show' &&
         <AllVehicles
           data={this.state.database}
+          vehicleBooking={this.vehicleBooking.bind(this)}
         />
         }
         {this.state.location === 'cancel' &&
@@ -118,6 +144,7 @@ class App extends Component {
         {this.state.bookVehicle &&
         <BookVehicle
           data={this.state.vehicleData}
+          closeModal={this.handleModal.bind(this)}
         />
         }
       </div>

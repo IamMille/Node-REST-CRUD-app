@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 export default class Menu extends Component {
   render() {
@@ -22,4 +23,10 @@ export default class Menu extends Component {
     );
   }
 }
+
+Menu.propTypes = {
+  checkUrl: PropTypes.func.isRequired,
+  admin: PropTypes.bool.isRequired,
+  handleLogin: PropTypes.func.isRequired
+};
 
