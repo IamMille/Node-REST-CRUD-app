@@ -96,7 +96,7 @@ class App extends Component {
     }
 
     const model = target.children[2].innerText.toLowerCase();
-    const findCarInDatabase = this.state.database.filter(a => a.model.toLowerCase().indexOf(model) > -1);
+    const findCarInDatabase = this.state.database.filter(vehicle => vehicle.model.toLowerCase().indexOf(model) > -1);
     console.log(findCarInDatabase);
     this.setState({
       vehicleData: findCarInDatabase,
@@ -104,16 +104,17 @@ class App extends Component {
     })
   };
 
-  handleModal() {
-    console.log('asd')
-    this.setState({
-      bookVehicle: !this.state.bookVehicle
-    })
+  handleModal(event) {
+    if (event.target.localName === 'section' || event.target.innerText === 'Stäng') {
+      this.setState({
+        bookVehicle: !this.state.bookVehicle
+      })
+    }
   }
 
   render() {
     return (
-      <div className="App">
+      <div className={this.state.bookVehicle ? 'no-scroll App' : 'App'}>
         <Menu
           admin={this.state.admin}
           checkUrl={this.checkUrl.bind(this)}
