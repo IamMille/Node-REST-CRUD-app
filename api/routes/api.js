@@ -43,7 +43,7 @@ router.get('/:model/delete/:id', (req, res) =>
     }
 });
 
-// http://localhost:5000/api/actor/update/59c8e505847b4a5c1bce7d82?name.last=hultgren4
+// http://localhost:5000/api/actor/update/59c8e505847b4a5c1bce7d82?name.last=hult
 router.get('/:model/update/:id', (req, res) =>
 {
     try {
@@ -52,7 +52,7 @@ router.get('/:model/update/:id', (req, res) =>
 
         let Model = require('../models/' + req.params.model);
 
-        Model.findByIdAndUpdate(req.params.id, req.query, {new:true}, (err, doc) =>
+        Model.findByIdAndUpdate(req.params.id, req.query, {new:true, runValidators:true}, (err, doc) =>
         {
             if (err) return res.json({result: 'error', error: err.name, message: err.message});
 
@@ -67,7 +67,8 @@ router.get('/:model/update/:id', (req, res) =>
     }
 });
 
-router.get('/:model/read', (req, res) => // http://localhost:5000/api/actor/read?name.first=nisse
+// http://localhost:5000/api/actor/read?name.first=nisse
+router.get('/:model/read', (req, res) =>
 {
     try {
         let Model = require('../models/' + req.params.model);
@@ -78,7 +79,7 @@ router.get('/:model/read', (req, res) => // http://localhost:5000/api/actor/read
 
             res.json({
                 result: 'ok',
-                message: `Successfully found document`,
+                message: 'Successfully found document',
                 data: docs
             });
         });
@@ -87,7 +88,10 @@ router.get('/:model/read', (req, res) => // http://localhost:5000/api/actor/read
     }
 });
 
-router.get('/:model/create', (req, res) => // http://localhost:5000/api/actor/create?name.first=nisse&name.last=hult
+// http://localhost:5000/api/actor/create?name.first=nisse&name.last=hult
+// http://localhost:5000/api/vehicle/create?type=personbil&brand=Mazda&model=cool&year=2018&price=999&gearbox=manuell&license=B
+// http://localhost:5000/api/booking/create/?vehicleId=59ccf2a16176ce4a59115532&name=Maria&dateFrom=2017-09-01&dateTill=2017-09-06
+router.get('/:model/create', (req, res) =>
 {
     try {
         let Model = require('../models/' + req.params.model);

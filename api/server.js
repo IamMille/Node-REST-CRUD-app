@@ -1,6 +1,6 @@
 
 const PORT = process.env.PORT || 5000;
-const DATABASE = 'mongodb://localhost/labMongo';
+const DATABASE = 'mongodb://localhost/vehicleBooking';
 
 // ---------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ app.use( (req, res, next) => {
 
     next();
 });
-app.use('/', express.static('build'));
+//app.use('/', express.static('build'));
 app.use('/api', require('./routes/api')); // beware! middleware without next()
 app.listen(PORT, () => {
     console.log('*** Server listening on %d @ %s', PORT, new Date().toLocaleString());
