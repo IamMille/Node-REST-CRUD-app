@@ -98,6 +98,10 @@ label {
   color: #ffffff;
 }
 
+.form-group-container-full > .button-danger {
+  background: #ff625b;
+}
+
 .form-group-container {
   width: 50%;
   display: inline-block;
