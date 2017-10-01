@@ -26,7 +26,7 @@ let vehicleSchema = new Schema(
     },
     license: {
         type: String,
-        enum: ['A1', 'B', 'CE']
+        enum: ['A1', 'A2', 'AM', 'B', 'BE', 'C', 'CE', 'C1', 'C1E', 'D', 'D1E', 'Utökad B']
     },
     price: {
         type: Number,
