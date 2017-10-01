@@ -5,7 +5,7 @@ export default class AllVehicles extends Component {
   render() {
     return (
       <section className={"all-vehicles"}>
-        {console.log(this.props.data)}
+        {/*console.log(this.props.data)*/}
         <h1 className={"section-heading"}>Alla fordon</h1>
         <div className="filter-container">
           <p>filter här kommer här</p>
@@ -19,7 +19,7 @@ export default class AllVehicles extends Component {
         </div>
         <ul>
           {this.props.data.map((vehicle, index) => {
-            console.log(vehicle);
+            //console.log(vehicle);
             return (
               <li key={index} data-id={vehicle._id} onClick={this.props.vehicleBooking}>
                 <div className={"image-container"}>
