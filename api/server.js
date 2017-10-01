@@ -15,10 +15,13 @@ app.engine('html', mustacheExpress());
 app.set('view engine', 'mustache'); //app.set('views', __dirname + '/views');
 app.use( (req, res, next) => {
     let ignore = ['/favicon.ico', '/banana'];
-
     if (ignore.indexOf(req.path) === -1)
         console.log('@', new Date().toLocaleString(), req.ip, req.method, req.originalUrl);
-
+    next();
+});
+app.use( (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 //app.use('/', express.static('build'));
