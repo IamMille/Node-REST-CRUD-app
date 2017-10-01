@@ -7,6 +7,7 @@ export default class EditVehicle extends Component {
       return (
         <section className="edit-vehicle">
           <h1 className="section-heading">Redigera fordon</h1>
+          <p>OBS! MYCKET AV DENNA HTML ÄR FIXAD/ÄNDRAD I COMPONENTEN [AddVehicles]</p>
           <form action="">
             <div className="form-group-container">
               <label htmlFor="vehicle-id">Fordons-id</label>
@@ -18,21 +19,19 @@ export default class EditVehicle extends Component {
             </div>
             <div className="form-group-container">
               <label htmlFor="type-of-license">Körkort</label>
-              {/*<input type="text" placeholder="B" id="type-of-license"/>*/}
               <select>
-                <option value="a">A</option>
-                <option value="a1">A1</option>
-                <option value="a2">A2</option>
-                <option value="am">AM</option>
-                <option value="b">B</option>
-                <option value="be">BE</option>
-                <option value="c">C</option>
-                <option value="ce">CE</option>
-                <option value="c1">C1</option>
-                <option value="c1e">C1E</option>
-                <option value="d">D</option>
-                <option value="d1">D1E</option>
-                <option value="extended-b">Utökad B</option>
+                <option value="A">A</option>
+                <option value="A1">A1</option>
+                <option value="A2">A2</option>
+                <option value="AM">AM</option>
+                <option value="B">B</option>
+                <option value="BE">BE</option>
+                <option value="C">C</option>
+                <option value="CE">CE</option>
+                <option value="C1">C1</option>
+                <option value="C1E">C1E</option>
+                <option value="D">D</option>
+                <option value="D1E">D1E</option>
               </select>
             </div>
             <div className="form-group-container">
@@ -49,10 +48,9 @@ export default class EditVehicle extends Component {
             </div>
             <div className="form-group-container">
               <label htmlFor="gearbox">Växellåda</label>
-              {/*<input type="text" placeholder="Manuell" id="gearbox"/>*/}
               <select>
-                <option value="manual">Manuell</option>
-                <option value="automatic">Automat</option>
+                <option value="manuell">Manuell</option>
+                <option value="automat">Automat</option>
               </select>
             </div>
             <div className="form-group-container">
@@ -65,7 +63,7 @@ export default class EditVehicle extends Component {
             </div>
             <div className="form-group-container-full">
               <label htmlFor="notes" className="block">Noteringar</label>
-              <textarea name="notes" id="notes" placeholder="Bilen är nästan trasig."></textarea>
+              <textarea name="notes" id="notes" placeholder="Bilen är nästan trasig." />
             </div>
             <div className="form-group-container-full">
               <label htmlFor="available-for-rent">Tillgänglig för uthyrning:</label>
