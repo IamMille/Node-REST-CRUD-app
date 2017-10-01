@@ -53,9 +53,7 @@
     "year": 1995,
     "price": 850,
     "photo": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Mercedes-Benz_Atego_white_strasbourg.JPG",
-    "notes": [
-      "Skada: Större reva på högersida skåp."
-    ]
+    "notes": "Skada: Större reva på högersida skåp."
   },
   {
     "type": "personbil",
