@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
+import AllVehicles from "./components/AllVehicles";
+import CancelBooking from "./components/CancelBooking";
+import AddVehicle from "./components/AddVehicle";
+import EditVehicle from "./components/EditVehicle";
+import Menu from "./components/Menu";
+import BookVehicle from "./components/BookVehicle";
+import Render from './components/Render';
 import './App.css';
-import AllVehicles from "./AllVehicles";
-import CancelBooking from "./CancelBooking";
-import AddVehicle from "./AddVehicle";
-import EditVehicle from "./EditVehicle";
-import Menu from "./Menu";
-import BookVehicle from "./BookVehicle";
 import placeholderData from "./data.json";
+
 
 class App extends Component {
   constructor(props) {
@@ -74,30 +76,37 @@ class App extends Component {
   render() {
     return (
       <div className={this.state.bookVehicle ? 'no-scroll App' : 'App'}>
+
         <Menu
           admin={this.state.admin}
           checkUrl={this.checkUrl.bind(this)}
           handleLogin={this.handleLogin.bind(this)}
         />
+
         <AllVehicles
           if={this.state.location === 'show'}
           data={this.state.database}
           vehicleBooking={this.vehicleBooking.bind(this)}
         />
+
         <CancelBooking
           if={this.state.location === 'cancel'}
         />
-        <AddVehicle
-          if={this.state.location === 'add' && this.state.admin}
-        />
+
+        <Render if={this.state.location === 'add' && this.state.admin}>
+            <AddVehicle/>
+        </Render>
+
         <EditVehicle
           if={this.state.location === 'edit' && this.state.admin}
         />
+
         <BookVehicle
           if={this.state.bookVehicle === true}
           data={this.state.vehicleData}
           closeModal={this.handleModal.bind(this)}
         />
+
       </div>
     );
   }
