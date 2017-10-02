@@ -28,7 +28,7 @@ export default class AddVehicle extends Component
     };
 
     handleSubmit = () => {
-        fetch( config.apiRoot + "vehicle/create?" + this.serializeObject(this.state) )
+        fetch(config.apiRoot + "vehicle/create?" + this.serializeObject(this.state))
             .then(resp => resp.json())
             .then(json => {
                 // show success message to the user
