@@ -48,6 +48,10 @@ export default class EditVehicle extends Component {
     }
   }
 
+  handleDelete() {
+    console.log(this.state.selectedVehicle[0]._id)
+  }
+
   handleSubmit() {
     console.log(this.state.selectedVehicle);
   }
@@ -139,7 +143,7 @@ export default class EditVehicle extends Component {
               <button className="button" type="button" onClick={this.handleSubmit.bind(this)}>Redigera</button>
             </div>
             <div className="form-group-container-full">
-              <button className="button button-danger">Ta bort fordon</button>
+              <button className="button button-danger" type="button" onClick={this.handleDelete.bind(this)}>Ta bort fordon</button>
             </div>
           </form>
         </section>

@@ -64,9 +64,9 @@ class App extends Component {
     } else if (target.localName === 'img') {
       target = target.parentElement.parentElement;
     }
-
-    const carModel = target.children[2].innerText.toLowerCase();
-    const findCarInDatabase = this.state.database.filter(vehicle => vehicle.model.toLowerCase().indexOf(carModel) > -1);
+    const carId = target.getAttribute('data-id');
+    //const carModel = target.children[2].innerText.toLowerCase();
+    const findCarInDatabase = this.state.database.filter(vehicle => vehicle._id.indexOf(carId) > -1);
     console.log(findCarInDatabase);
     this.setState({
       vehicleData: findCarInDatabase,

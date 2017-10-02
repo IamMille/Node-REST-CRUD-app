@@ -9,7 +9,7 @@ export default class BookVehicle extends Component {
           <div className="book-vehicle-container">
             {console.log(this.props.data)}
             <div className="image-container-book">
-              <img src={this.props.data[0].photo || "http://via.placeholder.com/150x150"} alt="bild"/>
+              <img src={this.props.data[0].image || "http://via.placeholder.com/150x150"} alt="bild"/>
             </div>
             <div className="list-container">
               <ul>
