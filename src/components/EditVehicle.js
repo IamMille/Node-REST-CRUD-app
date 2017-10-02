@@ -80,7 +80,6 @@ export default class EditVehicle extends Component {
       return (
         <section className="edit-vehicle">
           <h1 className="section-heading">Redigera fordon</h1>
-          <p>OBS! MYCKET AV DENNA HTML ÄR FIXAD/ÄNDRAD I COMPONENTEN [AddVehicles]</p>
           <form action="">
             <div className="form-group-container">
               <label htmlFor="vehicle-id">Fordons-id</label>
