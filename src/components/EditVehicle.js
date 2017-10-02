@@ -35,7 +35,6 @@ export default class EditVehicle extends Component {
     const value = event.target.value;
     const oldState = this.state.selectedVehicle;
     if (target.type === 'radio') {
-      console.log(target, value)
       oldState[0].bookable = !oldState[0].bookable;
       this.setState({
         selectedVehicle: oldState
@@ -57,7 +56,6 @@ export default class EditVehicle extends Component {
   }
   render() {
     if (this.props.if) {
-      console.log(this.state.selectedVehicle, '-----')
       return (
         <section className="edit-vehicle">
           <h1 className="section-heading">Redigera fordon</h1>

@@ -65,7 +65,7 @@ class App extends Component {
       target = target.parentElement.parentElement;
     }
     const carId = target.getAttribute('data-id');
-    //const carModel = target.children[2].innerText.toLowerCase();
+    //kom ihåg att lägga till && vehicle.bookable så att vi inte listar fordon som ej är tillgängliga för uthyrning
     const findCarInDatabase = this.state.database.filter(vehicle => vehicle._id.indexOf(carId) > -1);
     console.log(findCarInDatabase);
     this.setState({
