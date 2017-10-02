@@ -24,7 +24,7 @@ app.use( (req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-//app.use('/', express.static('build'));
+app.use('/', express.static('build'));
 app.use('/api', require('./routes/api')); // beware! middleware without next()
 app.listen(PORT, () => {
     console.log('*** Server listening on %d @ %s', PORT, new Date().toLocaleString());
