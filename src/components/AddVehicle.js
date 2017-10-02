@@ -13,7 +13,7 @@ export default class AddVehicle extends Component
             year: 2017,
             gearbox: 'manuell',
             price: 999,
-            note: 'Bananen är trasig'
+            note: 'Exempeldata är förifylld. (Formuläret är fungerande och ihopkopplat med API/DB.)'
         };
     }
 
