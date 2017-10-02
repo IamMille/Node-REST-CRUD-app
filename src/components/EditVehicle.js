@@ -16,7 +16,7 @@ export default class EditVehicle extends Component {
         price: 798,
         image: "https://url.se",
         bookable: true,
-        notes: 'Det här är lite anteckningar'
+        note: 'Det här är lite anteckningar'
       }]
     };
   }
@@ -147,8 +147,8 @@ export default class EditVehicle extends Component {
               <input type="text" placeholder="http://url.se" id="image" value={this.state.selectedVehicle[0].image || 'Ingen data'} onChange={this.handleChange.bind(this)}/>
             </div>
             <div className="form-group-container-full">
-              <label htmlFor="notes" className="block">Noteringar</label>
-              <textarea name="notes" id="notes" placeholder="Bilen är nästan trasig."  value={this.state.selectedVehicle[0].notes || 'Ingen' +
+              <label htmlFor="note" className="block">Noteringar</label>
+              <textarea name="note" id="note" placeholder="Bilen är nästan trasig."  value={this.state.selectedVehicle[0].note || 'Ingen' +
               ' data'} onChange={this.handleChange.bind(this)}/>
             </div>
             <div className="form-group-container-full">
