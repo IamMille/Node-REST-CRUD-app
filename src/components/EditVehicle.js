@@ -94,12 +94,11 @@ export default class EditVehicle extends Component {
             </div>
             <div className="form-group-container">
               <label htmlFor="type">Fordonstyp</label>
-              <input type="text" placeholder="Personbil" id="type" value={this.state.selectedVehicle[0].type || 'Ingen' +
-              ' data'} onChange={this.handleChange.bind(this)}/>
+              <input type="text" placeholder="ex. Personbil" id="type" value={this.state.selectedVehicle[0].type } onChange={this.handleChange.bind(this)}/>
             </div>
             <div className="form-group-container">
               <label htmlFor="license">Körkort</label>
-              <select value={this.state.selectedVehicle[0].license || 'Ingen data'} onChange={this.handleChange.bind(this)} id="license">
+              <select value={this.state.selectedVehicle[0].license} onChange={this.handleChange.bind(this)} id="license">
                 <option value="A">A</option>
                 <option value="A1">A1</option>
                 <option value="A2">A2</option>
@@ -116,39 +115,34 @@ export default class EditVehicle extends Component {
             </div>
             <div className="form-group-container">
               <label htmlFor="brand">Märke</label>
-              <input type="text" placeholder="Mazda" id="brand" value={this.state.selectedVehicle[0].brand || 'Ingen' +
-              ' data'} onChange={this.handleChange.bind(this)}/>
+              <input type="text" placeholder="ex. Mazda" id="brand" value={this.state.selectedVehicle[0].brand} onChange={this.handleChange.bind(this)}/>
             </div>
             <div className="form-group-container">
               <label htmlFor="model">Modell</label>
-              <input type="text" placeholder="321i" id="model" value={this.state.selectedVehicle[0].model || 'Ingen' +
-              ' data'} onChange={this.handleChange.bind(this)}/>
+              <input type="text" placeholder="ex. 321i" id="model" value={this.state.selectedVehicle[0].model} onChange={this.handleChange.bind(this)}/>
             </div>
             <div className="form-group-container">
               <label htmlFor="year">År</label>
-              <input type="text" placeholder="1995" id="year" value={this.state.selectedVehicle[0].year || 'Ingen' +
-                ' data'} onChange={this.handleChange.bind(this)}/>
+              <input type="text" placeholder="ex. 1995" id="year" value={this.state.selectedVehicle[0].year} onChange={this.handleChange.bind(this)}/>
             </div>
             <div className="form-group-container">
               <label htmlFor="gearbox">Växellåda</label>
-              <select value={this.state.selectedVehicle[0].gearbox || 'Ingen data'} onChange={this.handleChange.bind(this)} id="gearbox">
+              <select value={this.state.selectedVehicle[0].gearbox} onChange={this.handleChange.bind(this)} id="gearbox">
                 <option value="manuell">Manuell</option>
                 <option value="automat">Automat</option>
               </select>
             </div>
             <div className="form-group-container">
               <label htmlFor="price">Dagshyra</label>
-              <input type="text" placeholder="999" id="price" value={this.state.selectedVehicle[0].price || 'Ingen' +
-              ' data'} onChange={this.handleChange.bind(this)}/>
+              <input type="text" placeholder="ex. 999" id="price" value={this.state.selectedVehicle[0].price} onChange={this.handleChange.bind(this)}/>
             </div>
             <div className="form-group-container-full">
               <label htmlFor="image">Bildlänk</label>
-              <input type="text" placeholder="http://url.se" id="image" value={this.state.selectedVehicle[0].image || 'Ingen data'} onChange={this.handleChange.bind(this)}/>
+              <input type="text" placeholder="ex. http://url.se" id="image" value={this.state.selectedVehicle[0].image} onChange={this.handleChange.bind(this)}/>
             </div>
             <div className="form-group-container-full">
               <label htmlFor="note" className="block">Noteringar</label>
-              <textarea name="note" id="note" placeholder="Bilen är nästan trasig."  value={this.state.selectedVehicle[0].note || 'Ingen' +
-              ' data'} onChange={this.handleChange.bind(this)}/>
+              <textarea name="note" id="note" placeholder="ex. Bilen är nästan trasig."  value={this.state.selectedVehicle[0].note} onChange={this.handleChange.bind(this)}/>
             </div>
             <div className="form-group-container-full">
               <label htmlFor="available-for-rent">Tillgänglig för uthyrning:</label>
