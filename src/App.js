@@ -8,6 +8,7 @@ import BookVehicle from "./components/BookVehicle";
 import Render from './components/Render';
 import './App.css';
 import placeholderData from "./data.json";
+import config from './config.json';
 
 
 class App extends Component {
@@ -18,19 +19,28 @@ class App extends Component {
       location: '',
       bookVehicle: false,
       vehicleData: [],
-      database: []
+      database: [],
+      finished: false
     }
   }
 
   componentDidMount() {
+    fetch(config.apiRoot + "vehicle/read?")
+      .then(resp => resp.json())
+      .then(json => {
+        this.setState({
+          database: json.data,
+          finished: true
+        })
+      })
+      .catch(error => {
+        console.error("API error:", error);
+      });
+
     this.checkUrl();
     window.addEventListener("hashchange", () => {
       this.checkUrl()
     });
-
-    this.setState({
-      database: placeholderData
-    })
   }
 
   checkUrl() {
@@ -94,12 +104,15 @@ class App extends Component {
         />
 
         <Render if={this.state.location === 'add' && this.state.admin}>
-            <AddVehicle/>
+          <AddVehicle/>
         </Render>
 
+        <Render if={this.state.finished}>
         <EditVehicle
           if={this.state.location === 'edit' && this.state.admin}
+          data={this.state.database}
         />
+        </Render>
 
         <BookVehicle
           if={this.state.bookVehicle === true}

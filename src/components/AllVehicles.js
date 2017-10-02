@@ -24,10 +24,10 @@ export default class AllVehicles extends Component {
               return (
                 <li key={index} data-id={vehicle._id} onClick={this.props.vehicleBooking}>
                   <div className="image-container">
-                    <img src={vehicle.photo || "http://via.placeholder.com/150x150"} alt="" width="120"/>
+                    <img src={vehicle.image || "http://via.placeholder.com/150x150"} alt="" width="120"/>
                   </div>
-                  <span>{vehicle.brand}</span> <span>{vehicle.model}</span>
-                  <span>{vehicle.type}</span> <span>{vehicle.price}:-</span>
+                  <span>{vehicle.brand || 'Ingen data'}</span> <span>{vehicle.model || 'Ingen data'}</span>
+                  <span>{vehicle.type || 'Ingen data'}</span> <span>{vehicle.price || 'Ingen data'}:-</span>
                 </li>
               );
             })}
