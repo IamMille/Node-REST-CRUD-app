@@ -1,3 +1,5 @@
+.DS_Store
+
 # Webstorm
 # https://stackoverflow.com/questions/11968531/what-to-gitignore-from-the-idea-folder
 **/.idea/workspace.xml

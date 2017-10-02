@@ -7,7 +7,6 @@ import Menu from "./components/Menu";
 import BookVehicle from "./components/BookVehicle";
 import Render from './components/Render';
 import './App.css';
-import placeholderData from "./data.json";
 import config from './config.json';
 
 
