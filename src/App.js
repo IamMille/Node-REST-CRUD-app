@@ -11,117 +11,203 @@ import config from './config.json';
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      admin: true,
-      location: '',
-      bookVehicle: false,
-      vehicleData: [],
-      database: [],
-      finished: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            admin: true,
+            location: '',
+            bookVehicle: false,
+            editVehicle: false,
+            vehicleData: [],
+            database: [],
+            finished: false
+        }
     }
-  }
 
-  componentDidMount() {
-    fetch(config.apiRoot + "vehicle/read?")
-      .then(resp => resp.json())
-      .then(json => {
+    componentDidMount() {
+        fetch(config.apiRoot + "vehicle/read?")
+            .then(resp => resp.json())
+            .then(json => {
+                this.setState({
+                    database: json.data,
+                    finished: true
+                })
+            })
+            .catch(error => {
+                console.error("API error:", error);
+            });
+
+        this.checkUrl();
+        window.addEventListener("hashchange", () => {
+            this.checkUrl()
+        });
+    }
+
+    checkUrl() {
+        const currentLocation = window.location.hash.replace('#', '');
         this.setState({
-          database: json.data,
-          finished: true
+            location: currentLocation
         })
-      })
-      .catch(error => {
-        console.error("API error:", error);
-      });
-
-    this.checkUrl();
-    window.addEventListener("hashchange", () => {
-      this.checkUrl()
-    });
-  }
-
-  checkUrl() {
-    const currentLocation = window.location.hash.replace('#', '');
-    this.setState({
-      location: currentLocation
-    })
-  }
-
-  handleLogin() {
-    this.setState({
-      admin: !this.state.admin
-    })
-  }
-
-  vehicleBooking(event) {
-    //för att se till att oavsett vad vi klickar på i listan så är event.target alltid ett li element
-    let target = event.target;
-    if (target.localName === 'span' || target.localName === 'div') {
-      target = target.parentElement;
-    } else if (target.localName === 'img') {
-      target = target.parentElement.parentElement;
     }
-    const carId = target.getAttribute('data-id');
-    //kom ihåg att lägga till && vehicle.bookable så att vi inte listar fordon som ej är tillgängliga för uthyrning
-    const findCarInDatabase = this.state.database.filter(vehicle => vehicle._id.indexOf(carId) > -1);
-    console.log(findCarInDatabase);
-    this.setState({
-      vehicleData: findCarInDatabase,
-      bookVehicle: true
-    })
-  };
 
-  handleModal(event) {
-    const target = event.target;
-    if (target.localName === 'section' || target.innerText === 'Stäng') {
-      this.setState({
-        bookVehicle: !this.state.bookVehicle
-      })
+    handleLogin() {
+        this.setState({
+            admin: !this.state.admin
+        })
     }
-  }
 
-  render() {
-    return (
-      <div className={this.state.bookVehicle ? 'no-scroll App' : 'App'}>
+    vehicleBooking(event) {
+        //för att se till att oavsett vad vi klickar på i listan så är event.target alltid ett li element
+        let target = event.target;
+        if (target.localName === 'span' || target.localName === 'div') {
+            target = target.parentElement;
+        } else if (target.localName === 'img') {
+            target = target.parentElement.parentElement;
+        }
+        const carId = target.getAttribute('data-id');
+        //kom ihåg att lägga till && vehicle.bookable så att vi inte listar fordon som ej är tillgängliga för uthyrning
+        const findCarInDatabase = this.state.database.filter(vehicle => vehicle._id.indexOf(carId) > -1);
+        console.log(findCarInDatabase);
+        this.setState({
+            vehicleData: findCarInDatabase,
+            bookVehicle: true
+        })
+    };
 
-        <Menu
-          admin={this.state.admin}
-          checkUrl={this.checkUrl.bind(this)}
-          handleLogin={this.handleLogin.bind(this)}
-        />
+    handleModal(event) {
+        const target = event.target;
+        if (target.localName === 'section' || target.innerText === 'Stäng') {
+            this.setState({
+                bookVehicle: !this.state.bookVehicle
+            })
+        }
+    }
 
-        <AllVehicles
-          if={this.state.location === 'show'}
-          data={this.state.database}
-          vehicleBooking={this.vehicleBooking.bind(this)}
-        />
+    handleEditModal(event) {
+        const target = event.target;
+        if (target.localName === 'section' || target.innerText === 'Stäng') {
+            this.setState({
+                editVehicle: !this.state.editVehicle
+            })
+        }
+    }
 
-        <CancelBooking
-          if={this.state.location === 'cancel'}
-        />
+    /*
+    Methods for edit vehicle
+     */
 
-        <Render if={this.state.location === 'add' && this.state.admin}>
-          <AddVehicle/>
-        </Render>
+    editVehicle(event) {
+        console.log('kr')
+        let target = event.target;
+        if (target.localName === 'span' || target.localName === 'div') {
+            target = target.parentElement;
+        } else if (target.localName === 'img') {
+            target = target.parentElement.parentElement;
+        }
+        const carId = target.getAttribute('data-id');
+        const findCarInDatabase = this.state.database.filter(vehicle => vehicle._id.indexOf(carId) > -1);
+        console.log(findCarInDatabase);
+        this.setState({
+            vehicleData: findCarInDatabase,
+            editVehicle: true
+        })
+    }
 
-        <Render if={this.state.finished}>
-        <EditVehicle
-          if={this.state.location === 'edit' && this.state.admin}
-          data={this.state.database}
-        />
-        </Render>
+    serializeUpdateObject(obj) {
+        return Object.keys(obj).map(prop => {
+            if (prop === '_id') {
+                return false;
+            }
+            return encodeURIComponent(prop) + '=' + encodeURIComponent(obj[prop])
+        }).join('&')
+    };
 
-        <BookVehicle
-          if={this.state.bookVehicle === true}
-          data={this.state.vehicleData}
-          closeModal={this.handleModal.bind(this)}
-        />
+    handleChange(event) {
+        const target = event.target;
+        const value = event.target.value;
+        const oldState = this.state.vehicleData;
+        if (target.type === 'radio') {
+            oldState[0].bookable = !oldState[0].bookable;
+            this.setState({
+                vehicleData: oldState
+            })
+        } else {
+            oldState[0][target.id] = value;
+            this.setState({
+                vehicleData: oldState
+            })
+        }
+    }
 
-      </div>
-    );
-  }
+    handleDelete() {
+        console.log(this.state.vehicleData[0]._id)
+    }
+
+    handleSubmit() {
+        console.log(this.state.vehicleData);
+        const id = this.state.vehicleData[0]._id;
+        console.log(config.apiRoot + "vehicle/update/" + id + '?' + this.serializeUpdateObject(this.state.vehicleData[0]))
+        fetch(config.apiRoot + "vehicle/update/" + id + '?' + this.serializeUpdateObject(this.state.vehicleData[0]))
+            .then(resp => resp.json())
+            .then(json => {
+                // show success message to the user
+                console.log("API response:", json);
+            })
+            .catch(error => {
+                // show error message to the user (validation is handles by the api/model)
+                console.error("API error:", error);
+            });
+
+    }
+
+    render() {
+        return (
+            <div className={this.state.bookVehicle ? 'no-scroll App' : 'App'}>
+
+                <Menu
+                    admin={this.state.admin}
+                    checkUrl={this.checkUrl.bind(this)}
+                    handleLogin={this.handleLogin.bind(this)}
+                />
+
+                <AllVehicles
+                    if={this.state.location === 'show'}
+                    data={this.state.database}
+                    vehicleBooking={!this.state.admin ? this.vehicleBooking.bind(this) : null}
+                    editVehicles={this.state.admin ? this.editVehicle.bind(this) : null}
+                    admin={this.state.admin}
+                />
+
+                <CancelBooking
+                    if={this.state.location === 'cancel'}
+                />
+
+                <Render if={this.state.location === 'add' && this.state.admin}>
+                    <AddVehicle/>
+                </Render>
+
+                <Render if={this.state.vehicleData.length > 0}>
+                    <EditVehicle
+                        if={this.state.editVehicle && this.state.admin}
+                        data={this.state.vehicleData}
+                        closeModal={this.handleEditModal.bind(this)}
+                        editVehicle={this.editVehicle.bind(this)}
+                        serializeUpdateObject={this.serializeUpdateObject.bind(this)}
+                        handleChange={this.handleChange.bind(this)}
+                        handleDelete={this.handleDelete.bind(this)}
+                        handleSubmit={this.handleSubmit.bind(this)}
+                    />
+                </Render>
+
+                <BookVehicle
+                    if={this.state.bookVehicle === true}
+                    data={this.state.vehicleData}
+                    closeModal={this.handleModal.bind(this)}
+                />
+
+            </div>
+        );
+    }
 }
 
 export default App;

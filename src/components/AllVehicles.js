@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default class AllVehicles extends Component {
     render() {
         if (this.props.if) {
+            console.log(this.props.data, 'update')
             return (
                 <section className="all-vehicles">
                     {/* console.log(this.props.data) */}
@@ -22,7 +23,7 @@ export default class AllVehicles extends Component {
                         {this.props.data.map((vehicle, index) => {
                             //console.log(vehicle);
                             return (
-                                <li key={index} data-id={vehicle._id} onClick={this.props.vehicleBooking}>
+                                <li key={index} data-id={vehicle._id} onClick={this.props.admin ? this.props.editVehicles : this.props.vehicleBooking}>
                                     <div className="image-container">
                                         <img src={vehicle.image || "http://via.placeholder.com/150x150"} alt=""
                                              width="120"/>
@@ -46,8 +47,10 @@ export default class AllVehicles extends Component {
 
 AllVehicles.propTypes = {
     data: PropTypes.array.isRequired,
-    vehicleBooking: PropTypes.func.isRequired,
-    if: PropTypes.bool.isRequired
+    vehicleBooking: PropTypes.func,
+    if: PropTypes.bool.isRequired,
+    editVehicles: PropTypes.func,
+    admin: PropTypes.bool.isRequired
 };
 
 // TODO: check if merged correctly
