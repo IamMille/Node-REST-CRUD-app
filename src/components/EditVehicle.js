@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import config from '../config.json';
 
 export default class EditVehicle extends Component {
   constructor(props) {
@@ -19,6 +20,14 @@ export default class EditVehicle extends Component {
       }]
     };
   }
+
+  serializeObject = (obj) => {
+    return Object.keys(obj).map(prop => {
+      if (prop === '_id') {
+        return false;
+      }
+      return encodeURIComponent(prop) + '=' + encodeURIComponent(obj[prop])}).join('&')
+  };
 
   handleIdChange(event) {
     const select = event.target;
@@ -53,6 +62,18 @@ export default class EditVehicle extends Component {
 
   handleSubmit() {
     console.log(this.state.selectedVehicle);
+    const id = this.state.selectedVehicle[0]._id;
+    fetch(config.apiRoot + "vehicle/update/" + id + '?' + this.serializeObject(this.state.selectedVehicle[0]))
+      .then(resp => resp.json())
+      .then(json => {
+        // show success message to the user
+        console.log("API response:", json);
+      })
+      .catch(error => {
+        // show error message to the user (validation is handles by the api/model)
+        console.error("API error:", error);
+      });
+
   }
   render() {
     if (this.props.if) {
@@ -153,5 +174,6 @@ export default class EditVehicle extends Component {
 }
 
 EditVehicle.propTypes = {
-  if: PropTypes.bool.isRequired
+  if: PropTypes.bool.isRequired,
+  data: PropTypes.array.isRequired
 };
