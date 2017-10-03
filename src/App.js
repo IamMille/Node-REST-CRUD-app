@@ -39,7 +39,7 @@ class App extends Component {
             });
 
         if (window.location.hash === '')
-            window.location.hash = "#book";
+            window.location.hash = "#vehicles";
 
         this.checkUrl();
         window.addEventListener("hashchange", () => {
@@ -135,7 +135,7 @@ class App extends Component {
                     handleLogin={this.handleLogin.bind(this)}
                 />
 
-                <Render if={this.state.location === 'book'}>
+                <Render if={this.state.location === 'vehicles'}>
                     <AllVehicles
                         isAdmin={this.state.admin}
                         handleClick={this.state.admin ? this.editVehicle.bind(this) : this.vehicleBooking.bind(this) }
