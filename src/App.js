@@ -36,7 +36,10 @@ class App extends Component {
         console.error("API error:", error);
       });
 
-    this.checkUrl();
+    if (window.location.hash === '')
+        window.location.hash = "#show";
+
+      this.checkUrl()
     window.addEventListener("hashchange", () => {
       this.checkUrl()
     });
