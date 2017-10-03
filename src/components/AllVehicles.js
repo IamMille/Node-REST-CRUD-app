@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default class AllVehicles extends Component {
     render() {
         if (this.props.if) {
-            console.log(this.props.data, 'update')
+            console.log('render allvehicles')
             return (
                 <section className="all-vehicles">
                     {/* console.log(this.props.data) */}

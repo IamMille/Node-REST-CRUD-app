@@ -20,7 +20,8 @@ class App extends Component {
             editVehicle: false,
             vehicleData: [],
             database: [],
-            finished: false
+            finished: false,
+            dataIsFinished: false
         }
     }
 
@@ -92,12 +93,11 @@ class App extends Component {
         }
     }
 
-    /*
-    Methods for edit vehicle
-     */
-
     editVehicle(event) {
-        console.log('kr')
+        console.log('editvehicle')
+        this.setState({
+            dataIsFinished: false
+        });
         let target = event.target;
         if (target.localName === 'span' || target.localName === 'div') {
             target = target.parentElement;
@@ -110,55 +110,14 @@ class App extends Component {
         this.setState({
             vehicleData: findCarInDatabase,
             editVehicle: true
+        }, () => {
+            console.log('new state')
+            this.setState({
+                dataIsFinished: true
+            })
         })
     }
 
-    serializeUpdateObject(obj) {
-        return Object.keys(obj).map(prop => {
-            if (prop === '_id') {
-                return false;
-            }
-            return encodeURIComponent(prop) + '=' + encodeURIComponent(obj[prop])
-        }).join('&')
-    };
-
-    handleChange(event) {
-        const target = event.target;
-        const value = event.target.value;
-        const oldState = this.state.vehicleData;
-        if (target.type === 'radio') {
-            oldState[0].bookable = !oldState[0].bookable;
-            this.setState({
-                vehicleData: oldState
-            })
-        } else {
-            oldState[0][target.id] = value;
-            this.setState({
-                vehicleData: oldState
-            })
-        }
-    }
-
-    handleDelete() {
-        console.log(this.state.vehicleData[0]._id)
-    }
-
-    handleSubmit() {
-        console.log(this.state.vehicleData);
-        const id = this.state.vehicleData[0]._id;
-        console.log(config.apiRoot + "vehicle/update/" + id + '?' + this.serializeUpdateObject(this.state.vehicleData[0]))
-        fetch(config.apiRoot + "vehicle/update/" + id + '?' + this.serializeUpdateObject(this.state.vehicleData[0]))
-            .then(resp => resp.json())
-            .then(json => {
-                // show success message to the user
-                console.log("API response:", json);
-            })
-            .catch(error => {
-                // show error message to the user (validation is handles by the api/model)
-                console.error("API error:", error);
-            });
-
-    }
 
     render() {
         return (
@@ -192,10 +151,7 @@ class App extends Component {
                         data={this.state.vehicleData}
                         closeModal={this.handleEditModal.bind(this)}
                         editVehicle={this.editVehicle.bind(this)}
-                        serializeUpdateObject={this.serializeUpdateObject.bind(this)}
-                        handleChange={this.handleChange.bind(this)}
-                        handleDelete={this.handleDelete.bind(this)}
-                        handleSubmit={this.handleSubmit.bind(this)}
+                        dataIsFinished={this.state.dataIsFinished}
                     />
                 </Render>
 
