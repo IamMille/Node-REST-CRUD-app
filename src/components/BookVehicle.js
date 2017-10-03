@@ -5,7 +5,7 @@ export default class BookVehicle extends Component {
     render() {
         if (this.props.if) {
             return (
-                <section className="book-vehicle" onClick={this.props.closeModal}>
+                <section className="book-vehicle" onClick={this.props.closeBookModal}>
                     <div className="book-vehicle-container">
                         {console.log(this.props.data)}
                         <div className="image-container-book">
@@ -26,7 +26,7 @@ export default class BookVehicle extends Component {
                         </div>
                         <div className="button-container">
                             <button className="button">Boka</button>
-                            <button className="button" onClick={this.props.closeModal}>Stäng</button>
+                            <button className="button" onClick={this.props.closeBookModal}>Stäng</button>
                         </div>
                     </div>
                 </section>
@@ -38,8 +38,7 @@ export default class BookVehicle extends Component {
 }
 
 BookVehicle.propTypes = {
-    closeModal: PropTypes.func.isRequired,
+    closeBookModal: PropTypes.func.isRequired,
     data: PropTypes.array.isRequired,
-    if: PropTypes.bool.isRequired
 };
 

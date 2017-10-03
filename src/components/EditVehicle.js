@@ -48,10 +48,12 @@ export default class EditVehicle extends Component {
     }
 
     handleSubmit() {
-        console.log(this.state.vehicleData);
-        const id = this.state.vehicleData[0]._id;
-        console.log(config.apiRoot + "vehicle/update/" + id + '?' + this.serializeUpdateObject(this.state.vehicleData[0]))
-        fetch(config.apiRoot + "vehicle/update/" + id + '?' + this.serializeUpdateObject(this.state.vehicleData[0]))
+        console.log("Submit data: ", this.state.vehicleData);
+        let [vehicle] = this.state.vehicleData; // first item
+
+        console.log(config.apiRoot + "vehicle/update/" + vehicle._id + '?' + this.serializeUpdateObject(vehicle));
+
+        fetch(config.apiRoot + "vehicle/update/" + vehicle._id + '?' + this.serializeUpdateObject(vehicle))
             .then(resp => resp.json())
             .then(json => {
                 // show success message to the user
@@ -62,12 +64,25 @@ export default class EditVehicle extends Component {
                 console.error("API error:", error);
             });
 
+        // close modal
+        this.props.setState({editVehicle: false});
+
+        // uppdate global state
+        let updatedDatabase = this.props.getState.database.map(v => {
+            if (v._id === vehicle._id)
+                return vehicle;
+            else
+                return v;
+        });
+
+        this.props.setState({database: updatedDatabase});
+
     }
     render() {
         if (this.props.if && this.props.dataIsFinished) {
             console.log(this.props.data, '---render editvehicles');
             return (
-                <section className="edit-vehicle" onClick={this.props.closeModal}>
+                <section className="edit-vehicle" onClick={this.props.closeEditModal}>
                     <div className="edit-vehicle-container">
                         <h1 className="section-heading">Redigera fordon</h1>
                         <form action="">

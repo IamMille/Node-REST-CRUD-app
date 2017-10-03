@@ -38,6 +38,9 @@ class App extends Component {
                 console.error("API error:", error);
             });
 
+        if (window.location.hash === '')
+            window.location.hash = "#book";
+
         this.checkUrl();
         window.addEventListener("hashchange", () => {
             this.checkUrl()
@@ -65,18 +68,19 @@ class App extends Component {
         } else if (target.localName === 'img') {
             target = target.parentElement.parentElement;
         }
-        const carId = target.getAttribute('data-id');
+
         //kom ihåg att lägga till && vehicle.bookable så att vi inte listar fordon som ej är tillgängliga för uthyrning
-        const clonedArray = JSON.parse(JSON.stringify(this.state.database))
-        const findCarInDatabase = clonedArray.filter(vehicle => vehicle._id.indexOf(carId) > -1);
-        console.log(findCarInDatabase);
+        const clonedArray = JSON.parse(JSON.stringify(this.state.database));
+        const clickedVehicleId = target.getAttribute('data-id');
+        const clickedVehicle = clonedArray.filter(vehicle => vehicle._id.indexOf(clickedVehicleId) > -1);
+        console.log(clickedVehicle);
         this.setState({
-            vehicleData: findCarInDatabase,
+            vehicleData: clickedVehicle,
             bookVehicle: true
         })
     };
 
-    handleModal(event) {
+    handleBookModal(event) {
         const target = event.target;
         if (target.localName === 'section' || target.innerText === 'Stäng') {
             this.setState({
@@ -131,13 +135,13 @@ class App extends Component {
                     handleLogin={this.handleLogin.bind(this)}
                 />
 
-                <AllVehicles
-                    if={this.state.location === 'show'}
-                    data={this.state.database}
-                    vehicleBooking={!this.state.admin ? this.vehicleBooking.bind(this) : null}
-                    editVehicles={this.state.admin ? this.editVehicle.bind(this) : null}
-                    admin={this.state.admin}
-                />
+                <Render if={this.state.location === 'book'}>
+                    <AllVehicles
+                        isAdmin={this.state.admin}
+                        handleClick={this.state.admin ? this.editVehicle.bind(this) : this.vehicleBooking.bind(this) }
+                        data={this.state.database}
+                    />
+                </Render>
 
                 <CancelBooking
                     if={this.state.location === 'cancel'}
@@ -151,17 +155,21 @@ class App extends Component {
                     <EditVehicle
                         if={this.state.editVehicle && this.state.admin}
                         data={this.state.vehicleData}
-                        closeModal={this.handleEditModal.bind(this)}
+                        closeEditModal={this.handleEditModal.bind(this)}
                         editVehicle={this.editVehicle.bind(this)}
                         dataIsFinished={this.state.dataIsFinished}
+
+                        setState={this.setState.bind(this)}
+                        getState={{...this.state}}
                     />
                 </Render>
 
-                <BookVehicle
-                    if={this.state.bookVehicle === true}
-                    data={this.state.vehicleData}
-                    closeModal={this.handleModal.bind(this)}
-                />
+                <Render if={this.state.bookVehicle === true}>
+                    <BookVehicle
+                        data={this.state.vehicleData}
+                        closeBookModal={this.handleBookModal.bind(this)}
+                    />
+                </Render>
 
             </div>
         );
