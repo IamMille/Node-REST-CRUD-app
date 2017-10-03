@@ -11,7 +11,7 @@ export default class CancelBooking extends Component {
             <div className="form-group-container-full">
               <label htmlFor="booking-id">Ange ditt booknings ID nedan för att avboka</label>
               <input type="text" placeholder="09g74857gjh45" id="booking-id"/>
-              <button className="button">Avboka</button>
+              <button type="button" className="button">Avboka</button>
             </div>
           </form>
         </section>
