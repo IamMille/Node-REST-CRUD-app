@@ -11,120 +11,161 @@ import config from './config.json';
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      admin: true,
-      location: '',
-      bookVehicle: false,
-      vehicleData: [],
-      database: [],
-      finished: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            admin: true,
+            location: '',
+            bookVehicle: false,
+            editVehicle: false,
+            vehicleData: [],
+            database: [],
+            finished: false,
+            dataIsFinished: false
+        }
     }
-  }
 
-  componentDidMount() {
-    fetch(config.apiRoot + "vehicle/read?")
-      .then(resp => resp.json())
-      .then(json => {
+    componentDidMount() {
+        fetch(config.apiRoot + "vehicle/read?")
+            .then(resp => resp.json())
+            .then(json => {
+                this.setState({
+                    database: json.data,
+                    finished: true
+                })
+            })
+            .catch(error => {
+                console.error("API error:", error);
+            });
+
+        this.checkUrl();
+        window.addEventListener("hashchange", () => {
+            this.checkUrl()
+        });
+    }
+
+    checkUrl() {
+        const currentLocation = window.location.hash.replace('#', '');
         this.setState({
-          database: json.data,
-          finished: true
+            location: currentLocation
         })
-      })
-      .catch(error => {
-        console.error("API error:", error);
-      });
-
-    if (window.location.hash === '')
-        window.location.hash = "#show";
-
-      this.checkUrl()
-    window.addEventListener("hashchange", () => {
-      this.checkUrl()
-    });
-  }
-
-  checkUrl() {
-    const currentLocation = window.location.hash.replace('#', '');
-    this.setState({
-      location: currentLocation
-    })
-  }
-
-  handleLogin() {
-    this.setState({
-      admin: !this.state.admin
-    })
-  }
-
-  vehicleBooking(event) {
-    //för att se till att oavsett vad vi klickar på i listan så är event.target alltid ett li element
-    let target = event.target;
-    if (target.localName === 'span' || target.localName === 'div') {
-      target = target.parentElement;
-    } else if (target.localName === 'img') {
-      target = target.parentElement.parentElement;
     }
-    const carId = target.getAttribute('data-id');
-    //kom ihåg att lägga till && vehicle.bookable så att vi inte listar fordon som ej är tillgängliga för uthyrning
-    const findCarInDatabase = this.state.database.filter(vehicle => vehicle._id.indexOf(carId) > -1);
-    console.log(findCarInDatabase);
-    this.setState({
-      vehicleData: findCarInDatabase,
-      bookVehicle: true
-    })
-  };
 
-  handleModal(event) {
-    const target = event.target;
-    if (target.localName === 'section' || target.innerText === 'Stäng') {
-      this.setState({
-        bookVehicle: !this.state.bookVehicle
-      })
+    handleLogin() {
+        this.setState({
+            admin: !this.state.admin
+        })
     }
-  }
 
-  render() {
-    return (
-      <div className={this.state.bookVehicle ? 'no-scroll App' : 'App'}>
+    vehicleBooking(event) {
+        //för att se till att oavsett vad vi klickar på i listan så är event.target alltid ett li element
+        let target = event.target;
+        if (target.localName === 'span' || target.localName === 'div') {
+            target = target.parentElement;
+        } else if (target.localName === 'img') {
+            target = target.parentElement.parentElement;
+        }
+        const carId = target.getAttribute('data-id');
+        //kom ihåg att lägga till && vehicle.bookable så att vi inte listar fordon som ej är tillgängliga för uthyrning
+        const clonedArray = JSON.parse(JSON.stringify(this.state.database))
+        const findCarInDatabase = clonedArray.filter(vehicle => vehicle._id.indexOf(carId) > -1);
+        console.log(findCarInDatabase);
+        this.setState({
+            vehicleData: findCarInDatabase,
+            bookVehicle: true
+        })
+    };
 
-        <Menu
-          admin={this.state.admin}
-          checkUrl={this.checkUrl.bind(this)}
-          handleLogin={this.handleLogin.bind(this)}
-        />
+    handleModal(event) {
+        const target = event.target;
+        if (target.localName === 'section' || target.innerText === 'Stäng') {
+            this.setState({
+                bookVehicle: !this.state.bookVehicle
+            })
+        }
+    }
 
-        <AllVehicles
-          if={this.state.location === 'show'}
-          data={this.state.database}
-          vehicleBooking={this.vehicleBooking.bind(this)}
-        />
+    handleEditModal(event) {
+        const target = event.target;
+        if (target.localName === 'section' || target.innerText === 'Stäng') {
+            this.setState({
+                editVehicle: !this.state.editVehicle
+            })
+        }
+    }
 
-        <CancelBooking
-          if={this.state.location === 'cancel'}
-        />
+    editVehicle(event) {
+        console.log('editvehicle')
+        this.setState({
+            dataIsFinished: false
+        });
+        let target = event.target;
+        if (target.localName === 'span' || target.localName === 'div') {
+            target = target.parentElement;
+        } else if (target.localName === 'img') {
+            target = target.parentElement.parentElement;
+        }
+        const carId = target.getAttribute('data-id');
+        const clonedArray = JSON.parse(JSON.stringify(this.state.database));
+        const findCarInDatabase = clonedArray.filter(vehicle => vehicle._id.indexOf(carId) > -1);
+        console.log(findCarInDatabase);
+        this.setState({
+            vehicleData: findCarInDatabase,
+            editVehicle: true
+        }, () => {
+            console.log('new state')
+            this.setState({
+                dataIsFinished: true
+            })
+        })
+    }
 
-        <Render if={this.state.location === 'add' && this.state.admin}>
-          <AddVehicle/>
-        </Render>
 
-        <Render if={this.state.finished}>
-        <EditVehicle
-          if={this.state.location === 'edit' && this.state.admin}
-          data={this.state.database}
-        />
-        </Render>
+    render() {
+        return (
+            <div className={this.state.bookVehicle ? 'no-scroll App' : 'App'}>
 
-        <BookVehicle
-          if={this.state.bookVehicle === true}
-          data={this.state.vehicleData}
-          closeModal={this.handleModal.bind(this)}
-        />
+                <Menu
+                    admin={this.state.admin}
+                    checkUrl={this.checkUrl.bind(this)}
+                    handleLogin={this.handleLogin.bind(this)}
+                />
 
-      </div>
-    );
-  }
+                <AllVehicles
+                    if={this.state.location === 'show'}
+                    data={this.state.database}
+                    vehicleBooking={!this.state.admin ? this.vehicleBooking.bind(this) : null}
+                    editVehicles={this.state.admin ? this.editVehicle.bind(this) : null}
+                    admin={this.state.admin}
+                />
+
+                <CancelBooking
+                    if={this.state.location === 'cancel'}
+                />
+
+                <Render if={this.state.location === 'add' && this.state.admin}>
+                    <AddVehicle/>
+                </Render>
+
+                <Render if={this.state.vehicleData.length > 0}>
+                    <EditVehicle
+                        if={this.state.editVehicle && this.state.admin}
+                        data={this.state.vehicleData}
+                        closeModal={this.handleEditModal.bind(this)}
+                        editVehicle={this.editVehicle.bind(this)}
+                        dataIsFinished={this.state.dataIsFinished}
+                    />
+                </Render>
+
+                <BookVehicle
+                    if={this.state.bookVehicle === true}
+                    data={this.state.vehicleData}
+                    closeModal={this.handleModal.bind(this)}
+                />
+
+            </div>
+        );
+    }
 }
 
 export default App;
