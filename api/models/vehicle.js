@@ -6,6 +6,7 @@ let vehicleSchema = new Schema(
 {
     type: {
         type: String,
+        required: true
     },
     brand: {
         type: String,
