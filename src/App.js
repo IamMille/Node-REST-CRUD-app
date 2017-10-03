@@ -67,7 +67,8 @@ class App extends Component {
         }
         const carId = target.getAttribute('data-id');
         //kom ihåg att lägga till && vehicle.bookable så att vi inte listar fordon som ej är tillgängliga för uthyrning
-        const findCarInDatabase = this.state.database.filter(vehicle => vehicle._id.indexOf(carId) > -1);
+        const clonedArray = JSON.parse(JSON.stringify(this.state.database))
+        const findCarInDatabase = clonedArray.filter(vehicle => vehicle._id.indexOf(carId) > -1);
         console.log(findCarInDatabase);
         this.setState({
             vehicleData: findCarInDatabase,
@@ -105,7 +106,8 @@ class App extends Component {
             target = target.parentElement.parentElement;
         }
         const carId = target.getAttribute('data-id');
-        const findCarInDatabase = this.state.database.filter(vehicle => vehicle._id.indexOf(carId) > -1);
+        const clonedArray = JSON.parse(JSON.stringify(this.state.database));
+        const findCarInDatabase = clonedArray.filter(vehicle => vehicle._id.indexOf(carId) > -1);
         console.log(findCarInDatabase);
         this.setState({
             vehicleData: findCarInDatabase,
