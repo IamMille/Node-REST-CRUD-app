@@ -24,7 +24,7 @@ export default class AllVehicles extends Component
                     </select>
                 </div>
                 <div className="form-group-container">
-                    <label htmlFor="type">Växellåda</label>
+                    <label htmlFor="type">Typ</label>
                     <select id="type">
                         <option value="car">Personbil</option>
                         <option value="motorcycle">Motorcykel</option>
