@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
 .block {
   display: block;
 }
@@ -84,6 +88,10 @@ form {
 label {
   display: inline-block;
   margin: 0 0 5px 5px;
+}
+
+button {
+  cursor: pointer;
 }
 
 .form-group-container-full > .button {
@@ -237,16 +245,18 @@ BOOK VEHICLE
 .book-vehicle {
   height: 100vh;
   width: 100vw;
-  position: fixed;
-  top: 0;
-  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
 }
 
 .book-vehicle-container {
-  width: 40%;
-  margin: 15% auto;
-  background: #e3e3e3;
+  width: 600px;
+  background: #fff;
+  border-radius: 3px;
 }
 
 .image-container-book {
@@ -270,7 +280,22 @@ BOOK VEHICLE
 }
 
 .book-vehicle-container > .list-container > ul > li {
-  padding: 7px 0 7px 0;
+  padding: 15px 0 15px 0;
+}
+
+.book-vehicle-container > .list-container > ul > li:nth-child(1) {
+  font-size: 2em;
+  padding: 7px 0 0 0;
+  font-weight: 500;
+}
+
+.book-vehicle-container > .list-container > ul > li:nth-child(2) {
+  font-size: 1.2em;
+  padding: 0 0 40px 0;
+}
+
+.book-vehicle-container > .list-container > ul > li:nth-child(4), li:nth-child(6) {
+  text-transform: capitalize;
 }
 
 .book-vehicle-container > .button-container > button {
@@ -300,18 +325,20 @@ EDIT VEHICLE
 .edit-vehicle {
   height: 100vh;
   width: 100vw;
-  position: fixed;
-  top: 0;
-  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
 }
 
 .edit-vehicle-container {
-  width: 40%;
-  margin: 15% auto;
+  width: 600px;
   background: #fff;
   padding: 20px 0 50px 0;
 }
+
 /*
 EDIT VEHICLE END
 */

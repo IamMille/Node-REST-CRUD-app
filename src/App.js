@@ -14,7 +14,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            admin: true,
+            admin: false,
             location: '',
             bookVehicle: false,
             editVehicle: false,
@@ -127,7 +127,7 @@ class App extends Component {
 
     render() {
         return (
-            <div className={this.state.bookVehicle ? 'no-scroll App' : 'App'}>
+            <div className={this.state.bookVehicle || this.state.editVehicle ? 'no-scroll App' : 'App'}>
 
                 <Menu
                     admin={this.state.admin}
@@ -138,7 +138,7 @@ class App extends Component {
                 <Render if={this.state.location === 'vehicles'}>
                     <AllVehicles
                         isAdmin={this.state.admin}
-                        handleClick={this.state.admin ? this.editVehicle.bind(this) : this.vehicleBooking.bind(this) }
+                        handleClick={this.state.admin ? this.editVehicle.bind(this) : this.vehicleBooking.bind(this)}
                         data={this.state.database}
                     />
                 </Render>
@@ -164,12 +164,11 @@ class App extends Component {
                     />
                 </Render>
 
-                <Render if={this.state.bookVehicle === true}>
-                    <BookVehicle
-                        data={this.state.vehicleData}
-                        closeBookModal={this.handleBookModal.bind(this)}
-                    />
-                </Render>
+                <BookVehicle
+                    if={this.state.bookVehicle}
+                    data={this.state.vehicleData}
+                    closeBookModal={this.handleBookModal.bind(this)}
+                />
 
             </div>
         );

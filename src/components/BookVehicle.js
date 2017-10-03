@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default class BookVehicle extends Component {
     render() {
         if (this.props.if) {
+            console.log('hi')
             return (
                 <section className="book-vehicle" onClick={this.props.closeBookModal}>
                     <div className="book-vehicle-container">
@@ -13,15 +14,15 @@ export default class BookVehicle extends Component {
                         </div>
                         <div className="list-container">
                             <ul>
-                                <li>Märke: {this.props.data[0].brand || 'Information saknas.'}</li>
-                                <li>Modell: {this.props.data[0].model || 'Information saknas.'}</li>
-                                <li>År: {this.props.data[0].year || 'Information saknas.'}</li>
+                                <li>{this.props.data[0].brand || 'Information saknas.'}</li>
+                                <li>{this.props.data[0].model || 'Information saknas.'}</li>
+                                <li>Årsmodell: {this.props.data[0].year || 'Information saknas.'}</li>
                                 <li>Fordonstyp: {this.props.data[0].type || 'Information saknas.'}</li>
-                                <li>Körkort: {this.props.data[0].license || 'Information saknas.'}</li>
+                                <li>Körkortkrav: {this.props.data[0].license || 'Information saknas.'}</li>
                                 <li>Växellåda: {this.props.data[0].gearbox || 'Information saknas.'}</li>
                                 <li>Dagshyra: {this.props.data[0].price || 'Information saknas.'}</li>
                                 <li>Anteckningar: {this.props.data[0].notes || 'Inga anmärkningar.'}</li>
-                                <li>test: {this.props.data[0].typeasda || 'Unknown'}</li>
+                                <li>datepicker här sen</li>
                             </ul>
                         </div>
                         <div className="button-container">

@@ -16,7 +16,23 @@ export default class AllVehicles extends Component
             <h1 className="section-heading">Alla fordon</h1>
 
             <div className="filter-container">
-                <p>filter här kommer här</p>
+                <div className="form-group-container">
+                    <label htmlFor="gearbox">Växellåda</label>
+                    <select id="gearbox">
+                        <option value="manuell">Manuell</option>
+                        <option value="automat">Automat</option>
+                    </select>
+                </div>
+                <div className="form-group-container">
+                    <label htmlFor="type">Växellåda</label>
+                    <select id="type">
+                        <option value="car">Personbil</option>
+                        <option value="motorcycle">Motorcykel</option>
+                        <option value="atv">ATV</option>
+                        <option value="tricycle">Trehjuling</option>
+                        <option value="truck">Lätt lastbil</option>
+                    </select>
+                </div>
             </div>
 
             <div className="vehicle-search-head">
