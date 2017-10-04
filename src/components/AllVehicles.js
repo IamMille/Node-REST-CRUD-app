@@ -6,6 +6,7 @@ export default class AllVehicles extends Component
     render() {
         if (!this.props.data.length) return null;
 
+        // if not admin, show only bookable
         let allVehicles = this.props.isAdmin
             ? this.props.data
             : this.props.data.filter(v => v.bookable);

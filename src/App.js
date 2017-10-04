@@ -14,7 +14,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            admin: false,
+            admin: true,
             location: '',
             bookVehicle: false,
             editVehicle: false,
@@ -26,11 +26,11 @@ class App extends Component {
     }
 
     componentDidMount() {
-        fetch(config.apiRoot + "vehicle/read?")
+        fetch(config.apiRoot + "vehicle/read")
             .then(resp => resp.json())
             .then(json => {
                 this.setState({
-                    database: json.data,
+                    database: json.data.reverse(), // newest first
                     finished: true
                 })
             })
@@ -48,16 +48,15 @@ class App extends Component {
     }
 
     checkUrl() {
-        const currentLocation = window.location.hash.replace('#', '');
         this.setState({
-            location: currentLocation
-        })
+            location: window.location.hash.replace('#', '')
+        });
     }
 
     handleLogin() {
         this.setState({
             admin: !this.state.admin
-        })
+        });
     }
 
     vehicleBooking(event) {
@@ -69,7 +68,6 @@ class App extends Component {
             target = target.parentElement.parentElement;
         }
 
-        //kom ihåg att lägga till && vehicle.bookable så att vi inte listar fordon som ej är tillgängliga för uthyrning
         const clonedArray = JSON.parse(JSON.stringify(this.state.database));
         const clickedVehicleId = target.getAttribute('data-id');
         const clickedVehicle = clonedArray.filter(vehicle => vehicle._id.indexOf(clickedVehicleId) > -1);
@@ -99,29 +97,17 @@ class App extends Component {
     }
 
     editVehicle(event) {
-        console.log('editvehicle')
-        this.setState({
-            dataIsFinished: false
-        });
-        let target = event.target;
-        if (target.localName === 'span' || target.localName === 'div') {
-            target = target.parentElement;
-        } else if (target.localName === 'img') {
-            target = target.parentElement.parentElement;
-        }
-        const carId = target.getAttribute('data-id');
+        console.log('editvehicle');
+
         const clonedArray = JSON.parse(JSON.stringify(this.state.database));
-        const findCarInDatabase = clonedArray.filter(vehicle => vehicle._id.indexOf(carId) > -1);
-        console.log(findCarInDatabase);
+        const clickedVehicleId = event.currentTarget.getAttribute('data-id'); // currentTarget = where eventListener is
+        const clickedVehicle = clonedArray.filter(vehicle => vehicle._id === clickedVehicleId);
+
+        console.log(clickedVehicle);
         this.setState({
-            vehicleData: findCarInDatabase,
+            vehicleData: clickedVehicle,
             editVehicle: true
-        }, () => {
-            console.log('new state')
-            this.setState({
-                dataIsFinished: true
-            })
-        })
+        });
     }
 
 
@@ -151,9 +137,8 @@ class App extends Component {
                     <AddVehicle/>
                 </Render>
 
-                <Render if={this.state.vehicleData.length > 0}>
+                <Render if={this.state.editVehicle && this.state.admin}>
                     <EditVehicle
-                        if={this.state.editVehicle && this.state.admin}
                         data={this.state.vehicleData}
                         closeEditModal={this.handleEditModal.bind(this)}
                         editVehicle={this.editVehicle.bind(this)}

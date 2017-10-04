@@ -44,16 +44,9 @@ export default class EditVehicle extends Component {
     }
 
     handleDelete() {
-        console.log(this.state.vehicleData[0]._id)
-    }
+        const [deleteVehicle] = this.state.vehicleData; // first item
 
-    handleSubmit() {
-        console.log("Submit data: ", this.state.vehicleData);
-        let [vehicle] = this.state.vehicleData; // first item
-
-        console.log(config.apiRoot + "vehicle/update/" + vehicle._id + '?' + this.serializeUpdateObject(vehicle));
-
-        fetch(config.apiRoot + "vehicle/update/" + vehicle._id + '?' + this.serializeUpdateObject(vehicle))
+        fetch(config.apiRoot + "vehicle/delete/" + deleteVehicle._id)
             .then(resp => resp.json())
             .then(json => {
                 // show success message to the user
@@ -68,123 +61,146 @@ export default class EditVehicle extends Component {
         this.props.setState({editVehicle: false});
 
         // uppdate global state
-        let updatedDatabase = this.props.getState.database.map(v => {
-            if (v._id === vehicle._id)
-                return vehicle;
-            else
-                return v;
+        let updatedDatabase = this.props.getState.database.filter(
+            vehicle => (vehicle._id !== deleteVehicle._id)
+        );
+
+        this.props.setState({database: updatedDatabase});
+    }
+
+    handleSubmit() {
+        let [updatedVehicle] = this.state.vehicleData; // first item
+
+        fetch(config.apiRoot + "vehicle/update/" + updatedVehicle._id + '?' + this.serializeUpdateObject(updatedVehicle))
+            .then(resp => resp.json())
+            .then(json => {
+                // show success message to the user
+                console.log("API response:", json);
+            })
+            .catch(error => {
+                // show error message to the user (validation is handles by the api/model)
+                console.error("API error:", error);
+            });
+
+        // close modal
+        this.props.setState({editVehicle: false});
+
+        // uppdate global state
+        let updatedDatabase = this.props.getState.database.map(vehicle => {
+            return vehicle._id === updatedVehicle._id
+                ? updatedVehicle
+                : vehicle;
         });
 
         this.props.setState({database: updatedDatabase});
 
     }
+
     render() {
-        if (this.props.if && this.props.dataIsFinished) {
-            console.log(this.props.data, '---render editvehicles');
-            return (
-                <section className="edit-vehicle" onClick={this.props.closeEditModal}>
-                    <div className="edit-vehicle-container">
-                        <h1 className="section-heading">Redigera fordon</h1>
-                        <form action="">
-                            <div className="form-group-container">
-                                <label htmlFor="type">Fordonstyp</label>
-                                <input type="text" placeholder="ex. Personbil" id="type"
-                                       value={this.state.vehicleData[0].type}
-                                       onChange={this.handleChange.bind(this)}/>
-                            </div>
-                            <div className="form-group-container">
-                                <label htmlFor="license">Körkort</label>
-                                <select value={this.state.vehicleData[0].license}
-                                        onChange={this.handleChange.bind(this)} id="license">
-                                    <option value="A">A</option>
-                                    <option value="A1">A1</option>
-                                    <option value="A2">A2</option>
-                                    <option value="AM">AM</option>
-                                    <option value="B">B</option>
-                                    <option value="BE">BE</option>
-                                    <option value="C">C</option>
-                                    <option value="CE">CE</option>
-                                    <option value="C1">C1</option>
-                                    <option value="C1E">C1E</option>
-                                    <option value="D">D</option>
-                                    <option value="D1E">D1E</option>
-                                </select>
-                            </div>
-                            <div className="form-group-container">
-                                <label htmlFor="brand">Märke</label>
-                                <input type="text" placeholder="ex. Mazda" id="brand"
-                                       value={this.state.vehicleData[0].brand}
-                                       onChange={this.handleChange.bind(this)}/>
-                            </div>
-                            <div className="form-group-container">
-                                <label htmlFor="model">Modell</label>
-                                <input type="text" placeholder="ex. 321i" id="model"
-                                       value={this.state.vehicleData[0].model}
-                                       onChange={this.handleChange.bind(this)}/>
-                            </div>
-                            <div className="form-group-container">
-                                <label htmlFor="year">År</label>
-                                <input type="text" placeholder="ex. 1995" id="year"
-                                       value={this.state.vehicleData[0].year}
-                                       onChange={this.handleChange.bind(this)}/>
-                            </div>
-                            <div className="form-group-container">
-                                <label htmlFor="gearbox">Växellåda</label>
-                                <select value={this.state.vehicleData[0].gearbox}
-                                        onChange={this.handleChange.bind(this)} id="gearbox">
-                                    <option value="manuell">Manuell</option>
-                                    <option value="automat">Automat</option>
-                                </select>
-                            </div>
-                            <div className="form-group-container">
-                                <label htmlFor="price">Dagshyra</label>
-                                <input type="text" placeholder="ex. 999" id="price"
-                                       value={this.state.vehicleData[0].price}
-                                       onChange={this.handleChange.bind(this)}/>
-                            </div>
-                            <div className="form-group-container-full">
-                                <label htmlFor="image">Bildlänk</label>
-                                <input type="text" placeholder="ex. http://url.se" id="image"
-                                       value={this.state.vehicleData[0].image}
-                                       onChange={this.handleChange.bind(this)}/>
-                            </div>
-                            <div className="form-group-container-full">
-                                <label htmlFor="note" className="block">Noteringar</label>
-                                <textarea name="note" id="note" placeholder="ex. Bilen är nästan trasig."
-                                          value={this.state.vehicleData[0].note}
-                                          onChange={this.handleChange.bind(this)}/>
-                            </div>
-                            <div className="form-group-container-full">
-                                <label htmlFor="available-for-rent">Tillgänglig för uthyrning:</label>
-                                <label htmlFor="available-for-rent-true">Ja</label>
-                                <input type="radio" id="available-for-rent-true" name="hire" value={true}
-                                       checked={this.state.vehicleData[0].bookable}
-                                       onChange={this.handleChange.bind(this)}/>
-                                <label htmlFor="available-for-rent-false">Nej</label>
-                                <input type="radio" id="available-for-rent-false" name="hire" value={false}
-                                       checked={!this.state.vehicleData[0].bookable}
-                                       onChange={this.handleChange.bind(this)}/>
-                            </div>
-                            <div className="form-group-container-full">
-                                <button className="button" type="button" onClick={this.handleSubmit.bind(this)}>Redigera
-                                </button>
-                            </div>
-                            <div className="form-group-container-full">
-                                <button className="button button-danger" type="button"
-                                        onClick={this.handleDelete.bind(this)}>Ta bort fordon
-                                </button>
-                            </div>
-                        </form>
+        //this.state.vehicleData.length > 0) return null;
+        //if ( !this.props.dataIsFinished) return null
+        console.log(this.props.data, '---render editvehicles');
+
+        return <section className="edit-vehicle" onClick={this.props.closeEditModal}>
+            <div className="edit-vehicle-container">
+
+                <h1 className="section-heading">Redigera fordon</h1>
+
+                <form action="">
+                    <div className="form-group-container">
+                        <label htmlFor="type">Fordonstyp</label>
+                        <input type="text" placeholder="ex. Personbil" id="type"
+                               value={this.state.vehicleData[0].type}
+                               onChange={this.handleChange.bind(this)}/>
                     </div>
-                </section>
-            );
-        } else {
-            return null;
-        }
+                    <div className="form-group-container">
+                        <label htmlFor="license">Körkort</label>
+                        <select value={this.state.vehicleData[0].license}
+                                onChange={this.handleChange.bind(this)} id="license">
+                            <option value="A">A</option>
+                            <option value="A1">A1</option>
+                            <option value="A2">A2</option>
+                            <option value="AM">AM</option>
+                            <option value="B">B</option>
+                            <option value="BE">BE</option>
+                            <option value="C">C</option>
+                            <option value="CE">CE</option>
+                            <option value="C1">C1</option>
+                            <option value="C1E">C1E</option>
+                            <option value="D">D</option>
+                            <option value="D1E">D1E</option>
+                        </select>
+                    </div>
+                    <div className="form-group-container">
+                        <label htmlFor="brand">Märke</label>
+                        <input type="text" placeholder="ex. Mazda" id="brand"
+                               value={this.state.vehicleData[0].brand}
+                               onChange={this.handleChange.bind(this)}/>
+                    </div>
+                    <div className="form-group-container">
+                        <label htmlFor="model">Modell</label>
+                        <input type="text" placeholder="ex. 321i" id="model"
+                               value={this.state.vehicleData[0].model}
+                               onChange={this.handleChange.bind(this)}/>
+                    </div>
+                    <div className="form-group-container">
+                        <label htmlFor="year">År</label>
+                        <input type="text" placeholder="ex. 1995" id="year"
+                               value={this.state.vehicleData[0].year}
+                               onChange={this.handleChange.bind(this)}/>
+                    </div>
+                    <div className="form-group-container">
+                        <label htmlFor="gearbox">Växellåda</label>
+                        <select value={this.state.vehicleData[0].gearbox}
+                                onChange={this.handleChange.bind(this)} id="gearbox">
+                            <option value="manuell">Manuell</option>
+                            <option value="automat">Automat</option>
+                        </select>
+                    </div>
+                    <div className="form-group-container">
+                        <label htmlFor="price">Dagshyra</label>
+                        <input type="text" placeholder="ex. 999" id="price"
+                               value={this.state.vehicleData[0].price}
+                               onChange={this.handleChange.bind(this)}/>
+                    </div>
+                    <div className="form-group-container-full">
+                        <label htmlFor="image">Bildlänk</label>
+                        <input type="text" placeholder="ex. http://url.se" id="image"
+                               value={this.state.vehicleData[0].image}
+                               onChange={this.handleChange.bind(this)}/>
+                    </div>
+                    <div className="form-group-container-full">
+                        <label htmlFor="note" className="block">Noteringar</label>
+                        <textarea name="note" id="note" placeholder="ex. Bilen är nästan trasig."
+                                  value={this.state.vehicleData[0].note}
+                                  onChange={this.handleChange.bind(this)}/>
+                    </div>
+                    <div className="form-group-container-full">
+                        <label htmlFor="available-for-rent">Tillgänglig för uthyrning:</label>
+                        <label htmlFor="available-for-rent-true">Ja</label>
+                        <input type="radio" id="available-for-rent-true" name="hire" value={true}
+                               checked={this.state.vehicleData[0].bookable}
+                               onChange={this.handleChange.bind(this)}/>
+                        <label htmlFor="available-for-rent-false">Nej</label>
+                        <input type="radio" id="available-for-rent-false" name="hire" value={false}
+                               checked={!this.state.vehicleData[0].bookable}
+                               onChange={this.handleChange.bind(this)}/>
+                    </div>
+                    <div className="form-group-container-full">
+                        <button className="button" type="button" onClick={this.handleSubmit.bind(this)}>Spara
+                        </button>
+                    </div>
+                    <div className="form-group-container-full">
+                        <button className="button button-danger" type="button"
+                                onClick={this.handleDelete.bind(this)}>Ta bort fordon
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>;
     }
 }
 
 EditVehicle.propTypes = {
-    if: PropTypes.bool.isRequired,
     data: PropTypes.array.isRequired
 };
