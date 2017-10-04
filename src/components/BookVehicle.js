@@ -21,13 +21,13 @@ export default class BookVehicle extends Component {
                                 <li>Körkortkrav: {this.props.data[0].license || 'Information saknas.'}</li>
                                 <li>Växellåda: {this.props.data[0].gearbox || 'Information saknas.'}</li>
                                 <li>Dagshyra: {this.props.data[0].price || 'Information saknas.'}</li>
-                                <li>Anteckningar: {this.props.data[0].notes || 'Inga anmärkningar.'}</li>
+                                <li>Anteckningar: {this.props.data[0].note || 'Inga anmärkningar.'}</li>
                                 <li>datepicker här sen</li>
                             </ul>
                         </div>
                         <div className="button-container">
                             <button className="button">Boka</button>
-                            <button className="button" onClick={this.props.closeBookModal}>Stäng</button>
+                            <button className="button button-danger" onClick={this.props.closeBookModal}>Stäng</button>
                         </div>
                     </div>
                 </section>

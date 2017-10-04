@@ -12,6 +12,9 @@ body {
   display: block;
 }
 
+/*
+//TODO behöver en annan metod för att inte kunna scroll i bakgrunden när modal är uppe
+ */
 .no-scroll {
   overflow: hidden;
   height: 100vh;
@@ -22,10 +25,7 @@ MENU
  */
 .menu {
   text-align: center;
-}
-
-.menu-container {
-
+  padding: 20px 0 0 0;
 }
 
 .menu-li > a {
@@ -36,7 +36,7 @@ MENU
 
 .menu-li {
   display: inline-block;
-  padding: 20px;
+  padding: 30px;
 }
 
 .menu-ul {
@@ -61,10 +61,16 @@ input[type="text"] {
   height: 40px;
   font-size: .9em;
   border-radius: 5px;
-  border: none;
+  border: 1px solid rgba(209, 209, 209, 0.25);
   padding: 0 10px 0 10px;
   margin: 0 1% 10px 1%;
-  background: #e3e3e3
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+  transition: all .25s;
+}
+
+input[type="text"]:focus {
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 select {
@@ -74,10 +80,16 @@ select {
   height: 40px;
   font-size: .9em;
   border-radius: 5px;
-  border: none;
+  border: 1px solid rgba(209, 209, 209, 0.25);
   padding: 0 10px 0 10px;
   margin: 0 1% 10px 1%;
-  background: #e3e3e3
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+  transition: all .25s;
+}
+
+select:focus {
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 form {
@@ -92,21 +104,39 @@ label {
 
 button {
   cursor: pointer;
+  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+  border-radius: 4px;
+  transition: all .25s;
+  color: #f7f7f7;
 }
 
 .form-group-container-full > .button {
   width: 99%;
   height: 40px;
-  border-radius: 5px;
   border: none;
   font-size: .9em;
-  background: #9ad3de;
   margin: 10px auto 10px auto;
   display: block;
   color: #ffffff;
 }
 
-.form-group-container-full > .button-danger {
+.form-group-container-full > .button:hover {
+  box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+  border: 1px solid rgba(209, 209, 209, 0.25);
+  transform: translateY(-1px);
+}
+
+.button-container > .button:hover {
+  box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+  border: 1px solid rgba(209, 209, 209, 0.25);
+  transform: translateY(-1px);
+}
+
+.button-container {
+  margin: 0 0 0 0;
+}
+
+.button-danger {
   background: #ff625b;
 }
 
@@ -136,10 +166,16 @@ textarea {
   height: 120px;
   font-size: .9em;
   border-radius: 5px;
-  border: none;
+  border: 1px solid rgba(209, 209, 209, 0.25);
   padding: 10px 10px 0 10px;
   margin: 0 auto 10px auto;
-  background: #e3e3e3
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+  transition: all .25s;
+}
+
+textarea:focus {
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 /*
@@ -158,9 +194,10 @@ section {
 /*
 VEHICLE LIST
  */
-.all-vehicles > ul {
-  width: 80%;
-  margin: 0 auto 0 auto;
+
+.all-vehicles {
+  width: 1200px;
+  margin: 0 auto;
 }
 
 .all-vehicles > ul > li {
@@ -168,19 +205,18 @@ VEHICLE LIST
   align-items: center;
   text-transform: capitalize;
   margin: 10px 0 10px 0;
-  background: #e3e3e3;
-  cursor: pointer;
-  transition: all .3s;
-}
-
-.all-vehicles > ul > li:hover {
-  display: flex;
-  align-items: center;
-  text-transform: capitalize;
-  margin: 10px 0 10px 0;
   background: #ffffff;
   cursor: pointer;
   transition: all .3s;
+  border: 1px solid rgba(209, 209, 209, 0.25);
+  box-shadow: 0 4px 6px rgba(50,50,93,.05), 0 1px 3px rgba(0,0,0,.05);
+  border-radius: 3px;
+}
+
+.all-vehicles > ul > li:hover {
+  box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+  border: 1px solid rgba(209, 209, 209, 0.25);
+  transform: translateY(-1px);
 }
 
 .all-vehicles > ul > li > span, .image-container {
@@ -197,16 +233,17 @@ VEHICLE LIST
 .image-container > img {
   padding: 5px;
   vertical-align: middle;
+  border-radius: 3px;
 }
 
 .vehicle-search-head {
-  width: 80%;
-  margin: 0 auto 0 auto;
   display: flex;
   align-items: center;
   text-transform: capitalize;
-  background: #e3e3e3;
+  background: #f7f7f7;
+  margin: 10px 0 0 0;
   padding: 20px 0;
+  border-radius: 4px;
 }
 
 .vehicle-search-head > span {
@@ -229,9 +266,18 @@ END VEHICLE LIST
 FILTERS
 */
 .filter-container {
-  width: 80%;
-  background: #89bdd3;
-  margin: 0 auto 0 auto;
+  background: #f7f7f7;
+  border-radius: 4px;
+  padding: 0 0 20px 0;
+}
+
+.filter-container > .form-group-container {
+  width: 220px;
+  margin: 0 20px 0 20px;
+}
+
+.filter-container > .section-heading {
+  padding: 15px 0 0 0;
 }
 
 /*
@@ -248,7 +294,7 @@ BOOK VEHICLE
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.2);
   position: absolute;
   top: 0;
 }
@@ -257,6 +303,7 @@ BOOK VEHICLE
   width: 600px;
   background: #fff;
   border-radius: 3px;
+  box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
 }
 
 .image-container-book {
@@ -301,10 +348,8 @@ BOOK VEHICLE
 .book-vehicle-container > .button-container > button {
   width: 250px;
   height: 40px;
-  border-radius: 5px;
   border: none;
   font-size: .9em;
-  background: #9ad3de;
   margin: 10px auto 10px auto;
   display: block;
   color: #ffffff;
@@ -328,7 +373,7 @@ EDIT VEHICLE
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.2);
   position: absolute;
   top: 0;
 }
@@ -337,6 +382,8 @@ EDIT VEHICLE
   width: 600px;
   background: #fff;
   padding: 20px 0 50px 0;
+  border-radius: 3px;
+  box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
 }
 
 /*

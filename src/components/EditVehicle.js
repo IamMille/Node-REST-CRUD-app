@@ -186,14 +186,16 @@ export default class EditVehicle extends Component {
                                checked={!this.state.vehicleData[0].bookable}
                                onChange={this.handleChange.bind(this)}/>
                     </div>
-                    <div className="form-group-container-full">
-                        <button className="button" type="button" onClick={this.handleSubmit.bind(this)}>Spara
-                        </button>
-                    </div>
-                    <div className="form-group-container-full">
-                        <button className="button button-danger" type="button"
-                                onClick={this.handleDelete.bind(this)}>Ta bort fordon
-                        </button>
+                    <div className="button-container">
+                        <div className="form-group-container-full">
+                            <button className="button" type="button" onClick={this.handleSubmit.bind(this)}>Spara
+                            </button>
+                        </div>
+                        <div className="form-group-container-full">
+                            <button className="button button-danger" type="button"
+                                    onClick={this.handleDelete.bind(this)}>Ta bort fordon
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

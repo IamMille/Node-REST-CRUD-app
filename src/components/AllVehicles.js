@@ -17,6 +17,7 @@ export default class AllVehicles extends Component
             <h1 className="section-heading">Alla fordon</h1>
 
             <div className="filter-container">
+                <h3 className="section-heading">Filter</h3>
                 <div className="form-group-container">
                     <label htmlFor="gearbox">Växellåda</label>
                     <select id="gearbox">
