@@ -15,8 +15,9 @@ export default class BookVehicle extends Component
 
     componentDidMount() {
         console.log("bookVehicle did mount");
+        const [selectedVehicle] = this.props.data;
 
-        fetch(config.apiRoot + "booking/read") // TODO: SEARCH FOR THIS CAR, NOT HOLE DB
+        fetch(config.apiRoot + "booking/read?vehicleId=" + selectedVehicle._id)
             .then(resp => resp.json())
             .then(json => {
                 let disabledDays = [];
@@ -135,7 +136,7 @@ export default class BookVehicle extends Component
     }
 }
 
-Date.prototype.addDays = function(days) {
+Date.prototype.addDays = function(days) { // TODO: no extend native
     let date = new Date(this.valueOf());
     date.setDate(date.getDate() + days);
     return date;
