@@ -14,7 +14,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            admin: true,
+            admin: false,
             location: '',
             bookVehicle: false,
             editVehicle: false,
@@ -149,11 +149,14 @@ class App extends Component {
                     />
                 </Render>
 
-                <BookVehicle
-                    if={this.state.bookVehicle}
-                    data={this.state.vehicleData}
-                    closeBookModal={this.handleBookModal.bind(this)}
-                />
+                <Render if={this.state.bookVehicle}>
+                    <BookVehicle
+                        data={this.state.vehicleData}
+                        closeBookModal={this.handleBookModal.bind(this)}
+                        setState={this.setState.bind(this)}
+                        getState={{...this.state}}
+                    />
+                </Render>
 
             </div>
         );
