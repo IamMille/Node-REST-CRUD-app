@@ -25,29 +25,43 @@ export default class CancelBooking extends Component
                     statusMessage: json.message,
                     bookingId: ''
                 });
+                this.props.handleSuccessMessage(json);
             })
             .catch(error => {
                 console.warn("API error:", error);
-                this.setState({ statusMessage: error.name })
+                this.setState({ statusMessage: error.name });
+                this.props.handleErrorMessage(error.message);
             });
 
         console.log("bookVehicle did mount");
     };
 
     render() {
-        return <section className="cancel-booking">
-            <h1 className="section-heading">Avboka</h1>
-            <form action="">
-                <div className="form-group-container-full">
-                    <label htmlFor="bookingId">Ange ditt booknings ID nedan för att avboka</label>
-                    <input type="text" placeholder="09g74857gjh45" id="bookingId"
-                           onChange={this.handleChange}
-                           value={this.state.bookingId}
-                    />
-                    <button type="button" className="button" onClick={this.handleSubmit}>Avboka</button>
-                </div>
-            </form>
-        </section>;
-
+      if (this.props.if) {
+          return <section className="cancel-booking" onClick={this.props.handleCancelBookingModal}>
+              <div className="cancel-booking-container">
+              <h1 className="section-heading">Avboka</h1>
+              <form action="">
+                  <div className="form-group-container-full">
+                      <label htmlFor="bookingId">Ange ditt booknings ID nedan för att avboka</label>
+                      <input type="text" placeholder="09g74857gjh45" id="bookingId"
+                             onChange={this.handleChange}
+                             value={this.state.bookingId}
+                      />
+                      <div className="button-container">
+                          <div className="form-group-container-full">
+                              <button type="button" className="button" onClick={this.handleSubmit}>Avboka</button>
+                          </div>
+                          <div className="form-group-container-full">
+                              <button className="button" type="button" onClick={this.props.handleCancelBookingModal}>Stäng</button>
+                          </div>
+                      </div>
+                  </div>
+              </form>
+              </div>
+          </section>;
+      } else {
+          return null;
+      }
     }
 }
