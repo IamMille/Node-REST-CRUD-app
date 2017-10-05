@@ -8,6 +8,8 @@ import BookVehicle from "./components/BookVehicle";
 import Render from './components/Render';
 import './App.css';
 import config from './config.json';
+import SuccessMessage from "./components/SuccessMessage";
+import ErrorMessage from "./components/ErrorMessage";
 
 
 class App extends Component {
@@ -41,11 +43,11 @@ class App extends Component {
                     database: json.data.reverse(), // newest first
                     finished: true
                 });
-                this.handleSuccessMessage(json.message)
+                this.handleSuccessMessage(json)
             })
             .catch(error => {
                 console.error("API error:", error);
-                this.handleErrorMessage(error.message)
+                this.handleErrorMessage(error)
             });
 
         if (window.location.hash === '')
@@ -70,14 +72,7 @@ class App extends Component {
     }
 
     vehicleBooking(event) {
-        //för att se till att oavsett vad vi klickar på i listan så är event.target alltid ett li element
-        let target = event.target;
-        if (target.localName === 'span' || target.localName === 'div') {
-            target = target.parentElement;
-        } else if (target.localName === 'img') {
-            target = target.parentElement.parentElement;
-        }
-
+        let target = event.currentTarget;
         const clonedArray = JSON.parse(JSON.stringify(this.state.database));
         const clickedVehicleId = target.getAttribute('data-id');
         const clickedVehicle = clonedArray.filter(vehicle => vehicle._id.indexOf(clickedVehicleId) > -1);
@@ -107,8 +102,6 @@ class App extends Component {
     }
 
     editVehicle(event) {
-        console.log('editvehicle');
-
         const clonedArray = JSON.parse(JSON.stringify(this.state.database));
         const clickedVehicleId = event.currentTarget.getAttribute('data-id'); // currentTarget = where eventListener is
         const clickedVehicle = clonedArray.filter(vehicle => vehicle._id === clickedVehicleId);
@@ -120,21 +113,25 @@ class App extends Component {
         });
     }
 
-    handleSuccessMessage = (message) => {
-        this.setState({
-            success: {
-                exists: true,
-                message: message
-            }
-        });
-        setTimeout(() => {
+    handleSuccessMessage = (json) => {
+        if (json.result === 'ok') {
             this.setState({
                 success: {
-                    exists: false,
-                    message: ''
+                    exists: true,
+                    message: json.message
                 }
-            })
-        }, 3000)
+            });
+            setTimeout(() => {
+                this.setState({
+                    success: {
+                        exists: false,
+                        message: ''
+                    }
+                })
+            }, 3000)
+        } else if (json.result === 'error') {
+            this.handleErrorMessage(json.message || json.error)
+        }
     };
 
     handleErrorMessage = (message) => {
@@ -183,6 +180,8 @@ class App extends Component {
 
                 <CancelBooking
                     if={this.state.location === 'cancel'}
+                    handleSuccessMessage={this.handleSuccessMessage}
+                    handleErrorMessage={this.handleErrorMessage}
                 />
 
                 <Render if={this.state.location === 'add' && this.state.admin}>
@@ -198,9 +197,10 @@ class App extends Component {
                         closeEditModal={this.handleEditModal.bind(this)}
                         editVehicle={this.editVehicle.bind(this)}
                         dataIsFinished={this.state.dataIsFinished}
-
                         setState={this.setState.bind(this)}
                         getState={{...this.state}}
+                        handleSuccessMessage={this.handleSuccessMessage}
+                        handleErrorMessage={this.handleErrorMessage}
                     />
                 </Render>
 
@@ -210,6 +210,8 @@ class App extends Component {
                         closeBookModal={this.handleBookModal.bind(this)}
                         setState={this.setState.bind(this)}
                         getState={{...this.state}}
+                        handleSuccessMessage={this.handleSuccessMessage}
+                        handleErrorMessage={this.handleErrorMessage}
                     />
                 </Render>
 

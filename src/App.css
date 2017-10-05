@@ -358,6 +358,7 @@ BOOK VEHICLE
 
 .book-vehicle-container > .button-container {
   padding: 20px 0 20px 0;
+  clear: both;
 }
 
 /*
@@ -399,6 +400,7 @@ EDIT VEHICLE END
   left: 20px;
   color: #ffffff;
   border-radius: 4px;
+  word-break: break-all;
 }
 
 .error {
@@ -410,6 +412,7 @@ EDIT VEHICLE END
   left: 20px;
   color: #ffffff;
   border-radius: 4px;
+  word-break: break-all;
 }
 
 /*
@@ -419,6 +422,9 @@ CALENDAR
 .calendar-container {
   width: 300px;
   text-align: center;
+  clear: both;
+  float: right;
+  margin: 27px 0 0 0;
 }
 
 @media screen and (max-width: 1368px) {

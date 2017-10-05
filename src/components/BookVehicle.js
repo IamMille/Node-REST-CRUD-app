@@ -103,14 +103,16 @@ export default class BookVehicle extends Component
                     statusMessage: json.message,
                     isBookingComplate: true,
                     calendarMessage: ''
-                })
+                });
+                this.props.handleSuccessMessage(json);
             })
             .catch(error => {
                 console.warn("API error:", error);
                 this.setState({
                     statusMessage: error.name,
                     calendarMessage: ''
-                })
+                });
+                this.props.handleErrorMessage(error.message);
             });
         // close modal
         //this.props.setState({editVehicle: false});
@@ -126,6 +128,14 @@ export default class BookVehicle extends Component
                 <div className="image-container-book">
                     <img src={this.props.data[0].image || "http://via.placeholder.com/150x150"} alt="bild"/>
                 </div>
+                <div className="calendar-container">
+                    <p className="calendar-text">{this.state.calendarMessage}</p>
+                    <DayPicker
+                        selectedDays={this.state.selectedDays}
+                        disabledDays={this.state.disabledDays}
+                        onDayClick={this.handleDayClick}
+                    />
+                </div>
                 <div className="list-container">
                     <ul>
                         <li>{this.props.data[0].brand || 'Information saknas.'}</li>
@@ -136,16 +146,7 @@ export default class BookVehicle extends Component
                         <li>Växellåda: {this.props.data[0].gearbox || 'Information saknas.'}</li>
                         <li>Dagshyra: {this.props.data[0].price || 'Information saknas.'}</li>
                         <li>Anteckningar: {this.props.data[0].note || 'Inga anmärkningar.'}</li>
-                        <li>datepicker här sen</li>
                     </ul>
-                </div>
-                <div className="calendar-container">
-                    <p className="calendar-text">{this.state.calendarMessage}</p>
-                    <DayPicker
-                        selectedDays={this.state.selectedDays}
-                        disabledDays={this.state.disabledDays}
-                        onDayClick={this.handleDayClick}
-                    />
                 </div>
                 <div className="button-container">
                     <button className="button" onClick={this.handleSubmit}>Boka</button>

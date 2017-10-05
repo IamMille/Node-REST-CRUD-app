@@ -33,11 +33,12 @@ export default class AddVehicle extends Component
             .then(json => {
                 // show success message to the user
                 console.log("API response:", json);
-
+                this.props.handleSuccessMessage(json);
             })
             .catch(error => {
                 // show error message to the user (validation is handles by the api/model)
                 console.error("API error:", error);
+                this.props.handleErrorMessage(error.message);
             });
     };
 
@@ -113,7 +114,7 @@ export default class AddVehicle extends Component
                     <label htmlFor="note" className="block">Noteringar</label>
                     <textarea placeholder="Bilen är nästan trasig." id="note" onChange={this.handleChange} value={this.state.note || ""} />
 
-                    <button className="button" onClick={this.handleSubmit}>Lägg till</button>
+                    <button className="button" type="button" onClick={this.handleSubmit}>Lägg till</button>
                 </div>
             </form>
         </section>;
