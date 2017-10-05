@@ -38,7 +38,8 @@ export default class CancelBooking extends Component
 
     render() {
       if (this.props.if) {
-          return <section className="cancel-booking">
+          return <section className="cancel-booking" onClick={this.props.handleCancelBookingModal}>
+              <div className="cancel-booking-container">
               <h1 className="section-heading">Avboka</h1>
               <form action="">
                   <div className="form-group-container-full">
@@ -47,9 +48,17 @@ export default class CancelBooking extends Component
                              onChange={this.handleChange}
                              value={this.state.bookingId}
                       />
-                      <button type="button" className="button" onClick={this.handleSubmit}>Avboka</button>
+                      <div className="button-container">
+                          <div className="form-group-container-full">
+                              <button type="button" className="button" onClick={this.handleSubmit}>Avboka</button>
+                          </div>
+                          <div className="form-group-container-full">
+                              <button className="button" type="button" onClick={this.props.handleCancelBookingModal}>Stäng</button>
+                          </div>
+                      </div>
                   </div>
               </form>
+              </div>
           </section>;
       } else {
           return null;

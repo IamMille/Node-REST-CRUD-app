@@ -16,10 +16,12 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            admin: false,
+            admin: true,
             location: '',
             bookVehicle: false,
             editVehicle: false,
+            cancelBooking: false,
+            addVehicle: false,
             vehicleData: [],
             database: [],
             finished: false,
@@ -101,6 +103,33 @@ class App extends Component {
         }
     }
 
+    handleCancelBookingModal = (event) => {
+        const target = event.target;
+        if (target.localName === 'section' || target.innerText === 'Stäng') {
+            this.setState({
+                cancelBooking: !this.state.cancelBooking
+            })
+        } else if (target.localName === 'a') {
+            this.setState({
+                cancelBooking: true
+            })
+        }
+    };
+
+    handleAddVehicleModal = (event) => {
+        console.log('add vehicle modal');
+        const target = event.target;
+        if (target.localName === 'section' || target.innerText === 'Stäng') {
+            this.setState({
+                addVehicle: !this.state.addVehicle
+            })
+        } else if (target.localName === 'a') {
+            this.setState({
+                addVehicle: true
+            })
+        }
+    };
+
     editVehicle(event) {
         const clonedArray = JSON.parse(JSON.stringify(this.state.database));
         const clickedVehicleId = event.currentTarget.getAttribute('data-id'); // currentTarget = where eventListener is
@@ -168,6 +197,8 @@ class App extends Component {
                     admin={this.state.admin}
                     checkUrl={this.checkUrl.bind(this)}
                     handleLogin={this.handleLogin.bind(this)}
+                    handleCancelBookingModal={this.handleCancelBookingModal}
+                    handleAddVehicleModal={this.handleAddVehicleModal}
                 />
 
                 <Render if={this.state.location === 'vehicles'}>
@@ -179,17 +210,18 @@ class App extends Component {
                 </Render>
 
                 <CancelBooking
-                    if={this.state.location === 'cancel'}
+                    if={this.state.cancelBooking}
                     handleSuccessMessage={this.handleSuccessMessage}
                     handleErrorMessage={this.handleErrorMessage}
+                    handleCancelBookingModal={this.handleCancelBookingModal}
                 />
 
-                <Render if={this.state.location === 'add' && this.state.admin}>
-                    <AddVehicle
-                        handleSuccessMessage={this.handleSuccessMessage}
-                        handleErrorMessage={this.handleErrorMessage}
-                    />
-                </Render>
+                <AddVehicle
+                    if={this.state.addVehicle && this.state.admin}
+                    handleSuccessMessage={this.handleSuccessMessage}
+                    handleErrorMessage={this.handleErrorMessage}
+                    handleAddVehicleModal={this.handleAddVehicleModal}
+                />
 
                 <Render if={this.state.editVehicle && this.state.admin}>
                     <EditVehicle

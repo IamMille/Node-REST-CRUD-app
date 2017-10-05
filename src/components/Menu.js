@@ -10,14 +10,14 @@ export default class Menu extends Component {
           {!this.props.admin &&
             <ul className="menu-ul">
               <li className="menu-li"><a href="#vehicles" onClick={this.props.checkUrl}>Boka</a></li>
-              <li className="menu-li"><a href="#cancel" onClick={this.props.checkUrl}>Avboka</a></li>
+              <li className="menu-li"><a onClick={this.props.handleCancelBookingModal}>Avboka</a></li>
             </ul>
           }
 
           {this.props.admin &&
             <ul className="menu-ul">
               <li className="menu-li"><a href="#vehicles" onClick={this.props.checkUrl}>Visa fordon</a></li>
-              <li className="menu-li"><a href="#add" onClick={this.props.checkUrl}>Lägg till fordon</a></li>
+              <li className="menu-li"><a onClick={this.props.handleAddVehicleModal}>Lägg till fordon</a></li>
             </ul>
           }
 

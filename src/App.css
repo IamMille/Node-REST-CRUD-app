@@ -65,7 +65,7 @@ input[type="text"] {
   padding: 0 10px 0 10px;
   margin: 0 1% 10px 1%;
   background: #ffffff;
-  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
   transition: all .25s;
 }
 
@@ -84,7 +84,7 @@ select {
   padding: 0 10px 0 10px;
   margin: 0 1% 10px 1%;
   background: #ffffff;
-  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
   transition: all .25s;
 }
 
@@ -104,7 +104,7 @@ label {
 
 button {
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
   border-radius: 4px;
   transition: all .25s;
   color: #f7f7f7;
@@ -121,13 +121,13 @@ button {
 }
 
 .form-group-container-full > .button:hover {
-  box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
   border: 1px solid rgba(209, 209, 209, 0.25);
   transform: translateY(-1px);
 }
 
 .button-container > .button:hover {
-  box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
   border: 1px solid rgba(209, 209, 209, 0.25);
   transform: translateY(-1px);
 }
@@ -170,7 +170,7 @@ textarea {
   padding: 10px 10px 0 10px;
   margin: 0 auto 10px auto;
   background: #ffffff;
-  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
   transition: all .25s;
 }
 
@@ -209,12 +209,12 @@ VEHICLE LIST
   cursor: pointer;
   transition: all .3s;
   border: 1px solid rgba(209, 209, 209, 0.25);
-  box-shadow: 0 4px 6px rgba(50,50,93,.05), 0 1px 3px rgba(0,0,0,.05);
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .05), 0 1px 3px rgba(0, 0, 0, .05);
   border-radius: 3px;
 }
 
 .all-vehicles > ul > li:hover {
-  box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
   border: 1px solid rgba(209, 209, 209, 0.25);
   transform: translateY(-1px);
 }
@@ -303,7 +303,7 @@ BOOK VEHICLE
   width: 600px;
   background: #fff;
   border-radius: 3px;
-  box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
+  box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
 }
 
 .image-container-book {
@@ -384,7 +384,7 @@ EDIT VEHICLE
   background: #fff;
   padding: 20px 0 50px 0;
   border-radius: 3px;
-  box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
+  box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
 }
 
 /*
@@ -426,6 +426,62 @@ CALENDAR
   float: right;
   margin: 27px 0 0 0;
 }
+
+/*
+END CALENDAR
+ */
+
+/*
+CANCEL BOOKING
+ */
+.cancel-booking {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+}
+
+.cancel-booking-container {
+  width: 600px;
+  background: #fff;
+  padding: 20px 0 50px 0;
+  border-radius: 3px;
+  box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+}
+
+/*
+END CANCEL BOOKING
+ */
+
+/*
+ADD VEHICLE
+ */
+.add-vehicle {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+}
+
+.add-vehicle-container {
+  width: 600px;
+  background: #fff;
+  padding: 20px 0 50px 0;
+  border-radius: 3px;
+  box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+}
+
+/*
+END ADD VEHICLE
+ */
 
 @media screen and (max-width: 1368px) {
   .all-vehicles {
