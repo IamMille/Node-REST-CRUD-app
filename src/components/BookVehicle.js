@@ -4,12 +4,13 @@ import DayPicker, {DateUtils} from 'react-day-picker';
 import config from '../config.json';
 
 import 'react-day-picker/lib/style.css';
+import Render from "./Render";
 
 
 export default class BookVehicle extends Component
 {
     state = {
-        statusMessage: '',
+        statusMessage: 'Välj dag',
         calendarMessage: '',
         isBookingComplate: false,
         selectedDays: [],
@@ -50,21 +51,21 @@ export default class BookVehicle extends Component
                 DateUtils.isSameDay(selectedDay, day)
             );
             selectedDays.splice(selectedIndex, 1);
-            this.setState({ calendarMessage: 'Bortvald.' });
+            this.setState({ calendarMessage: '' }); // dag bortvald
         }
         else {
             if (isBookingComplate)
-                this.setState({ calendarMessage: 'Du kan ej längre ändra datum.' });
+                this.setState({ calendarMessage: 'Du kan ej längre ändra datum' });
 
             else if (disabled)
-                this.setState({ calendarMessage: 'Ej tillgänglig dag.' });
+                this.setState({ calendarMessage: 'Ej tillgänglig dag' });
 
             else if (selectedDays.length > 0 && !this.isCohesiveDate(day))
                 this.setState({ calendarMessage: 'Välj en sammanhängande dag' });
 
             else {
                 selectedDays.push(day);
-                this.setState({ calendarMessage: 'Vald.' });
+                this.setState({ calendarMessage: '' }); // dag vald
             }
         }
 
@@ -129,12 +130,12 @@ export default class BookVehicle extends Component
                     <img src={this.props.data[0].image || "http://via.placeholder.com/150x150"} alt="bild"/>
                 </div>
                 <div className="calendar-container">
-                    <p className="calendar-text">{this.state.calendarMessage}</p>
                     <DayPicker
                         selectedDays={this.state.selectedDays}
                         disabledDays={this.state.disabledDays}
                         onDayClick={this.handleDayClick}
                     />
+                    <p className="calendar-text">{this.state.calendarMessage}&nbsp;</p>
                 </div>
                 <div className="list-container">
                     <ul>
@@ -149,7 +150,15 @@ export default class BookVehicle extends Component
                     </ul>
                 </div>
                 <div className="button-container">
-                    <button className="button" onClick={this.handleSubmit}>Boka</button>
+                    {
+                        ! this.state.isBookingComplate
+                        ? <button className="button" onClick={this.handleSubmit}>Boka</button>
+                        : <center>
+                            <p>Fordonet har bokats! Boknings ID: kl3j12lk3j12lkj3</p>
+                            <p>Spara ditt boknings ID för ev. avbokning.</p>
+                        </center>
+                    }
+
                     <button className="button" onClick={this.props.closeBookModal}>Stäng</button>
                 </div>
             </div>
