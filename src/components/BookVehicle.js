@@ -9,8 +9,11 @@ import 'react-day-picker/lib/style.css';
 export default class BookVehicle extends Component
 {
     state = {
+        statusMessage: '',
+        calendarMessage: '',
+        isBookingComplate: false,
         selectedDays: [],
-        disabledDays: []
+        disabledDays: [],
     };
 
     componentDidMount() {
@@ -40,21 +43,29 @@ export default class BookVehicle extends Component
 
     handleDayClick = (day, { selected, disabled }) =>
     {
-        const {selectedDays, disabledDays} = this.state;
-
-        console.log("handleDayClick:", disabledDays);
+        const {selectedDays, isBookingComplate} = this.state;
 
         if (selected) {
             const selectedIndex = selectedDays.findIndex(selectedDay =>
                 DateUtils.isSameDay(selectedDay, day)
             );
             selectedDays.splice(selectedIndex, 1);
+            this.setState({ calendarMessage: 'Bortvald.' });
         }
         else {
-            // if disabled, DONT PUSH
-            console.log("push date");
-            if (selectedDays.length === 0 || this.isCohesiveDate(day))
+            if (isBookingComplate)
+                this.setState({ calendarMessage: 'Du kan ej längre ändra datum.' });
+
+            else if (disabled)
+                this.setState({ calendarMessage: 'Ej tillgänglig dag.' });
+
+            else if (selectedDays.length > 0 && !this.isCohesiveDate(day))
+                this.setState({ calendarMessage: 'Välj en sammanhängande dag' });
+
+            else {
                 selectedDays.push(day);
+                this.setState({ calendarMessage: 'Vald.' });
+            }
         }
 
         this.setState({selectedDays});
@@ -83,17 +94,24 @@ export default class BookVehicle extends Component
         let dateTill = new Date(Math.max.apply(null,selectedDays));
         let dateFrom = new Date(Math.min.apply(null,selectedDays));
         let createBooking = {vehicleId, dateFrom, dateTill};
-        console.log(this.serializeUpdateObject(createBooking))
+        console.log(this.serializeUpdateObject(createBooking));
 
         fetch( config.apiRoot + "booking/create/?" + this.serializeUpdateObject(createBooking) )
             .then(resp => resp.json())
             .then(json => {
-                // show success message to the user
                 console.log("API response:", json);
+                this.setState({
+                    statusMessage: json.message,
+                    isBookingComplate: true,
+                    calendarMessage: ''
+                })
             })
             .catch(error => {
-                // show error message to the user (validation is handles by the api/model)
-                console.error("API error:", error);
+                console.warn("API error:", error);
+                this.setState({
+                    statusMessage: error.name,
+                    calendarMessage: ''
+                })
             });
         // close modal
         //this.props.setState({editVehicle: false});
@@ -113,6 +131,9 @@ export default class BookVehicle extends Component
                         disabledDays={this.state.disabledDays}
                         onDayClick={this.handleDayClick}
                     />
+                    <p>
+                        {this.state.calendarMessage}
+                    </p>
                 </div>
                 <div className="list-container">
                     <ul>
@@ -136,7 +157,8 @@ export default class BookVehicle extends Component
     }
 }
 
-Date.prototype.addDays = function(days) { // TODO: no extend native
+// eslint-disable-next-line
+Date.prototype.addDays = function(days) {
     let date = new Date(this.valueOf());
     date.setDate(date.getDate() + days);
     return date;
