@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-export default class AllVehicles extends Component
-{
+export default class AllVehicles extends Component {
     render() {
         if (!this.props.data.length) return null;
 
@@ -54,10 +53,11 @@ export default class AllVehicles extends Component
                                 <img src={vehicle.image || "http://via.placeholder.com/150x150"} alt=""
                                      width="120"/>
                             </div>
-                            <span>{vehicle.brand || 'Ingen data'}</span>
-                            <span>{vehicle.model || 'Ingen data'}</span>
-                            <span>{vehicle.type || 'Ingen data'}</span>
-                            <span>{vehicle.price || 'Ingen data'}</span>
+                                <span>{vehicle.brand || 'Ingen data'}</span>
+                                <span>{vehicle.model || 'Ingen data'}</span>
+                                <span>{vehicle.type || 'Ingen data'}</span>
+                                <span>{vehicle.price || 'Ingen data'}</span>
+                            <br/>
                         </li>
                     );
                 })}

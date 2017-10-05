@@ -150,7 +150,7 @@ export default class BookVehicle extends Component
                 </div>
                 <div className="button-container">
                     <button className="button" onClick={this.handleSubmit}>Boka</button>
-                    <button className="button" onClick={this.props.closeBookModal}>Stäng</button>
+                    <button className="button button-danger" onClick={this.props.closeBookModal}>Stäng</button>
                 </div>
             </div>
         </section>;

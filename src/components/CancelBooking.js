@@ -53,7 +53,7 @@ export default class CancelBooking extends Component
                               <button type="button" className="button" onClick={this.handleSubmit}>Avboka</button>
                           </div>
                           <div className="form-group-container-full">
-                              <button className="button" type="button" onClick={this.props.handleCancelBookingModal}>Stäng</button>
+                              <button className="button button-danger" type="button" onClick={this.props.handleCancelBookingModal}>Stäng</button>
                           </div>
                       </div>
                   </div>
