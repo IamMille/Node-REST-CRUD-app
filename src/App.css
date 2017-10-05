@@ -389,3 +389,40 @@ EDIT VEHICLE
 /*
 EDIT VEHICLE END
 */
+
+.success {
+  width: 400px;
+  padding: 20px;
+  background: green;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+.error {
+  width: 400px;
+  padding: 20px;
+  background: red;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+/*
+CALENDAR
+ */
+
+.calendar-container {
+  width: 300px;
+  text-align: center;
+}
+
+@media screen and (max-width: 1368px) {
+  .all-vehicles {
+    width: 90%;
+  }
+}

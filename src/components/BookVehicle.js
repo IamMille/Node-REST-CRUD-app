@@ -6,8 +6,7 @@ import config from '../config.json';
 import 'react-day-picker/lib/style.css';
 
 
-export default class BookVehicle extends Component
-{
+export default class BookVehicle extends Component {
     state = {
         selectedDays: [],
         disabledDays: []
@@ -29,7 +28,7 @@ export default class BookVehicle extends Component
                     })
                 });
 
-                this.setState({ disabledDays })
+                this.setState({disabledDays})
             })
             .catch(error => {
                 console.warn("API error:", error);
@@ -38,8 +37,7 @@ export default class BookVehicle extends Component
 
     }
 
-    handleDayClick = (day, { selected, disabled }) =>
-    {
+    handleDayClick = (day, {selected, disabled}) => {
         const {selectedDays, disabledDays} = this.state;
 
         console.log("handleDayClick:", disabledDays);
@@ -61,7 +59,7 @@ export default class BookVehicle extends Component
     };
 
     isCohesiveDate = (day) => {
-        let dayAfter  = day.addDays(1);
+        let dayAfter = day.addDays(1);
         let dayBefore = day.addDays(-1);
 
         return Boolean(this.state.selectedDays.filter(d =>
@@ -80,12 +78,12 @@ export default class BookVehicle extends Component
         const {selectedDays} = this.state;
 
         let vehicleId = this.props.data[0]._id;
-        let dateTill = new Date(Math.max.apply(null,selectedDays));
-        let dateFrom = new Date(Math.min.apply(null,selectedDays));
+        let dateTill = new Date(Math.max.apply(null, selectedDays));
+        let dateFrom = new Date(Math.min.apply(null, selectedDays));
         let createBooking = {vehicleId, dateFrom, dateTill};
         console.log(this.serializeUpdateObject(createBooking))
 
-        fetch( config.apiRoot + "booking/create/?" + this.serializeUpdateObject(createBooking) )
+        fetch(config.apiRoot + "booking/create/?" + this.serializeUpdateObject(createBooking))
             .then(resp => resp.json())
             .then(json => {
                 // show success message to the user
@@ -107,12 +105,7 @@ export default class BookVehicle extends Component
             <div className="book-vehicle-container">
 
                 <div className="image-container-book">
-                    {/*<img src={this.props.data[0].image || "http://via.placeholder.com/150x150"} alt="bild"/>*/}
-                    <DayPicker
-                        selectedDays={this.state.selectedDays}
-                        disabledDays={this.state.disabledDays}
-                        onDayClick={this.handleDayClick}
-                    />
+                    <img src={this.props.data[0].image || "http://via.placeholder.com/150x150"} alt="bild"/>
                 </div>
                 <div className="list-container">
                     <ul>
@@ -123,9 +116,17 @@ export default class BookVehicle extends Component
                         <li>Körkortkrav: {this.props.data[0].license || 'Information saknas.'}</li>
                         <li>Växellåda: {this.props.data[0].gearbox || 'Information saknas.'}</li>
                         <li>Dagshyra: {this.props.data[0].price || 'Information saknas.'}</li>
-                        <li>Anteckningar: {this.props.data[0].notes || 'Inga anmärkningar.'}</li>
+                        <li>Anteckningar: {this.props.data[0].note || 'Inga anmärkningar.'}</li>
                         <li>datepicker här sen</li>
                     </ul>
+                </div>
+                <div className="calendar-container">
+                    <p className="calendar-text">Välj datum</p>
+                    <DayPicker
+                        selectedDays={this.state.selectedDays}
+                        disabledDays={this.state.disabledDays}
+                        onDayClick={this.handleDayClick}
+                    />
                 </div>
                 <div className="button-container">
                     <button className="button" onClick={this.handleSubmit}>Boka</button>
@@ -136,7 +137,7 @@ export default class BookVehicle extends Component
     }
 }
 
-Date.prototype.addDays = function(days) { // TODO: no extend native
+Date.prototype.addDays = function (days) { // TODO: no extend native
     let date = new Date(this.valueOf());
     date.setDate(date.getDate() + days);
     return date;
