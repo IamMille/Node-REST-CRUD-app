@@ -5,6 +5,8 @@ import AddVehicle from "./components/AddVehicle";
 import EditVehicle from "./components/EditVehicle";
 import Menu from "./components/Menu";
 import BookVehicle from "./components/BookVehicle";
+import SuccessMessage from "./components/SuccessMessage";
+import ErrorMessage from "./components/ErrorMessage";
 import Render from './components/Render';
 import './App.css';
 import config from './config.json';
