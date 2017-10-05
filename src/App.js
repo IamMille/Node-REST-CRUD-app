@@ -5,11 +5,11 @@ import AddVehicle from "./components/AddVehicle";
 import EditVehicle from "./components/EditVehicle";
 import Menu from "./components/Menu";
 import BookVehicle from "./components/BookVehicle";
-import SuccessMessage from "./components/SuccessMessage";
-import ErrorMessage from "./components/ErrorMessage";
 import Render from './components/Render';
 import './App.css';
 import config from './config.json';
+import SuccessMessage from "./components/SuccessMessage";
+import ErrorMessage from "./components/ErrorMessage";
 
 
 class App extends Component {
@@ -209,13 +209,12 @@ class App extends Component {
                     />
                 </Render>
 
-                <Render if={this.state.location === 'cancel'}>
-                    <CancelBooking
-                        handleSuccessMessage={this.handleSuccessMessage}
-                        handleErrorMessage={this.handleErrorMessage}
-                        handleCancelBookingModal={this.handleCancelBookingModal}
-                    />
-                </Render>
+                <CancelBooking
+                    if={this.state.cancelBooking}
+                    handleSuccessMessage={this.handleSuccessMessage}
+                    handleErrorMessage={this.handleErrorMessage}
+                    handleCancelBookingModal={this.handleCancelBookingModal}
+                />
 
                 <AddVehicle
                     if={this.state.addVehicle && this.state.admin}
