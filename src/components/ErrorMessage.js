@@ -6,7 +6,7 @@ export default class ErrorMessage extends Component {
         if (this.props.if) {
             return (
                 <div className="error">
-                    <p>{this.props.message}.</p>
+                    <p>{this.props.message}</p>
                 </div>
             );
         } else {

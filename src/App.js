@@ -16,7 +16,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            admin: true,
+            admin: false,
             location: '',
             bookVehicle: false,
             editVehicle: false,

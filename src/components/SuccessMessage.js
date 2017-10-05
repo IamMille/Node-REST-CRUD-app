@@ -7,7 +7,7 @@ export default class SuccessMessage extends Component {
 
             return (
                 <div className="success">
-                    <p>{this.props.message}.</p>
+                    <p>{this.props.message}</p>
                 </div>
             );
         } else {

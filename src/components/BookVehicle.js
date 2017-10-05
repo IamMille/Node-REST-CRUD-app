@@ -91,33 +91,32 @@ export default class BookVehicle extends Component
     handleSubmit = () => {
         const {selectedDays} = this.state;
 
-        let vehicleId = this.props.data[0]._id;
-        let dateTill = new Date(Math.max.apply(null, selectedDays));
-        let dateFrom = new Date(Math.min.apply(null, selectedDays));
-        let createBooking = {vehicleId, dateFrom, dateTill};
+        let createBooking = {
+            dateFrom: new Date(Math.min.apply(null, selectedDays)),
+            dateTill: new Date(Math.max.apply(null, selectedDays)),
+            vehicleId: this.props.data[0]._id,
+        };
 
         fetch( config.apiRoot + "booking/create/?" + this.serializeUpdateObject(createBooking) )
             .then(resp => resp.json())
-            .then(json => {
+            .then(json =>
+            {
                 console.log("API response:", json);
+                this.props.handleSuccessMessage(json);
+
                 this.setState({
                     statusMessage: json.message,
-                    isBookingComplate: true,
+                    isBookingComplate: json.data._id,
                     calendarMessage: ''
                 });
-                this.props.handleSuccessMessage(json);
             })
-            .catch(error => {
+            .catch(error =>
+            {
                 console.warn("API error:", error);
-                this.setState({
-                    statusMessage: error.name,
-                    calendarMessage: ''
-                });
-                this.props.handleErrorMessage(error.message);
-            });
-        // close modal
-        //this.props.setState({editVehicle: false});
+                this.props.handleErrorMessage(error.name);
 
+                this.setState({ calendarMessage: '' });
+            });
     };
 
     render() {
@@ -129,6 +128,7 @@ export default class BookVehicle extends Component
                 <div className="image-container-book">
                     <img src={this.props.data[0].image || "http://via.placeholder.com/150x150"} alt="bild"/>
                 </div>
+
                 <div className="calendar-container">
                     <DayPicker
                         selectedDays={this.state.selectedDays}
@@ -137,6 +137,7 @@ export default class BookVehicle extends Component
                     />
                     <p className="calendar-text">{this.state.calendarMessage}&nbsp;</p>
                 </div>
+
                 <div className="list-container">
                     <ul>
                         <li>{this.props.data[0].brand || 'Information saknas.'}</li>
@@ -149,18 +150,19 @@ export default class BookVehicle extends Component
                         <li>Anteckningar: {this.props.data[0].note || 'Inga anmärkningar.'}</li>
                     </ul>
                 </div>
+
                 <div className="button-container">
                     {
                         ! this.state.isBookingComplate
                         ? <button className="button" onClick={this.handleSubmit}>Boka</button>
                         : <center>
-                            <p>Fordonet har bokats! Boknings ID: kl3j12lk3j12lkj3</p>
+                            <p>Fordonet har bokats! Boknings ID: {this.state.isBookingComplate}</p>
                             <p>Spara ditt boknings ID för ev. avbokning.</p>
                         </center>
                     }
-
                     <button className="button" onClick={this.props.closeBookModal}>Stäng</button>
                 </div>
+
             </div>
         </section>;
     }

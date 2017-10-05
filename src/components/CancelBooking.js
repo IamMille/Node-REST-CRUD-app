@@ -15,22 +15,34 @@ export default class CancelBooking extends Component
     };
 
     handleSubmit = () => {
-        console.log("handle submit:", this.state.bookingId);
+        const {bookingId} = this.state;
+        const {handleErrorMessage, handleSuccessMessage} = this.props;
 
-        fetch( config.apiRoot + "booking/delete/" + this.state.bookingId )
+        if (!bookingId) return handleErrorMessage("Ange ditt boknings ID först!");
+
+        fetch( config.apiRoot + "booking/delete/" + bookingId )
             .then(resp => resp.json())
-            .then(json => {
+            .then(json =>
+            {
                 console.log("API response:", json);
-                this.setState({
-                    statusMessage: json.message,
-                    bookingId: ''
-                });
+
+                let dateFrom = new Date(json.data.dateFrom).toISOString().substr(0,10);
+                let dateTill = new Date(json.data.dateTill).toISOString().substr(0,10);
+                let displayDate = ( dateFrom === dateTill ? dateFrom : dateFrom +"→"+ dateTill );
+
+                if (json.result === "ok")
+                    json.message = "Avbokning genomförd: " + displayDate;
+
+                if (json.error === "Not found")
+                    json.message = "Bokning med angivet ID kunde ej hittas!";
+
+                this.setState({ bookingId: '' });
                 this.props.handleSuccessMessage(json);
             })
-            .catch(error => {
+            .catch(error =>
+            {
                 console.warn("API error:", error);
-                this.setState({ statusMessage: error.name });
-                this.props.handleErrorMessage(error.message);
+                handleErrorMessage(error.message);
             });
 
         console.log("bookVehicle did mount");
