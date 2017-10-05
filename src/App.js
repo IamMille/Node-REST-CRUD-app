@@ -183,9 +183,9 @@ class App extends Component {
                     />
                 </Render>
 
-                <CancelBooking
-                    if={this.state.location === 'cancel'}
-                />
+                <Render if={this.state.location === 'cancel'}>
+                    <CancelBooking />
+                </Render>
 
                 <Render if={this.state.location === 'add' && this.state.admin}>
                     <AddVehicle
