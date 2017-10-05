@@ -21,7 +21,15 @@ class App extends Component {
             vehicleData: [],
             database: [],
             finished: false,
-            dataIsFinished: false
+            dataIsFinished: false,
+            success: {
+                exists: false,
+                message: ''
+            },
+            error: {
+                exists: false,
+                message: ''
+            }
         }
     }
 
@@ -32,10 +40,12 @@ class App extends Component {
                 this.setState({
                     database: json.data.reverse(), // newest first
                     finished: true
-                })
+                });
+                this.handleSuccessMessage(json.message)
             })
             .catch(error => {
                 console.error("API error:", error);
+                this.handleErrorMessage(error.message)
             });
 
         if (window.location.hash === '')
@@ -110,10 +120,52 @@ class App extends Component {
         });
     }
 
+    handleSuccessMessage = (message) => {
+        this.setState({
+            success: {
+                exists: true,
+                message: message
+            }
+        });
+        setTimeout(() => {
+            this.setState({
+                success: {
+                    exists: false,
+                    message: ''
+                }
+            })
+        }, 3000)
+    };
+
+    handleErrorMessage = (message) => {
+        this.setState({
+            error: {
+                exists: true,
+                message: message
+            }
+        });
+        setTimeout(() => {
+            this.setState({
+                error: {
+                    exists: false,
+                    message: ''
+                }
+            })
+        }, 3000)
+    };
+
 
     render() {
         return (
             <div className={this.state.bookVehicle || this.state.editVehicle ? 'no-scroll App' : 'App'}>
+                <SuccessMessage
+                    if={this.state.success.exists}
+                    message={this.state.success.message}
+                />
+                <ErrorMessage
+                    if={this.state.error.exists}
+                    message={this.state.error.message}
+                />
 
                 <Menu
                     admin={this.state.admin}
@@ -129,12 +181,15 @@ class App extends Component {
                     />
                 </Render>
 
-                <Render if={this.state.location === 'cancel'}>
-                    <CancelBooking />
-                </Render>
+                <CancelBooking
+                    if={this.state.location === 'cancel'}
+                />
 
                 <Render if={this.state.location === 'add' && this.state.admin}>
-                    <AddVehicle/>
+                    <AddVehicle
+                        handleSuccessMessage={this.handleSuccessMessage}
+                        handleErrorMessage={this.handleErrorMessage}
+                    />
                 </Render>
 
                 <Render if={this.state.editVehicle && this.state.admin}>
