@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 */
 
 // http://localhost:5000/api/actor/delete/12312
-router.get('/:model/delete/:id', (req, res) =>
+router.get('/:model/delete/:id', (req, res) => // TODO: cancelbooking when id not exist, json error
 {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id))

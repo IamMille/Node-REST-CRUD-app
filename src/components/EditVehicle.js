@@ -46,6 +46,7 @@ export default class EditVehicle extends Component {
     handleDelete() {
         const [deleteVehicle] = this.state.vehicleData; // first item
 
+        // TODO: delete all bookings associated with car
         fetch(config.apiRoot + "vehicle/delete/" + deleteVehicle._id)
             .then(resp => resp.json())
             .then(json => {
@@ -58,14 +59,14 @@ export default class EditVehicle extends Component {
             });
 
         // close modal
-        this.props.setState({editVehicle: false});
+        this.props.setState({ editVehicle: false });
 
         // uppdate global state
         let updatedDatabase = this.props.getState.database.filter(
             vehicle => (vehicle._id !== deleteVehicle._id)
         );
 
-        this.props.setState({database: updatedDatabase});
+        this.props.setState({ database: updatedDatabase });
     }
 
     handleSubmit() {
