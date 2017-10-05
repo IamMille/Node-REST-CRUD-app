@@ -34,7 +34,7 @@ router.get('/:model/delete/:id', (req, res) =>
 
             res.json({
                 result: 'ok',
-                message: 'Successfully deleted document.',
+                message: 'Successfully deleted document(s).',
                 data: doc || {} // if empty, nothing really deleted
             });
         })
@@ -79,7 +79,7 @@ router.get('/:model/read', (req, res) =>
 
             res.json({
                 result: 'ok',
-                message: 'Successfully found document',
+                message: 'Successfully found document(s)',
                 data: docs
             });
         });
