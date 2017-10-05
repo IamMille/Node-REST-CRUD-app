@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 */
 
 // http://localhost:5000/api/actor/delete/12312
-router.get('/:model/delete/:id', (req, res) => // TODO: cancelbooking when id not exist, json error
+router.get('/:model/delete/:id', (req, res) =>
 {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id))
@@ -35,7 +35,7 @@ router.get('/:model/delete/:id', (req, res) => // TODO: cancelbooking when id no
             res.json({
                 result: 'ok',
                 message: 'Successfully deleted document.',
-                data: doc
+                data: doc || {} // if empty, nothing really deleted
             });
         })
     } catch(err) {
