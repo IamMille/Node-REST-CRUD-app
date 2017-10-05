@@ -77,24 +77,23 @@ export default class EditVehicle extends Component {
             .then(json => {
                 // show success message to the user
                 console.log("API response:", json);
+
+                // close modal
+                this.props.setState({editVehicle: false});
+
+                // uppdate global state
+                let updatedDatabase = this.props.getState.database.map(vehicle => {
+                    return vehicle._id === updatedVehicle._id
+                        ? updatedVehicle
+                        : vehicle;
+                });
+
+                this.props.setState({database: updatedDatabase});
             })
             .catch(error => {
                 // show error message to the user (validation is handles by the api/model)
                 console.error("API error:", error);
             });
-
-        // close modal
-        this.props.setState({editVehicle: false});
-
-        // uppdate global state
-        let updatedDatabase = this.props.getState.database.map(vehicle => {
-            return vehicle._id === updatedVehicle._id
-                ? updatedVehicle
-                : vehicle;
-        });
-
-        this.props.setState({database: updatedDatabase});
-
     }
 
     render() {
