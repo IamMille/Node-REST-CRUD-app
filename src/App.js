@@ -183,7 +183,7 @@ class App extends Component {
 
     render() {
         return (
-            <div className={this.state.bookVehicle || this.state.editVehicle ? 'no-scroll App' : 'App'}>
+            <div className="App">
                 <SuccessMessage
                     if={this.state.success.exists}
                     message={this.state.success.message}

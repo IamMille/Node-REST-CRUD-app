@@ -52,10 +52,12 @@ export default class EditVehicle extends Component {
             .then(json => {
                 // show success message to the user
                 console.log("API response:", json);
+                this.props.handleSuccessMessage(json);
             })
             .catch(error => {
                 // show error message to the user (validation is handles by the api/model)
                 console.error("API error:", error);
+                this.props.handleErrorMessage(error.message);
             });
 
         // close modal

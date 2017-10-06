@@ -124,7 +124,7 @@ export default class AddVehicle extends Component {
                                     <button className="button" type="button" onClick={this.handleSubmit}>Lägg till</button>
                                 </div>
                                 <div className="form-group-container-full">
-                                    <button className="button" type="button" onClick={this.props.handleAddVehicleModal}>Stäng</button>
+                                    <button className="button button-danger" type="button" onClick={this.props.handleAddVehicleModal}>Stäng</button>
                                 </div>
                             </div>
 

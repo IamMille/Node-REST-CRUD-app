@@ -9,7 +9,7 @@ import 'react-day-picker/lib/style.css';
 export default class BookVehicle extends Component
 {
     state = {
-        statusMessage: 'Välj dag',
+        statusMessage: '',
         calendarMessage: '',
         isBookingComplate: false,
         selectedDays: [],
@@ -148,6 +148,14 @@ export default class BookVehicle extends Component
                         <li>Dagshyra: {this.props.data[0].price || 'Information saknas.'}</li>
                         <li>Anteckningar: {this.props.data[0].note || 'Inga anmärkningar.'}</li>
                     </ul>
+                </div>
+                <div className="calendar-container">
+                    <p className="calendar-text">{this.state.calendarMessage}</p>
+                    <DayPicker
+                        selectedDays={this.state.selectedDays}
+                        disabledDays={this.state.disabledDays}
+                        onDayClick={this.handleDayClick}
+                    />
                 </div>
 
                 <div className="button-container">
