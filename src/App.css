@@ -668,3 +668,10 @@ END ADD VEHICLE
     float: none;
   }
 }
+
+@media screen and (max-height: 880px) {
+  .edit-vehicle-container, .add-vehicle-container, .cancel-booking-container, .book-vehicle-container {
+    height: 100%;
+    overflow: scroll;
+  }
+}

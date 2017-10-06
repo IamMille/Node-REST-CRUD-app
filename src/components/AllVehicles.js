@@ -106,6 +106,7 @@ export default class AllVehicles extends Component
                                 <span>{vehicle.model || 'Ingen data'}</span>
                                 <span>{vehicle.type || 'Ingen data'}</span>
                                 <span>{!vehicle.price ? 'Ingen data' : vehicle.price + ':-'}</span>
+                                <br/>
                             </li>
                         );
                     })}
