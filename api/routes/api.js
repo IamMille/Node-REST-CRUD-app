@@ -24,7 +24,7 @@ router.get('/:model/delete/:id', (req, res) =>
 {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id))
-            return res.json({result: 'error', error: 'Ogiltigt ID'});
+            return res.json({result: 'error', error: 'Invalid ID'});
 
         let Model = require('../models/' + req.params.model);
 

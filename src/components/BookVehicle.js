@@ -4,7 +4,6 @@ import DayPicker, {DateUtils} from 'react-day-picker';
 import config from '../config.json';
 
 import 'react-day-picker/lib/style.css';
-import Render from "./Render";
 
 
 export default class BookVehicle extends Component

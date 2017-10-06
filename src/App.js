@@ -206,6 +206,9 @@ class App extends Component {
                         isAdmin={this.state.admin}
                         handleClick={this.state.admin ? this.editVehicle.bind(this) : this.vehicleBooking.bind(this)}
                         data={this.state.database}
+                        handleSuccessMessage={this.handleSuccessMessage}
+                        handleErrorMessage={this.handleErrorMessage}
+                        setState={this.setState.bind(this)}
                     />
                 </Render>
 

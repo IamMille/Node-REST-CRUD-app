@@ -117,8 +117,9 @@ export default class EditVehicle extends Component {
                     </div>
                     <div className="form-group-container">
                         <label htmlFor="license">Körkort</label>
-                        <select value={this.state.vehicleData[0].license}
+                        <select value={this.state.vehicleData[0].license || ""}
                                 onChange={this.handleChange.bind(this)} id="license">
+                            <option value="" disabled>Välj</option>
                             <option value="A">A</option>
                             <option value="A1">A1</option>
                             <option value="A2">A2</option>
@@ -153,8 +154,9 @@ export default class EditVehicle extends Component {
                     </div>
                     <div className="form-group-container">
                         <label htmlFor="gearbox">Växellåda</label>
-                        <select value={this.state.vehicleData[0].gearbox}
+                        <select value={this.state.vehicleData[0].gearbox || ""}
                                 onChange={this.handleChange.bind(this)} id="gearbox">
+                            <option value="" disabled>Välj</option>
                             <option value="manuell">Manuell</option>
                             <option value="automat">Automat</option>
                         </select>

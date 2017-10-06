@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 
 export default class ErrorMessage extends Component {
     render() {
@@ -14,5 +13,3 @@ export default class ErrorMessage extends Component {
         }
     }
 }
-
-ErrorMessage.propTypes = {};

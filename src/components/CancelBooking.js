@@ -25,15 +25,19 @@ export default class CancelBooking extends Component
             {
                 console.log("API response:", json);
 
-                let dateFrom = new Date(json.data.dateFrom).toISOString().substr(0,10);
-                let dateTill = new Date(json.data.dateTill).toISOString().substr(0,10);
-                let displayDate = ( dateFrom === dateTill ? dateFrom : dateFrom +"→"+ dateTill );
-
-                if (json.result === "ok")
-                    json.message = "Avbokning genomförd: " + displayDate;
-
                 if (json.error === "Not found")
                     json.message = "Bokning med angivet ID kunde ej hittas!";
+
+                if (json.error === "Invalid ID")
+                    json.message = "Ogiltigt ID angivet";
+
+                if (json.result === "ok") {
+                    let dateFrom = new Date(json.data.dateFrom).toISOString().substr(0,10);
+                    let dateTill = new Date(json.data.dateTill).toISOString().substr(0,10);
+                    let displayDate = ( dateFrom === dateTill ? dateFrom : dateFrom +"→"+ dateTill );
+
+                    json.message = "Avbokning genomförd: " + displayDate;
+                }
 
                 this.setState({ bookingId: '' });
                 this.props.handleSuccessMessage(json);
