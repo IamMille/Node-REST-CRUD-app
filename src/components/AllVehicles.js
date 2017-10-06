@@ -1,38 +1,81 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import config from '../config.json';
+import Render from './Render';
 
 export default class AllVehicles extends Component
 {
-    render() {
-        if (!this.props.data.length) return null;
+    constructor() {
+        super(...arguments);
+        this.state = {
+            gearbox: '',
+            type: ''
+        };
+    }
 
-        // if not admin, show only bookable
+    handleChange = (event) => {
+        const {id, value} = event.target;
+        this.setState({ [id]: value }); console.log("handelChange:", value);
+
+        let filters = {...this.state, [id]: value};
+
+        for (let prop in filters) {
+            if (filters[prop] === '')
+                delete filters[prop]
+        }
+
+        let url = config.apiRoot + "vehicle/read?" + this.serializeUpdateObject(filters);  console.log(url);
+
+        fetch( config.apiRoot + "vehicle/read?" + this.serializeUpdateObject(filters) )
+            .then(resp => resp.json())
+            .then(json => {
+                this.props.setState({ database: json.data.reverse() });  console.log("API response (filter):", json.data);
+                this.props.handleSuccessMessage(json)
+            })
+            .catch(error => {
+                console.error("API error:", error);
+                this.props.handleErrorMessage(error)
+            });
+    };
+
+    serializeUpdateObject(obj) {
+        return Object.keys(obj).map(prop => {
+            return encodeURIComponent(prop) + '=' + encodeURIComponent(obj[prop])
+        }).join('&')
+    };
+
+    render() {
+        // if not admin, show only bookable -- SECURITY RISK
         let allVehicles = this.props.isAdmin
             ? this.props.data
             : this.props.data.filter(v => v.bookable);
 
         console.log('render allvehicles');
-        return <section className="all-vehicles">
 
+        return <section className="all-vehicles">
             <h1 className="section-heading">Alla fordon</h1>
 
             <div className="filter-container">
                 <h3 className="section-heading">Filter</h3>
+
                 <div className="form-group-container">
                     <label htmlFor="gearbox">Växellåda</label>
-                    <select id="gearbox">
+                    <select id="gearbox" onChange={this.handleChange} value={this.state.gearbox}>
+                        <option value="">Visa alla</option>
                         <option value="manuell">Manuell</option>
                         <option value="automat">Automat</option>
                     </select>
                 </div>
+
                 <div className="form-group-container">
                     <label htmlFor="type">Typ</label>
-                    <select id="type">
-                        <option value="car">Personbil</option>
-                        <option value="motorcycle">Motorcykel</option>
+                    <select id="type" onChange={this.handleChange} value={this.state.type}>
+                        <option value="">Visa alla</option>
+                        <option value="personbil">Personbil</option>
+                        <option value="motorcykel">Motorcykel</option>
                         <option value="atv">ATV</option>
-                        <option value="tricycle">Trehjuling</option>
-                        <option value="truck">Lätt lastbil</option>
+                        <option value="trehjuling">Trehjuling</option>
+                        <option value="lätt lastbil">Lätt lastbil</option>
                     </select>
                 </div>
             </div>
@@ -45,23 +88,29 @@ export default class AllVehicles extends Component
                 <span>Dygnspris</span>
             </div>
 
-            <ul>
-                {allVehicles.map((vehicle, index) => {
-                    return (
-                        <li key={index} data-id={vehicle._id}
-                            onClick={this.props.handleClick}>
-                            <div className="image-container">
-                                <img src={vehicle.image || "http://via.placeholder.com/150x150"} alt=""
-                                     width="120"/>
-                            </div>
-                            <span>{vehicle.brand || 'Ingen data'}</span>
-                            <span>{vehicle.model || 'Ingen data'}</span>
-                            <span>{vehicle.type || 'Ingen data'}</span>
-                            <span>{vehicle.price || 'Ingen data'}</span>
-                        </li>
-                    );
-                })}
-            </ul>
+            <Render if={allVehicles.length === 0}>
+                <p>Inget matchar ditt filter</p>
+            </Render>
+
+            <Render if={allVehicles.length > 0}>
+                <ul>
+                    {allVehicles.map((vehicle, index) => {
+                        return (
+                            <li key={index} data-id={vehicle._id}
+                                onClick={this.props.handleClick}>
+                                <div className="image-container">
+                                    <img src={vehicle.image || "http://via.placeholder.com/150x150"} alt=""
+                                         width="120"/>
+                                </div>
+                                <span>{vehicle.brand || 'Ingen data'}</span>
+                                <span>{vehicle.model || 'Ingen data'}</span>
+                                <span>{vehicle.type || 'Ingen data'}</span>
+                                <span>{!vehicle.price ? 'Ingen data' : vehicle.price + ':-'}</span>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </Render>
 
         </section>;
     }
@@ -71,5 +120,3 @@ export default class AllVehicles extends Component
 AllVehicles.propTypes = {
     data: PropTypes.array.isRequired,
 };
-
-// TODO: check if merged correctly
