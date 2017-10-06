@@ -59,6 +59,17 @@ class App extends Component {
         window.addEventListener("hashchange", () => {
             this.checkUrl()
         });
+
+        document.addEventListener("keydown", this.escFunction, false);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.escFunction, false);
+    }
+
+    escFunction = (event) => {
+        if (event.keyCode !== 27) return;
+        this.setState({ bookVehicle: false, editVehicle: false, cancelBooking: false, addVehicle: false })
     }
 
     checkUrl() {
