@@ -16,9 +16,8 @@ export default class CancelBooking extends Component
 
     handleSubmit = () => {
         const {bookingId} = this.state;
-        const {handleErrorMessage, handleSuccessMessage} = this.props;
 
-        if (!bookingId) return handleErrorMessage("Ange ditt boknings ID först!");
+        if (!bookingId) return this.props.handleErrorMessage("Ange ditt boknings ID först!");
 
         fetch( config.apiRoot + "booking/delete/" + bookingId )
             .then(resp => resp.json())
@@ -42,7 +41,7 @@ export default class CancelBooking extends Component
             .catch(error =>
             {
                 console.warn("API error:", error);
-                handleErrorMessage(error.message);
+                this.props.handleErrorMessage(error.message);
             });
 
         console.log("bookVehicle did mount");
