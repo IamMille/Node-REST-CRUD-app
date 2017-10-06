@@ -148,8 +148,12 @@ button {
 }
 
 .form-group-container {
-  width: 50%;
+  width: 48%;
   display: inline-block;
+}
+
+.form-group-container:nth-child(odd) {
+  margin: 0 18px 0 0;
 }
 
 .form-group-container-full {
@@ -231,13 +235,16 @@ VEHICLE LIST
   flex-direction: row;
   flex-wrap: wrap;
   text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /*.all-vehicles > ul > li > .span-container > span{*/
-  /*width: 100%;*/
-  /*flex-direction: row;*/
-  /*flex-wrap: wrap;*/
-  /*text-align: center;*/
+/*width: 100%;*/
+/*flex-direction: row;*/
+/*flex-wrap: wrap;*/
+/*text-align: center;*/
 /*}*/
 
 .image-container {
@@ -248,8 +255,8 @@ VEHICLE LIST
   padding: 5px;
   vertical-align: middle;
   object-fit: cover;
-  width:140px;
-  height:110px;
+  width: 140px;
+  height: 110px;
 }
 
 .vehicle-search-head {
@@ -339,7 +346,7 @@ BOOK VEHICLE
 
 .book-vehicle-container > .image-container-book > img {
   padding: 20px 20px 0 0;
-  width: 200px;
+  width: 264px;
 }
 
 .book-vehicle-container > .list-container > ul {
@@ -443,8 +450,7 @@ CALENDAR
   width: 300px;
   text-align: center;
   clear: both;
-  float: right;
-  margin: 27px 0 0 0;
+  margin: 27px auto 0 auto;
 }
 
 /*
@@ -513,6 +519,19 @@ END ADD VEHICLE
   /*
     VEHICLE LIST MOBILE
  */
+  form {
+    width: 90%;
+  }
+
+  .form-group-container {
+    width: 48%;
+    display: inline-block;
+  }
+
+  .form-group-container:nth-child(odd) {
+    margin: 0 14px 0 0;
+  }
+
   .filter-container > .form-group-container {
     width: 80%;
     margin: 20px auto 0 auto;
@@ -544,9 +563,21 @@ END ADD VEHICLE
     margin: 20px 0 0 0;
   }
 
+  .all-vehicles > ul > li > span:nth-child(3) {
+    display: inline-block;
+    width: 40%;
+  }
+
+  .all-vehicles > ul > li > span:nth-child(5) {
+    display: inline-block;
+    text-align: right;
+    width: 20%;
+  }
+
   .all-vehicles > ul > li > span:nth-child(5):after {
     content: ' kr';
     text-transform: none;
+    display: inline;
   }
 
   .all-vehicles > ul > li {
@@ -560,15 +591,15 @@ END ADD VEHICLE
 
   .image-container {
     display: inline-block;
-    width: 140px;
+    width: 100px;
   }
 
   .image-container > img {
     padding: 0;
     border-radius: 0;
     object-fit: cover;
-    width:140px;
-    height:100px;
+    width: 100px;
+    height: 80px;
   }
 
   .all-vehicles > ul > li > span {
@@ -598,14 +629,42 @@ END ADD VEHICLE
 
   .edit-vehicle-container, .add-vehicle-container, .cancel-booking-container, .book-vehicle-container {
     width: 100%;
-    height: 130vh;
+    min-height: 100vh;
     background: #fff;
     padding: 20px 0 50px 0;
     border-radius: 0;
     box-shadow: none;
   }
 
-  form {
-    width: 90%;
+  .section-heading {
+    padding: 0 0 30px 0;
+  }
+
+  /*
+  NAV
+   */
+  .menu-ul > li {
+    display: block;
+  }
+
+  .menu-container > a {
+    display: block;
+    padding: 30px;
+  }
+
+  /*
+  BOOK VEHICLE
+   */
+  .book-vehicle-container {
+    padding: 0;
+  }
+
+  .book-vehicle-container > .image-container-book > img {
+    width: 160px;
+  }
+
+  .calendar-container {
+    margin: 20px auto 0 auto;
+    float: none;
   }
 }

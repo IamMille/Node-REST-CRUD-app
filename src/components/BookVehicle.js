@@ -128,14 +128,6 @@ export default class BookVehicle extends Component
                 <div className="image-container-book">
                     <img src={this.props.data[0].image || "http://via.placeholder.com/150x150"} alt="bild"/>
                 </div>
-                <div className="calendar-container">
-                    <p className="calendar-text">{this.state.calendarMessage}</p>
-                    <DayPicker
-                        selectedDays={this.state.selectedDays}
-                        disabledDays={this.state.disabledDays}
-                        onDayClick={this.handleDayClick}
-                    />
-                </div>
                 <div className="list-container">
                     <ul>
                         <li>{this.props.data[0].brand || 'Information saknas.'}</li>
@@ -147,6 +139,14 @@ export default class BookVehicle extends Component
                         <li>Dagshyra: {this.props.data[0].price || 'Information saknas.'}</li>
                         <li>Anteckningar: {this.props.data[0].note || 'Inga anmärkningar.'}</li>
                     </ul>
+                </div>
+                <div className="calendar-container">
+                    <p className="calendar-text">{this.state.calendarMessage}</p>
+                    <DayPicker
+                        selectedDays={this.state.selectedDays}
+                        disabledDays={this.state.disabledDays}
+                        onDayClick={this.handleDayClick}
+                    />
                 </div>
                 <div className="button-container">
                     <button className="button" onClick={this.handleSubmit}>Boka</button>
