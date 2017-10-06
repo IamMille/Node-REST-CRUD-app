@@ -37,9 +37,11 @@ export default class CancelBooking extends Component
                     let displayDate = ( dateFrom === dateTill ? dateFrom : dateFrom +"→"+ dateTill );
 
                     json.message = "Avbokning genomförd: " + displayDate;
+                    //close modal
                 }
 
                 this.setState({ bookingId: '' });
+                this.props.setState({ cancelBooking: false });
                 this.props.handleSuccessMessage(json);
             })
             .catch(error =>

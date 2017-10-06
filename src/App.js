@@ -12,7 +12,8 @@ import SuccessMessage from "./components/SuccessMessage";
 import ErrorMessage from "./components/ErrorMessage";
 
 
-class App extends Component {
+class App extends Component
+{
     constructor(props) {
         super(props);
         this.state = {
@@ -70,7 +71,7 @@ class App extends Component {
     escFunction = (event) => {
         if (event.keyCode !== 27) return;
         this.setState({ bookVehicle: false, editVehicle: false, cancelBooking: false, addVehicle: false })
-    }
+    };
 
     checkUrl() {
         this.setState({
@@ -228,6 +229,8 @@ class App extends Component {
                     handleSuccessMessage={this.handleSuccessMessage}
                     handleErrorMessage={this.handleErrorMessage}
                     handleCancelBookingModal={this.handleCancelBookingModal}
+                    setState={this.setState.bind(this)}
+                    getState={{...this.state}}
                 />
 
                 <AddVehicle
