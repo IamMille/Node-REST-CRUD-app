@@ -45,7 +45,10 @@ export default class BookVehicle extends Component
     {
         const {selectedDays, isBookingComplate} = this.state;
 
-        if (selected) {
+        if (isBookingComplate)
+            this.setState({ calendarMessage: 'Du kan ej längre ändra datum' });
+
+        else if (selected) {
             const selectedIndex = selectedDays.findIndex(selectedDay =>
                 DateUtils.isSameDay(selectedDay, day)
             );
@@ -53,10 +56,7 @@ export default class BookVehicle extends Component
             this.setState({ calendarMessage: '' }); // dag bortvald
         }
         else {
-            if (isBookingComplate)
-                this.setState({ calendarMessage: 'Du kan ej längre ändra datum' });
-
-            else if (disabled)
+            if (disabled)
                 this.setState({ calendarMessage: 'Ej tillgänglig dag' });
 
             else if (selectedDays.length > 0 && !this.isCohesiveDate(day))
