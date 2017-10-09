@@ -13,6 +13,10 @@ body {
   display: block;
 }
 
+.hidden {
+  display: none!important;
+}
+
 /*
 //TODO behöver en annan metod för att inte kunna scroll i bakgrunden när modal är uppe
  */
@@ -30,8 +34,14 @@ a {
 MENU
  */
 .menu {
-  text-align: center;
   padding: 20px 0 0 0;
+  width: 1200px;
+  margin: 0 auto 0 auto;
+  position: relative;
+}
+
+.menu-container {
+  text-align: center;
 }
 
 .menu-li > a {
@@ -51,6 +61,50 @@ MENU
 
 .log-in {
   padding: 20px;
+}
+
+.logo {
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: -1px;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  text-transform: uppercase;
+}
+
+.logo > span:first-child {
+  display: block;
+  margin: -10px 0 0 50px;
+  padding: 0;
+  font-weight: 500;
+}
+
+.mobile {
+  position: absolute;
+  top: 40px;
+  right: 0;
+}
+
+.mobile > span {
+  width: 35px;
+  border-bottom: 1px solid black;
+  display: block;
+  transition: all .3s;
+}
+
+.mobile > span:nth-child(2), span:nth-child(3) {
+  padding: 0 0 10px 0;
+}
+
+.mobile > .rotate-left {
+  transform: rotate(45deg);
+  margin: 10px 0 0 0;
+}
+
+.mobile > .rotate-right {
+  transform: rotate(135deg);
+  padding: 0;
 }
 
 /*
@@ -212,6 +266,7 @@ VEHICLE LIST
 }
 
 .all-vehicles > ul > li {
+  min-height: 70px;
   display: flex;
   align-items: center;
   text-transform: capitalize;
@@ -418,7 +473,7 @@ EDIT VEHICLE
 EDIT VEHICLE END
 */
 
-.success {
+.success, .error {
   width: 400px;
   padding: 20px;
   background: #7df072;
@@ -428,18 +483,11 @@ EDIT VEHICLE END
   color: #ffffff;
   border-radius: 4px;
   word-break: break-all;
+  z-index: 1;
 }
 
 .error {
-  width: 400px;
-  padding: 20px;
   background: #ff625b;
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  color: #ffffff;
-  border-radius: 4px;
-  word-break: break-all;
 }
 
 /*
@@ -513,6 +561,9 @@ END ADD VEHICLE
   .all-vehicles {
     width: 90%;
   }
+  .menu {
+    width: 90%;
+  }
 }
 
 @media screen and (max-width: 678px) {
@@ -529,7 +580,7 @@ END ADD VEHICLE
   }
 
   .form-group-container:nth-child(odd) {
-    margin: 0 14px 0 0;
+    margin: 0 13px 0 0;
   }
 
   .filter-container > .form-group-container {
@@ -565,20 +616,22 @@ END ADD VEHICLE
 
   .all-vehicles > ul > li > span:nth-child(3) {
     display: inline-block;
-    width: 40%;
+    width: 45%;
   }
 
   .all-vehicles > ul > li > span:nth-child(5) {
     display: inline-block;
     text-align: right;
-    width: 20%;
+    width: 15%;
+    float: right;
+    margin: 0 10px 0 0;
   }
 
-  .all-vehicles > ul > li > span:nth-child(5):after {
-    content: ' kr';
-    text-transform: none;
-    display: inline;
-  }
+  /*.all-vehicles > ul > li > span:nth-child(5):after {*/
+    /*content: ' kr';*/
+    /*text-transform: none;*/
+    /*display: inline;*/
+  /*}*/
 
   .all-vehicles > ul > li {
     padding: 6px 6px 4px 6px;
@@ -643,13 +696,52 @@ END ADD VEHICLE
   /*
   NAV
    */
+
+  .menu {
+    width: 100%;
+    min-height: 100px;
+    padding: 0;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .05), 0 1px 3px rgba(0, 0, 0, .05);
+  }
+
+  .background {
+    background: #ffffff;
+  }
+
   .menu-ul > li {
     display: block;
+    padding: 40px 0 0 0;
   }
 
   .menu-container > a {
     display: block;
-    padding: 30px;
+    padding: 40px 0 40px 0;
+  }
+
+  .logo {
+    font-size: 1.3em;
+    font-weight: 700;
+    letter-spacing: -1px;
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    text-transform: uppercase;
+  }
+
+  .mobile {
+    top: 35px;
+    right: 20px;
+  }
+
+  .menu-ul {
+    margin: 70px 0 0 0;
+  }
+
+  .logo > span:first-child {
+    display: block;
+    margin: -6px 0 0 50px;
+    padding: 0;
+    font-weight: 500;
   }
 
   /*
@@ -666,5 +758,31 @@ END ADD VEHICLE
   .calendar-container {
     margin: 20px auto 0 auto;
     float: none;
+  }
+
+  /*
+  FEEDBACK MESSAGES
+   */
+  .success, .error {
+    width: 90%;
+    padding: 20px;
+    background: #7df072;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    color: #ffffff;
+    border-radius: 4px;
+    word-break: break-all;
+  }
+
+  .error {
+    background: #ff625b;
+  }
+}
+
+@media screen and (max-height: 880px) {
+  .edit-vehicle-container, .add-vehicle-container, .cancel-booking-container, .book-vehicle-container {
+    height: 100%;
+    overflow: scroll;
   }
 }

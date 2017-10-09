@@ -2,36 +2,64 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 export default class Menu extends Component {
-  render() {
-    return (
-      <nav className="menu">
-        <div className="menu-container">
+    constructor(props) {
+        super(props);
+        this.state = {
+            onMobile: false,
+            menuIsShowing: false
+        }
+    }
 
-          {!this.props.admin &&
-            <ul className="menu-ul">
-              <li className="menu-li"><a href="#vehicles" onClick={this.props.checkUrl}>Boka</a></li>
-              <li className="menu-li"><a onClick={this.props.handleCancelBookingModal}>Avboka</a></li>
-            </ul>
-          }
+    componentDidMount = () => {
+        if (window.screen.availWidth <= 678) {
+            this.setState({
+                onMobile: true
+            })
+        }
+    };
 
-          {this.props.admin &&
-            <ul className="menu-ul">
-              <li className="menu-li"><a href="#vehicles" onClick={this.props.checkUrl}>Visa fordon</a></li>
-              <li className="menu-li"><a onClick={this.props.handleAddVehicleModal}>Lägg till fordon</a></li>
-            </ul>
-          }
+    handleMenuToggle = () => {
+        this.setState({
+            menuIsShowing: !this.state.menuIsShowing
+        })
+    };
 
-          <a className="log-in" onClick={this.props.handleLogin}>{this.props.admin ? 'Logga ut' : 'Logga in'}</a>
+    render() {
+        return (
+            <nav className={this.state.onMobile ? 'menu background' : 'menu'}>
+                <span className="logo">Olssons<span>Fordon Ab</span></span>
+                <div className={this.state.onMobile ? 'mobile': 'hidden'} onClick={this.handleMenuToggle}>
+                    <span className={this.state.menuIsShowing ? 'rotate-left' : null}></span>
+                    <span className={this.state.menuIsShowing ? 'hidden': null}></span>
+                    <span className={this.state.menuIsShowing ? 'rotate-right' : null}></span>
+                </div>
+                <div className={this.state.menuIsShowing || !this.state.onMobile ? 'menu-container': 'hidden'}>
+                    {!this.props.admin &&
+                    <ul className="menu-ul">
+                        <li className="menu-li"><a href="#vehicles" onClick={this.props.checkUrl}>Boka</a></li>
+                        <li className="menu-li"><a onClick={this.props.handleCancelBookingModal}>Avboka</a></li>
+                    </ul>
+                    }
 
-        </div>
-      </nav>
-    );
-  }
+                    {this.props.admin &&
+                    <ul className="menu-ul">
+                        <li className="menu-li"><a href="#vehicles" onClick={this.props.checkUrl}>Visa fordon</a></li>
+                        <li className="menu-li"><a onClick={this.props.handleAddVehicleModal}>Lägg till fordon</a></li>
+                    </ul>
+                    }
+
+                    <a className="log-in"
+                       onClick={this.props.handleLogin}>{this.props.admin ? 'Logga ut' : 'Logga in'}</a>
+
+                </div>
+            </nav>
+        );
+    }
 }
 
 Menu.propTypes = {
-  checkUrl: PropTypes.func.isRequired,
-  admin: PropTypes.bool.isRequired,
-  handleLogin: PropTypes.func.isRequired
+    checkUrl: PropTypes.func.isRequired,
+    admin: PropTypes.bool.isRequired,
+    handleLogin: PropTypes.func.isRequired
 };
 
