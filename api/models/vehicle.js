@@ -81,8 +81,10 @@ function isWorkingImageURL(url)
     return new Promise( (resolve, reject) =>
     {
         // validate url
+        console.log("image url lenght:", url.length);
+
         let regex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
-        if (url && url.length === 0) resolve();
+        if (url.length === 0) resolve();
         else if (regex.test(url)) resolve();
         else reject();
 
