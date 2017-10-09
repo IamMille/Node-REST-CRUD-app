@@ -102,7 +102,7 @@ export default class AllVehicles extends Component
             </div>
 
             <Render if={allVehicles.length === 0}>
-                <p>Inget matchar ditt filter</p>
+                <p className="filter-message">Inget matchar ditt filter</p>
             </Render>
 
             <Render if={allVehicles.length > 0}>

@@ -1,6 +1,6 @@
 
 const PORT = process.env.PORT || 5000;
-const DATABASE = 'mongodb://localhost/vehicleBooking';
+const DATABASE = process.env.MONGODB || 'mongodb://localhost/vehicleBooking';
 
 // ---------------------------------------------------------------------
 
