@@ -250,6 +250,7 @@ VEHICLE LIST
   border: 1px solid rgba(209, 209, 209, 0.25);
   box-shadow: 0 4px 6px rgba(50, 50, 93, .05), 0 1px 3px rgba(0, 0, 0, .05);
   border-radius: 3px;
+  padding: 5px 0 5px 5px;
 }
 
 .all-vehicles > ul > li:hover {
@@ -277,10 +278,14 @@ VEHICLE LIST
 
 .image-container {
   text-align: left;
+  min-width: 140px;
+  min-height: 110px;
+  max-width: 140px;
+  max-height: 110px;
+  background: #cccccc;
 }
 
 .image-container > img {
-  padding: 5px;
   vertical-align: middle;
   object-fit: cover;
   width: 140px;
@@ -366,6 +371,10 @@ BOOK VEHICLE
   /*flex-flow: row wrap;*/
   /*justify-content: flex-end;*/
   float: right;
+  width: 264px;
+  min-height: 100px;
+  background: #cccccc;
+  margin: 20px 20px 0 0;
 }
 
 .list-container {
@@ -373,8 +382,8 @@ BOOK VEHICLE
 }
 
 .book-vehicle-container > .image-container-book > img {
-  padding: 20px 20px 0 0;
   width: 264px;
+  vertical-align: middle;
 }
 
 .book-vehicle-container > .list-container > ul {
@@ -620,6 +629,15 @@ END ADD VEHICLE
     width: 100px;
   }
 
+  .image-container {
+    text-align: left;
+    min-width: 100px;
+    min-height: 80px;
+    max-width: 100px;
+    max-height: 80px;
+    background: #cccccc;
+  }
+
   .image-container > img {
     padding: 0;
     border-radius: 0;
@@ -757,11 +775,23 @@ END ADD VEHICLE
 
   .book-vehicle-container > .image-container-book > img {
     width: 160px;
+    vertical-align: middle;
   }
 
   .calendar-container {
     margin: 20px auto 0 auto;
     float: none;
+  }
+
+  .image-container-book {
+    /*display: flex;*/
+    /*flex-flow: row wrap;*/
+    /*justify-content: flex-end;*/
+    float: right;
+    width: 160px;
+    min-height: 80px;
+    background: #cccccc;
+    margin: 20px 20px 0 0;
   }
 
   /*
