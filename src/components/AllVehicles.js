@@ -59,14 +59,14 @@ export default class AllVehicles extends Component
                 <h3 className="section-heading">Filter</h3>
 
                 <div className="form-group-container">
-                    <label htmlFor="fuel">Drivmedel</label>
-                    <select id="fuel" onChange={this.handleChange} value={this.state.fuel}>
+                    <label htmlFor="type">Typ</label>
+                    <select id="type" onChange={this.handleChange} value={this.state.type}>
                         <option value="">Visa alla</option>
-                        <option value="95">95</option>
-                        <option value="E85">E85</option>
-                        <option value="diesel">diesel</option>
-                        <option value="gas">gas</option>
-                        <option value="jetbränsle">jetbränsle</option>
+                        <option value="personbil">Personbil</option>
+                        <option value="motorcykel">Motorcykel</option>
+                        <option value="atv">ATV</option>
+                        <option value="trehjuling">Trehjuling</option>
+                        <option value="lätt lastbil">Lätt lastbil</option>
                     </select>
                 </div>
 
@@ -78,16 +78,16 @@ export default class AllVehicles extends Component
                         <option value="automat">Automat</option>
                     </select>
                 </div>
-
+                
                 <div className="form-group-container">
-                    <label htmlFor="type">Typ</label>
-                    <select id="type" onChange={this.handleChange} value={this.state.type}>
+                    <label htmlFor="fuel">Drivmedel</label>
+                    <select id="fuel" onChange={this.handleChange} value={this.state.fuel}>
                         <option value="">Visa alla</option>
-                        <option value="personbil">Personbil</option>
-                        <option value="motorcykel">Motorcykel</option>
-                        <option value="atv">ATV</option>
-                        <option value="trehjuling">Trehjuling</option>
-                        <option value="lätt lastbil">Lätt lastbil</option>
+                        <option value="95">95</option>
+                        <option value="E85">E85</option>
+                        <option value="diesel">diesel</option>
+                        <option value="gas">gas</option>
+                        <option value="jetbränsle">jetbränsle</option>
                     </select>
                 </div>
 

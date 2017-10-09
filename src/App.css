@@ -290,6 +290,8 @@ VEHICLE LIST
   object-fit: cover;
   width: 140px;
   height: 110px;
+  background: url('./ring.gif') center no-repeat;
+  background-size: 25%;
 }
 
 .vehicle-search-head {
