@@ -62,10 +62,10 @@ vehicleSchema.pre('validate', (next) =>
     fetch(url, {method:'HEAD'})
         .then(resp =>
         {
-            let ct = resp.headers.getAll('Content-Type');
+            let contentTypes = resp.headers.getAll('Content-Type');
             let isValidType = (type) => type.indexOf('image') > -1; // image/jpeg
 
-            if (ct.some(isValidType)) {
+            if (contentTypes.some(isValidType)) {
                 console.log("pre save: ok!");
                 next();
             }
@@ -82,7 +82,8 @@ function isWorkingImageURL(url)
     {
         // validate url
         let regex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
-        if (regex.test(url)) resolve();
+        if (url && url.length === 0) resolve();
+        else if (regex.test(url)) resolve();
         else reject();
 
         /*
@@ -90,10 +91,10 @@ function isWorkingImageURL(url)
         fetch(url, {method:'HEAD'})
             .then(resp =>
             {
-                let ct = resp.headers.getAll('Content-Type');
+                let contentTypes = resp.headers.getAll('Content-Type');
                 let isValidType = (type) => type.indexOf('image') > -1; // image/jpeg
 
-                if (ct.some(isValidType)) resolve(true);
+                if (contentTypes.some(isValidType)) resolve(true);
                 else reject('URL returns wrong Content-Type');
             })
             .catch(error => {
