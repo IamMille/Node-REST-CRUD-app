@@ -7,9 +7,10 @@
     "express": "^4.15.5",
     "mongodb": "^2.2.31",
     "mongoose": "^4.11.13",
-    "mustache-express": "^1.2.5",
+    "node-fetch": "^1.7.3",
     "prop-types": "^15.6.0",
     "react": "^15.6.1",
+    "react-day-picker": "^6.1.1",
     "react-dom": "^15.6.1",
     "react-scripts": "^1.0.13"
   },

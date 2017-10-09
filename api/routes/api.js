@@ -24,18 +24,19 @@ router.get('/:model/delete/:id', (req, res) =>
 {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id))
-            return res.json({result: 'error', error: 'Invalid Id'});
+            return res.json({result: 'error', error: 'Invalid ID'});
 
         let Model = require('../models/' + req.params.model);
 
         Model.findByIdAndRemove(req.params.id, (err, doc) =>
         {
             if (err) return res.json({result: 'error', error: err.name, message: err.message});
+            if (!doc) return res.json({result: 'error', error: 'Not found', message: 'No matching document(s)'});
 
             res.json({
                 result: 'ok',
-                message: 'Successfully deleted document.',
-                data: doc
+                message: 'Successfully deleted document(s).',
+                data: doc || {} // if empty, nothing really deleted
             });
         })
     } catch(err) {
@@ -59,7 +60,7 @@ router.get('/:model/update/:id', (req, res) =>
             res.json({
                 result: 'ok',
                 message: `Successfully updated ${req.params.id} with ${req.originalUrl.split('?',2)[1]}`,
-                data: doc
+                data: doc || {}
             });
         })
     } catch(err) {
@@ -79,7 +80,7 @@ router.get('/:model/read', (req, res) =>
 
             res.json({
                 result: 'ok',
-                message: 'Successfully found document',
+                message: 'Successfully found document(s)',
                 data: docs
             });
         });
@@ -96,11 +97,15 @@ router.get('/:model/create', (req, res) =>
     try {
         let Model = require('../models/' + req.params.model);
 
-        new Model(req.query).save(err =>
+        new Model(req.query).save( (err,doc) =>
         {
             if (err) return res.json({result: 'error', error: err.name, message: err.message});
 
-            res.json({result: 'ok', message: 'Successfully created ' + req.params.model });
+            res.json({
+                result: 'ok',
+                message: 'Successfully created ' + req.params.model,
+                data: doc || {}
+            });
         });
     } catch(err) {
         res.json({result: 'error', error: err.name, message: err.message});

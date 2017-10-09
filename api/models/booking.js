@@ -2,6 +2,9 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
+
+// kom ihåg att lägga till && vehicle.bookable så att vi inte listar fordon som ej är tillgängliga för uthyrning
+// check date conflicts!
 let bookingSchema = new Schema(
 {
     vehicleId: {

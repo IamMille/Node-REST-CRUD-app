@@ -4,35 +4,55 @@
   padding: 0;
 }
 
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background: #fafafa;
+}
+
 .block {
   display: block;
 }
 
+.hidden {
+  display: none!important;
+}
+
+/*
+//TODO behöver en annan metod för att inte kunna scroll i bakgrunden när modal är uppe
+ */
 .no-scroll {
   overflow: hidden;
   height: 100vh;
+}
+
+a {
+  cursor: pointer;
+  color: #44c6ff;
 }
 
 /*
 MENU
  */
 .menu {
-  text-align: center;
+  padding: 20px 0 0 0;
+  width: 1200px;
+  margin: 0 auto 0 auto;
+  position: relative;
 }
 
 .menu-container {
-
+  text-align: center;
 }
 
 .menu-li > a {
   display: inline-block;
   text-decoration: none;
-  color: cadetblue;
+  color: #44c6ff;
 }
 
 .menu-li {
   display: inline-block;
-  padding: 20px;
+  padding: 30px;
 }
 
 .menu-ul {
@@ -41,6 +61,23 @@ MENU
 
 .log-in {
   padding: 20px;
+}
+
+.logo {
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: -1px;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  text-transform: uppercase;
+}
+
+.logo > span:first-child {
+  display: block;
+  margin: -10px 0 0 50px;
+  padding: 0;
+  font-weight: 500;
 }
 
 /*
@@ -57,10 +94,16 @@ input[type="text"] {
   height: 40px;
   font-size: .9em;
   border-radius: 5px;
-  border: none;
+  border: 1px solid rgba(209, 209, 209, 0.25);
   padding: 0 10px 0 10px;
   margin: 0 1% 10px 1%;
-  background: #e3e3e3
+  background: #fafafa;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+  transition: all .25s;
+}
+
+input[type="text"]:focus {
+  border: 1px solid rgba(68, 198, 255, 0.3);
 }
 
 select {
@@ -70,10 +113,16 @@ select {
   height: 40px;
   font-size: .9em;
   border-radius: 5px;
-  border: none;
+  border: 1px solid rgba(209, 209, 209, 0.25);
   padding: 0 10px 0 10px;
   margin: 0 1% 10px 1%;
-  background: #e3e3e3
+  background: #fafafa;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+  transition: all .25s;
+}
+
+select:focus {
+  border: 1px solid rgba(68, 198, 255, 0.3);
 }
 
 form {
@@ -86,25 +135,52 @@ label {
   margin: 0 0 5px 5px;
 }
 
+button {
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+  border-radius: 4px;
+  transition: all .25s;
+  color: #f7f7f7;
+  background: #44c6ff;
+}
+
 .form-group-container-full > .button {
   width: 99%;
   height: 40px;
-  border-radius: 5px;
   border: none;
   font-size: .9em;
-  background: #9ad3de;
   margin: 10px auto 10px auto;
   display: block;
   color: #ffffff;
 }
 
-.form-group-container-full > .button-danger {
+.form-group-container-full > .button:hover {
+  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
+  border: 1px solid rgba(209, 209, 209, 0.25);
+  transform: translateY(-1px);
+}
+
+.button-container > .button:hover {
+  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
+  border: 1px solid rgba(209, 209, 209, 0.25);
+  transform: translateY(-1px);
+}
+
+.button-container {
+  margin: 0 0 0 0;
+}
+
+.button-danger {
   background: #ff625b;
 }
 
 .form-group-container {
-  width: 50%;
+  width: 48%;
   display: inline-block;
+}
+
+.form-group-container:nth-child(odd) {
+  margin: 0 18px 0 0;
 }
 
 .form-group-container-full {
@@ -128,10 +204,16 @@ textarea {
   height: 120px;
   font-size: .9em;
   border-radius: 5px;
-  border: none;
+  border: 1px solid rgba(209, 209, 209, 0.25);
   padding: 10px 10px 0 10px;
   margin: 0 auto 10px auto;
-  background: #e3e3e3
+  background: #fafafa;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+  transition: all .25s;
+}
+
+textarea:focus {
+  border: 1px solid rgba(68, 198, 255, 0.3);
 }
 
 /*
@@ -150,22 +232,14 @@ section {
 /*
 VEHICLE LIST
  */
-.all-vehicles > ul {
-  width: 80%;
-  margin: 0 auto 0 auto;
+
+.all-vehicles {
+  width: 1200px;
+  margin: 0 auto;
 }
 
 .all-vehicles > ul > li {
-  display: flex;
-  align-items: center;
-  text-transform: capitalize;
-  margin: 10px 0 10px 0;
-  background: #e3e3e3;
-  cursor: pointer;
-  transition: all .3s;
-}
-
-.all-vehicles > ul > li:hover {
+  min-height: 70px;
   display: flex;
   align-items: center;
   text-transform: capitalize;
@@ -173,6 +247,15 @@ VEHICLE LIST
   background: #ffffff;
   cursor: pointer;
   transition: all .3s;
+  border: 1px solid rgba(209, 209, 209, 0.25);
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .05), 0 1px 3px rgba(0, 0, 0, .05);
+  border-radius: 3px;
+}
+
+.all-vehicles > ul > li:hover {
+  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
+  border: 1px solid rgba(209, 209, 209, 0.25);
+  transform: translateY(-1px);
 }
 
 .all-vehicles > ul > li > span, .image-container {
@@ -180,7 +263,17 @@ VEHICLE LIST
   flex-direction: row;
   flex-wrap: wrap;
   text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
+
+/*.all-vehicles > ul > li > .span-container > span{*/
+/*width: 100%;*/
+/*flex-direction: row;*/
+/*flex-wrap: wrap;*/
+/*text-align: center;*/
+/*}*/
 
 .image-container {
   text-align: left;
@@ -189,16 +282,23 @@ VEHICLE LIST
 .image-container > img {
   padding: 5px;
   vertical-align: middle;
+  object-fit: cover;
+  width: 140px;
+  height: 110px;
+  background: url('./ring.gif') center no-repeat;
+  background-size: 25%;
 }
 
 .vehicle-search-head {
-  width: 80%;
-  margin: 0 auto 0 auto;
   display: flex;
   align-items: center;
   text-transform: capitalize;
-  background: #e3e3e3;
+  background: #ffffff;
+  margin: 10px 0 0 0;
   padding: 20px 0;
+  border-radius: 4px;
+  border: 1px solid rgba(209, 209, 209, 0.25);
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .05), 0 1px 3px rgba(0, 0, 0, .05);
 }
 
 .vehicle-search-head > span {
@@ -221,9 +321,20 @@ END VEHICLE LIST
 FILTERS
 */
 .filter-container {
-  width: 80%;
-  background: #89bdd3;
-  margin: 0 auto 0 auto;
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 0 0 20px 0;
+  border: 1px solid rgba(209, 209, 209, 0.25);
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .05), 0 1px 3px rgba(0, 0, 0, .05);
+}
+
+.filter-container > .form-group-container {
+  width: 220px;
+  margin: 0 20px 0 20px;
+}
+
+.filter-container > .section-heading {
+  padding: 25px 0 25px 0;
 }
 
 /*
@@ -237,16 +348,19 @@ BOOK VEHICLE
 .book-vehicle {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
   position: fixed;
   top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.4);
 }
 
 .book-vehicle-container {
-  width: 40%;
-  margin: 15% auto;
-  background: #e3e3e3;
+  width: 600px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
 }
 
 .image-container-book {
@@ -262,7 +376,7 @@ BOOK VEHICLE
 
 .book-vehicle-container > .image-container-book > img {
   padding: 20px 20px 0 0;
-  width: 200px;
+  width: 264px;
 }
 
 .book-vehicle-container > .list-container > ul {
@@ -270,15 +384,29 @@ BOOK VEHICLE
 }
 
 .book-vehicle-container > .list-container > ul > li {
-  padding: 7px 0 7px 0;
+  padding: 15px 0 15px 0;
 }
+
+.book-vehicle-container > .list-container > ul > li:nth-child(1) {
+  font-size: 2em;
+  padding: 7px 0 0 0;
+  font-weight: 500;
+}
+
+.book-vehicle-container > .list-container > ul > li:nth-child(2) {
+  font-size: 1.2em;
+  padding: 0 0 40px 0;
+}
+
+.book-vehicle-container > .list-container > ul > li:nth-child(4), li:nth-child(6) {
+  text-transform: capitalize;
+}
+
 .book-vehicle-container > .button-container > button {
   width: 250px;
   height: 40px;
-  border-radius: 5px;
   border: none;
   font-size: .9em;
-  background: #9ad3de;
   margin: 10px auto 10px auto;
   display: block;
   color: #ffffff;
@@ -287,8 +415,380 @@ BOOK VEHICLE
 
 .book-vehicle-container > .button-container {
   padding: 20px 0 20px 0;
+  clear: both;
 }
 
 /*
 BOOK VEHICLE END
 */
+
+/*
+EDIT VEHICLE
+*/
+.edit-vehicle {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+}
+
+.edit-vehicle-container {
+  width: 600px;
+  background: #fff;
+  padding: 20px 0 50px 0;
+  border-radius: 3px;
+  box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+}
+
+/*
+EDIT VEHICLE END
+*/
+
+.success, .error {
+  width: 400px;
+  padding: 20px;
+  background: #7df072;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  color: #ffffff;
+  border-radius: 4px;
+  word-break: break-all;
+  z-index: 1;
+}
+
+.error {
+  background: #ff625b;
+}
+
+/*
+CALENDAR
+ */
+
+.calendar-container {
+  width: 300px;
+  text-align: center;
+  clear: both;
+  margin: 27px auto 0 auto;
+}
+
+/*
+END CALENDAR
+ */
+
+/*
+CANCEL BOOKING
+ */
+.cancel-booking {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+}
+
+.cancel-booking-container {
+  width: 600px;
+  background: #fff;
+  padding: 20px 0 50px 0;
+  border-radius: 3px;
+  box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+}
+
+/*
+END CANCEL BOOKING
+ */
+
+/*
+ADD VEHICLE
+ */
+.add-vehicle {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+}
+
+.add-vehicle-container {
+  width: 600px;
+  background: #fff;
+  padding: 20px 0 50px 0;
+  border-radius: 3px;
+  box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+}
+
+/*
+END ADD VEHICLE
+ */
+
+@media screen and (max-width: 1368px) {
+  .all-vehicles {
+    width: 90%;
+  }
+  .menu {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 678px) {
+  /*
+    VEHICLE LIST MOBILE
+ */
+  form {
+    width: 90%;
+  }
+
+  .form-group-container {
+    width: 48%;
+    display: inline-block;
+  }
+
+  .form-group-container:nth-child(odd) {
+    margin: 0 13px 0 0;
+  }
+
+  .filter-container > .form-group-container {
+    width: 80%;
+    margin: 20px auto 0 auto;
+    display: block;
+  }
+
+  .vehicle-search-head {
+    display: none;
+  }
+
+  .all-vehicles > ul > li {
+    display: block;
+  }
+
+  .image-container {
+    float: left;
+    margin: 0 10px 0 0;
+  }
+
+  br {
+    clear: both;
+  }
+
+  .all-vehicles > ul > li > span:nth-child(4) {
+    display: none;
+  }
+
+  .all-vehicles > ul > li > span:nth-child(2) {
+    margin: 20px 0 0 0;
+  }
+
+  .all-vehicles > ul > li > span:nth-child(3) {
+    display: inline-block;
+    width: 45%;
+  }
+
+  .all-vehicles > ul > li > span:nth-child(5) {
+    display: inline-block;
+    text-align: right;
+    width: 15%;
+    float: right;
+    margin: 0 10px 0 0;
+  }
+
+  /*.all-vehicles > ul > li > span:nth-child(5):after {*/
+    /*content: ' kr';*/
+    /*text-transform: none;*/
+    /*display: inline;*/
+  /*}*/
+
+  .all-vehicles > ul > li {
+    padding: 6px 6px 4px 6px;
+  }
+
+  .span-container {
+    display: inline-block;
+    margin-left: 20px;
+  }
+
+  .image-container {
+    display: inline-block;
+    width: 100px;
+  }
+
+  .image-container > img {
+    padding: 0;
+    border-radius: 0;
+    object-fit: cover;
+    width: 100px;
+    height: 80px;
+  }
+
+  .all-vehicles > ul > li > span {
+    display: block;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 50%;
+  }
+
+  /*
+    END VEHICLE LIST MOBILE
+ */
+  /*
+    EDIT VEHICLE LIST MOBILE
+ */
+  .edit-vehicle, .add-vehicle, .cancel-booking, .book-vehicle {
+    padding: 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background: rgba(0, 0, 0, 0.2);
+    overflow: scroll;
+    display: block;
+  }
+
+  .edit-vehicle-container, .add-vehicle-container, .cancel-booking-container, .book-vehicle-container {
+    width: 100%;
+    min-height: 100vh;
+    background: #fff;
+    padding: 20px 0 50px 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .section-heading {
+    padding: 0 0 30px 0;
+  }
+
+  /*
+  NAV
+   */
+
+  .menu {
+    width: 100%;
+    padding: 0;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .05), 0 1px 3px rgba(0, 0, 0, .05);
+  }
+
+  .closed {
+    min-height: 100px;
+    max-height: 100px;
+  }
+
+  .open {
+    max-height: 400px;
+    transition: all .35s;
+  }
+
+  .background {
+    background: #ffffff;
+  }
+
+  .menu-ul > li {
+    display: block;
+    padding: 40px 0 0 0;
+  }
+
+  .menu-container > a {
+    display: block;
+    padding: 40px 0 40px 0;
+  }
+
+  .logo {
+    font-size: 1.3em;
+    font-weight: 700;
+    letter-spacing: -1px;
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    text-transform: uppercase;
+  }
+
+  .menu-ul {
+    margin: 70px 0 0 0;
+  }
+
+  .logo > span:first-child {
+    display: block;
+    margin: -6px 0 0 50px;
+    padding: 0;
+    font-weight: 500;
+  }
+
+  .mobile {
+    position: absolute;
+    top: 35px;
+    right: 20px;
+  }
+
+  .mobile > span {
+    width: 35px;
+    border-bottom: 1px solid black;
+    display: block;
+    transition: all .3s;
+  }
+
+  .mobile > span:nth-child(2), span:nth-child(3) {
+    padding: 0 0 10px 0;
+  }
+
+  .mobile > .rotate-left {
+    transform: rotate(45deg);
+    margin: 10px 0 0 0;
+  }
+
+  .mobile > .rotate-right {
+    transform: rotate(135deg);
+    padding: 0;
+  }
+
+  /*
+  BOOK VEHICLE
+   */
+  .book-vehicle-container {
+    padding: 0;
+  }
+
+  .book-vehicle-container > .image-container-book > img {
+    width: 160px;
+  }
+
+  .calendar-container {
+    margin: 20px auto 0 auto;
+    float: none;
+  }
+
+  /*
+  FEEDBACK MESSAGES
+   */
+  .success, .error {
+    width: 90%;
+    padding: 20px;
+    background: #7df072;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    color: #ffffff;
+    border-radius: 4px;
+    word-break: break-all;
+  }
+
+  .error {
+    background: #ff625b;
+  }
+}
+
+@media screen and (max-height: 880px) {
+  .edit-vehicle-container, .add-vehicle-container, .cancel-booking-container, .book-vehicle-container {
+    height: 100%;
+    overflow: scroll;
+  }
+}
