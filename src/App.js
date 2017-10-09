@@ -12,11 +12,12 @@ import SuccessMessage from "./components/SuccessMessage";
 import ErrorMessage from "./components/ErrorMessage";
 
 
-class App extends Component {
+class App extends Component
+{
     constructor(props) {
         super(props);
         this.state = {
-            admin: false,
+            admin: true,
             location: '',
             bookVehicle: false,
             editVehicle: false,
@@ -70,7 +71,7 @@ class App extends Component {
     escFunction = (event) => {
         if (event.keyCode !== 27) return;
         this.setState({ bookVehicle: false, editVehicle: false, cancelBooking: false, addVehicle: false })
-    }
+    };
 
     checkUrl() {
         this.setState({
@@ -86,10 +87,11 @@ class App extends Component {
 
     vehicleBooking(event) {
         let target = event.currentTarget;
+
         const clonedArray = JSON.parse(JSON.stringify(this.state.database));
         const clickedVehicleId = target.getAttribute('data-id');
         const clickedVehicle = clonedArray.filter(vehicle => vehicle._id.indexOf(clickedVehicleId) > -1);
-        console.log(clickedVehicle);
+
         this.setState({
             vehicleData: clickedVehicle,
             bookVehicle: true
@@ -146,7 +148,6 @@ class App extends Component {
         const clickedVehicleId = event.currentTarget.getAttribute('data-id'); // currentTarget = where eventListener is
         const clickedVehicle = clonedArray.filter(vehicle => vehicle._id === clickedVehicleId);
 
-        console.log(clickedVehicle);
         this.setState({
             vehicleData: clickedVehicle,
             editVehicle: true
@@ -228,6 +229,8 @@ class App extends Component {
                     handleSuccessMessage={this.handleSuccessMessage}
                     handleErrorMessage={this.handleErrorMessage}
                     handleCancelBookingModal={this.handleCancelBookingModal}
+                    setState={this.setState.bind(this)}
+                    getState={{...this.state}}
                 />
 
                 <AddVehicle
