@@ -39,14 +39,20 @@ class App extends Component
     }
 
     componentDidMount() {
-        fetch(config.apiRoot + "vehicle/read")
-            .then(resp => resp.json())
-            .then(json => {
-                this.setState({
-                    database: json.data.reverse(), // newest first
-                    finished: true
-                });
-                this.handleSuccessMessage(json)
+        fetch( '/api/vehicle/read' )
+            .then(resp => resp.text()) //text()
+            .then(text => {
+                try {
+                    //console.log("fetch:", text);
+                    let json = JSON.parse(text);
+                    this.setState({
+                        database: json.data.reverse(), // newest first
+                        finished: true
+                    });
+                    this.handleSuccessMessage(json)
+                } catch(err) {
+                    console.log("Catched error:", err);
+                }
             })
             .catch(error => {
                 console.error("API error:", error);
@@ -175,7 +181,9 @@ class App extends Component
         }
     };
 
-    handleErrorMessage = (message) => {
+    handleErrorMessage = (error) => {
+        let message = error.message ? error.message : error;
+
         this.setState({
             error: {
                 exists: true,
