@@ -21,6 +21,10 @@ let vehicleSchema = new Schema(
         min: 1900, max: 2018,
         required: true
     },
+    fuel: {
+      type: String,
+      enum: ['95', 'E85', 'diesel', 'gas', 'jetbränsle']
+    },
     gearbox: {
         type: String,
         enum: ['manuell', 'automat']
@@ -37,6 +41,7 @@ let vehicleSchema = new Schema(
     },
     image: {
         type: String,
+
     },
     bookable: {
         type: Boolean,

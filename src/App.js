@@ -17,7 +17,7 @@ class App extends Component
     constructor(props) {
         super(props);
         this.state = {
-            admin: false,
+            admin: true,
             location: '',
             bookVehicle: false,
             editVehicle: false,
@@ -87,10 +87,11 @@ class App extends Component
 
     vehicleBooking(event) {
         let target = event.currentTarget;
+
         const clonedArray = JSON.parse(JSON.stringify(this.state.database));
         const clickedVehicleId = target.getAttribute('data-id');
         const clickedVehicle = clonedArray.filter(vehicle => vehicle._id.indexOf(clickedVehicleId) > -1);
-        console.log(clickedVehicle);
+
         this.setState({
             vehicleData: clickedVehicle,
             bookVehicle: true
@@ -147,7 +148,6 @@ class App extends Component
         const clickedVehicleId = event.currentTarget.getAttribute('data-id'); // currentTarget = where eventListener is
         const clickedVehicle = clonedArray.filter(vehicle => vehicle._id === clickedVehicleId);
 
-        console.log(clickedVehicle);
         this.setState({
             vehicleData: clickedVehicle,
             editVehicle: true
