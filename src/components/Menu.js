@@ -27,30 +27,34 @@ export default class Menu extends Component {
     render() {
         return (
             <nav className={this.state.onMobile ? 'menu background' : 'menu'}>
-                <span className="logo">Olssons<span>Fordon Ab</span></span>
-                <div className={this.state.onMobile ? 'mobile': 'hidden'} onClick={this.handleMenuToggle}>
-                    <span className={this.state.menuIsShowing ? 'rotate-left' : null}></span>
-                    <span className={this.state.menuIsShowing ? 'hidden': null}></span>
-                    <span className={this.state.menuIsShowing ? 'rotate-right' : null}></span>
-                </div>
-                <div className={this.state.menuIsShowing || !this.state.onMobile ? 'menu-container': 'hidden'}>
-                    {!this.props.admin &&
-                    <ul className="menu-ul">
-                        <li className="menu-li"><a href="#vehicles" onClick={this.props.checkUrl}>Boka</a></li>
-                        <li className="menu-li"><a onClick={this.props.handleCancelBookingModal}>Avboka</a></li>
-                    </ul>
-                    }
+                <div className={this.state.menuIsShowing ? 'open': 'closed'}>
+                    <span className="logo">Olssons<span>Fordon Ab</span></span>
+                    <div className={this.state.onMobile ? 'mobile' : 'hidden'} onClick={this.handleMenuToggle}>
+                        <span className={this.state.menuIsShowing ? 'rotate-left' : null}></span>
+                        <span className={this.state.menuIsShowing ? 'hidden' : null}></span>
+                        <span className={this.state.menuIsShowing ? 'rotate-right' : null}></span>
+                    </div>
+                    <div className={this.state.menuIsShowing || !this.state.onMobile ? 'menu-container' : 'hidden'}>
+                        {!this.props.admin &&
+                        <ul className="menu-ul">
+                            <li className="menu-li"><a href="#vehicles" onClick={this.props.checkUrl}>Boka</a></li>
+                            <li className="menu-li"><a onClick={this.props.handleCancelBookingModal}>Avboka</a></li>
+                        </ul>
+                        }
 
-                    {this.props.admin &&
-                    <ul className="menu-ul">
-                        <li className="menu-li"><a href="#vehicles" onClick={this.props.checkUrl}>Visa fordon</a></li>
-                        <li className="menu-li"><a onClick={this.props.handleAddVehicleModal}>Lägg till fordon</a></li>
-                    </ul>
-                    }
+                        {this.props.admin &&
+                        <ul className="menu-ul">
+                            <li className="menu-li"><a href="#vehicles" onClick={this.props.checkUrl}>Visa fordon</a>
+                            </li>
+                            <li className="menu-li"><a onClick={this.props.handleAddVehicleModal}>Lägg till fordon</a>
+                            </li>
+                        </ul>
+                        }
 
-                    <a className="log-in"
-                       onClick={this.props.handleLogin}>{this.props.admin ? 'Logga ut' : 'Logga in'}</a>
+                        <a className="log-in"
+                           onClick={this.props.handleLogin}>{this.props.admin ? 'Logga ut' : 'Logga in'}</a>
 
+                    </div>
                 </div>
             </nav>
         );
