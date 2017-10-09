@@ -1,4 +1,5 @@
 
+let fetch = require('node-fetch');
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
@@ -41,7 +42,7 @@ let vehicleSchema = new Schema(
     },
     image: {
         type: String,
-
+        validate: isWorkingImageURL,
     },
     bookable: {
         type: Boolean,
@@ -54,4 +55,53 @@ let vehicleSchema = new Schema(
 
 });
 
+vehicleSchema.pre('validate', (next) =>
+{
+    console.log("pre validate");
+
+    fetch(url, {method:'HEAD'})
+        .then(resp =>
+        {
+            let ct = resp.headers.getAll('Content-Type');
+            let isValidType = (type) => type.indexOf('image') > -1; // image/jpeg
+
+            if (ct.some(isValidType)) {
+                console.log("pre save: ok!");
+                next();
+            }
+            else next(new Error('URL returns wrong Content-Type'));
+        })
+        .catch(error => {
+            console.log("isWorkingUrl error:", error);
+            next(new Error('URL check returned an error: ' + error))
+        });
+});
+function isWorkingImageURL(url)
+{
+    return new Promise( (resolve, reject) =>
+    {
+        // validate url
+        let regex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+        if (regex.test(url)) resolve();
+        else reject();
+
+        /*
+        // validate content-type
+        fetch(url, {method:'HEAD'})
+            .then(resp =>
+            {
+                let ct = resp.headers.getAll('Content-Type');
+                let isValidType = (type) => type.indexOf('image') > -1; // image/jpeg
+
+                if (ct.some(isValidType)) resolve(true);
+                else reject('URL returns wrong Content-Type');
+            })
+            .catch(error => {
+                console.log("isWorkingUrl error:", error);
+                reject('URL check returned an error: ' + error)
+            });
+         */
+
+    });
+}
 module.exports = mongoose.model('Vehicle', vehicleSchema);

@@ -10,8 +10,6 @@ const express = require('express');
 // ---------------------------------------------------------------------
 
 const app = express();
-app.engine('html', mustacheExpress());
-app.set('view engine', 'mustache'); //app.set('views', __dirname + '/views');
 app.use( (req, res, next) => {
     let ignore = ['/favicon.ico', '/banana'];
     if (ignore.indexOf(req.path) === -1)

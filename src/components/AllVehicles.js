@@ -50,7 +50,7 @@ export default class AllVehicles extends Component
             ? this.props.data
             : this.props.data.filter(v => v.bookable);
 
-        console.log('render allvehicles');
+        //console.log('render allvehicles');
 
         return <section className="all-vehicles">
             <h1 className="section-heading">Alla fordon</h1>

@@ -77,21 +77,23 @@ export default class EditVehicle extends Component {
         fetch(config.apiRoot + "vehicle/update/" + updatedVehicle._id + '?' + this.serializeUpdateObject(updatedVehicle))
             .then(resp => resp.json())
             .then(json => {
-                // show success message to the user
                 console.log("API response:", json);
                 this.props.handleSuccessMessage(json);
 
-                // close modal
-                this.props.setState({editVehicle: false});
+                if (json.result === 'ok')
+                {
+                    // close modal
+                    this.props.setState({editVehicle: false});
 
-                // uppdate global state
-                let updatedDatabase = this.props.getState.database.map(vehicle => {
-                    return vehicle._id === updatedVehicle._id
-                        ? updatedVehicle
-                        : vehicle;
-                });
+                    // uppdate global state
+                    let updatedDatabase = this.props.getState.database.map(vehicle => {
+                        return vehicle._id === updatedVehicle._id
+                            ? updatedVehicle
+                            : vehicle;
+                    });
 
-                this.props.setState({database: updatedDatabase});
+                    this.props.setState({database: updatedDatabase});
+                }
             })
             .catch(error => {
                 // show error message to the user (validation is handles by the api/model)
@@ -103,7 +105,7 @@ export default class EditVehicle extends Component {
     render() {
         //this.state.vehicleData.length > 0) return null;
         //if ( !this.props.dataIsFinished) return null
-        console.log(this.props.data, '---render editvehicles');
+        //console.log(this.props.data, '---render editvehicles');
 
         return <section className="edit-vehicle" onClick={this.props.closeEditModal}>
             <div className="edit-vehicle-container">
