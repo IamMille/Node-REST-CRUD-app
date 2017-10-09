@@ -71,6 +71,15 @@ export default class AllVehicles extends Component
                 </div>
 
                 <div className="form-group-container">
+                    <label htmlFor="gearbox">Växellåda</label>
+                    <select id="gearbox" onChange={this.handleChange} value={this.state.gearbox}>
+                        <option value="">Visa alla</option>
+                        <option value="manuell">Manuell</option>
+                        <option value="automat">Automat</option>
+                    </select>
+                </div>
+                
+                <div className="form-group-container">
                     <label htmlFor="fuel">Drivmedel</label>
                     <select id="fuel" onChange={this.handleChange} value={this.state.fuel}>
                         <option value="">Visa alla</option>
@@ -79,15 +88,6 @@ export default class AllVehicles extends Component
                         <option value="diesel">diesel</option>
                         <option value="gas">gas</option>
                         <option value="jetbränsle">jetbränsle</option>
-                    </select>
-                </div>
-
-                <div className="form-group-container">
-                    <label htmlFor="gearbox">Växellåda</label>
-                    <select id="gearbox" onChange={this.handleChange} value={this.state.gearbox}>
-                        <option value="">Visa alla</option>
-                        <option value="manuell">Manuell</option>
-                        <option value="automat">Automat</option>
                     </select>
                 </div>
 
