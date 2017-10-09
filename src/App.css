@@ -80,33 +80,6 @@ MENU
   font-weight: 500;
 }
 
-.mobile {
-  position: absolute;
-  top: 40px;
-  right: 0;
-}
-
-.mobile > span {
-  width: 35px;
-  border-bottom: 1px solid black;
-  display: block;
-  transition: all .3s;
-}
-
-.mobile > span:nth-child(2), span:nth-child(3) {
-  padding: 0 0 10px 0;
-}
-
-.mobile > .rotate-left {
-  transform: rotate(45deg);
-  margin: 10px 0 0 0;
-}
-
-.mobile > .rotate-right {
-  transform: rotate(135deg);
-  padding: 0;
-}
-
 /*
 END MENU
  */
@@ -359,7 +332,7 @@ FILTERS
 }
 
 .filter-container > .section-heading {
-  padding: 15px 0 0 0;
+  padding: 25px 0 25px 0;
 }
 
 /*
@@ -737,11 +710,6 @@ END ADD VEHICLE
     text-transform: uppercase;
   }
 
-  .mobile {
-    top: 35px;
-    right: 20px;
-  }
-
   .menu-ul {
     margin: 70px 0 0 0;
   }
@@ -751,6 +719,33 @@ END ADD VEHICLE
     margin: -6px 0 0 50px;
     padding: 0;
     font-weight: 500;
+  }
+
+  .mobile {
+    position: absolute;
+    top: 35px;
+    right: 20px;
+  }
+
+  .mobile > span {
+    width: 35px;
+    border-bottom: 1px solid black;
+    display: block;
+    transition: all .3s;
+  }
+
+  .mobile > span:nth-child(2), span:nth-child(3) {
+    padding: 0 0 10px 0;
+  }
+
+  .mobile > .rotate-left {
+    transform: rotate(45deg);
+    margin: 10px 0 0 0;
+  }
+
+  .mobile > .rotate-right {
+    transform: rotate(135deg);
+    padding: 0;
   }
 
   /*
