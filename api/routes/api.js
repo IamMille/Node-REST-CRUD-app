@@ -59,7 +59,7 @@ router.get('/:model/update/:id', (req, res) =>
 
             res.json({
                 result: 'ok',
-                message: `Successfully updated ${req.params.id} with ${req.originalUrl.split('?',2)[1]}`,
+                message: `Successfully updated ${req.params.id}`, // with ${req.originalUrl.split('?',2)[1]}
                 data: doc || {}
             });
         })
