@@ -7,6 +7,8 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   background: #fafafa;
+  color: #606c76;
+  letter-spacing: 0.01em;
 }
 
 .block {
@@ -41,7 +43,7 @@ MENU
 }
 
 .menu-container {
-  text-align: center;
+  text-align: right;
 }
 
 .menu-li > a {
@@ -53,6 +55,8 @@ MENU
 .menu-li {
   display: inline-block;
   padding: 30px;
+  font-size: 1.02em;
+  font-weight: 200;
 }
 
 .menu-ul {
@@ -60,12 +64,14 @@ MENU
 }
 
 .log-in {
-  padding: 20px;
+  padding: 20px 0 20px 20px;
+  font-size: 1.02em;
+  font-weight: 200;
 }
 
 .logo {
   font-size: 2em;
-  font-weight: 700;
+  font-weight: 300;
   letter-spacing: -1px;
   position: absolute;
   top: 30px;
@@ -77,7 +83,8 @@ MENU
   display: block;
   margin: -10px 0 0 50px;
   padding: 0;
-  font-weight: 500;
+  font-weight: 200;
+  color: #44c6ff;
 }
 
 /*
@@ -98,12 +105,12 @@ input[type="text"] {
   padding: 0 10px 0 10px;
   margin: 0 1% 10px 1%;
   background: #fafafa;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
   transition: all .25s;
+  font-weight: 200;
 }
 
 input[type="text"]:focus {
-  border: 1px solid rgba(68, 198, 255, 0.3);
+  border: 1px solid rgba(68, 198, 255, 0.27);
 }
 
 select {
@@ -117,8 +124,8 @@ select {
   padding: 0 10px 0 10px;
   margin: 0 1% 10px 1%;
   background: #fafafa;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
   transition: all .25s;
+  font-weight: 200;
 }
 
 select:focus {
@@ -133,41 +140,66 @@ form {
 label {
   display: inline-block;
   margin: 0 0 5px 5px;
+  font-weight: 500;
 }
 
 button {
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
   border-radius: 4px;
   transition: all .25s;
   color: #f7f7f7;
   background: #44c6ff;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-size: .8em;
 }
 
 .form-group-container-full > .button {
   width: 99%;
   height: 40px;
+  margin: 10px auto 10px auto;
+  display: block;
+}
+
+.button {
+  width: 99%;
+  height: 40px;
   border: none;
-  font-size: .9em;
   margin: 10px auto 10px auto;
   display: block;
   color: #ffffff;
 }
 
-.form-group-container-full > .button:hover {
-  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
+.button:hover {
   border: 1px solid rgba(209, 209, 209, 0.25);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
-.button-container > .button:hover {
-  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
+.button:hover {
   border: 1px solid rgba(209, 209, 209, 0.25);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+}
+
+.button-close {
+  background: transparent;
+  border: 1px solid #ff625b;
+  color: #ff625b;
+}
+
+.button-close {
+  background: transparent;
+  border: 1px solid #ff625b;
+  color: #ff625b;
+}
+
+.button-close:hover {
+  background: #ff625b;
+  border: 1px solid #ff625b;
+  color: #ffffff;
 }
 
 .button-container {
-  margin: 0 0 0 0;
+  margin: 25px 0 0 0;
 }
 
 .button-danger {
@@ -208,8 +240,8 @@ textarea {
   padding: 10px 10px 0 10px;
   margin: 0 auto 10px auto;
   background: #fafafa;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
   transition: all .25s;
+  font-weight: 200;
 }
 
 textarea:focus {
@@ -223,6 +255,7 @@ END INPUT FIELDS
 .section-heading {
   text-align: center;
   padding: 30px 0 30px 0;
+  font-weight: 300;
 }
 
 section {
@@ -248,15 +281,13 @@ VEHICLE LIST
   cursor: pointer;
   transition: all .3s;
   border: 1px solid rgba(209, 209, 209, 0.25);
-  box-shadow: 0 4px 6px rgba(50, 50, 93, .05), 0 1px 3px rgba(0, 0, 0, .05);
   border-radius: 3px;
   padding: 5px 0 5px 5px;
 }
 
 .all-vehicles > ul > li:hover {
-  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
-  border: 1px solid rgba(209, 209, 209, 0.25);
-  transform: translateY(-1px);
+  border: 1px solid rgba(68, 198, 255, 0.27);
+  transform: translateY(-2px);
 }
 
 .all-vehicles > ul > li > span, .image-container {
@@ -267,6 +298,7 @@ VEHICLE LIST
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  font-weight: 200;
 }
 
 /*.all-vehicles > ul > li > .span-container > span{*/
@@ -303,7 +335,6 @@ VEHICLE LIST
   padding: 20px 0;
   border-radius: 4px;
   border: 1px solid rgba(209, 209, 209, 0.25);
-  box-shadow: 0 4px 6px rgba(50, 50, 93, .05), 0 1px 3px rgba(0, 0, 0, .05);
 }
 
 .vehicle-search-head > span {
@@ -311,7 +342,7 @@ VEHICLE LIST
   flex-direction: row;
   flex-wrap: wrap;
   text-align: center;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .vehicle-search-head > span:first-child {
@@ -332,11 +363,16 @@ FILTERS
   border-radius: 4px;
   padding: 0 0 20px 0;
   border: 1px solid rgba(209, 209, 209, 0.25);
-  box-shadow: 0 4px 6px rgba(50, 50, 93, .05), 0 1px 3px rgba(0, 0, 0, .05);
 }
 
-.filter-container > .form-group-container {
-  width: 220px;
+.center-select {
+  width: 60%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.filter-container > .center-select > .form-group-container {
+  width: calc(33% - 40px);
   margin: 0 20px 0 20px;
 }
 
@@ -350,7 +386,7 @@ FILTERS
   margin: 10px 0 0 0;
   border-radius: 4px;
   border: 1px solid rgba(209, 209, 209, 0.25);
-  box-shadow: 0 4px 6px rgba(50, 50, 93, .05), 0 1px 3px rgba(0, 0, 0, .05);
+  font-weight: 200;
 }
 
 /*
@@ -392,6 +428,7 @@ BOOK VEHICLE
 
 .list-container {
   padding: 13px 20px;
+  font-weight: 200;
 }
 
 .book-vehicle-container > .image-container-book > img {
@@ -410,7 +447,7 @@ BOOK VEHICLE
 .book-vehicle-container > .list-container > ul > li:nth-child(1) {
   font-size: 2em;
   padding: 7px 0 0 0;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 .book-vehicle-container > .list-container > ul > li:nth-child(2) {
@@ -418,24 +455,42 @@ BOOK VEHICLE
   padding: 0 0 40px 0;
 }
 
-.book-vehicle-container > .list-container > ul > li:nth-child(4), li:nth-child(6) {
+.book-vehicle-container > .list-container > ul > li:nth-child(4), li:nth-child(6), li:nth-child(7) {
   text-transform: capitalize;
 }
 
-.book-vehicle-container > .button-container > button {
+.book-vehicle-container > .button-container > .button {
   width: 250px;
   height: 40px;
-  border: none;
-  font-size: .9em;
   margin: 10px auto 10px auto;
   display: block;
-  color: #ffffff;
   outline: none;
 }
 
 .book-vehicle-container > .button-container {
   padding: 20px 0 20px 0;
   clear: both;
+}
+
+.DayPicker {
+  font-weight: 200;
+  outline: none;
+}
+
+.DayPicker-wrapper, .DayPicker-Day {
+  outline: none;
+}
+
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+  background: #44c6ff;
+}
+
+.calendar-text {
+  font-weight: 200;
+}
+
+center > p {
+  font-weight: 200;
 }
 
 /*
@@ -471,7 +526,7 @@ EDIT VEHICLE END
 .success, .error {
   width: 400px;
   padding: 20px;
-  background: #7df072;
+  background: #23d160;
   position: fixed;
   top: 20px;
   left: 20px;
@@ -578,10 +633,18 @@ END ADD VEHICLE
     margin: 0 13px 0 0;
   }
 
-  .filter-container > .form-group-container {
+  .center-select {
+    width: 80%;
+  }
+
+  .filter-container > .center-select > .form-group-container {
     width: 80%;
     margin: 20px auto 0 auto;
     display: block;
+  }
+
+  .filter-container > .section-heading {
+    padding: 25px 0 0 0;
   }
 
   .vehicle-search-head {
@@ -704,7 +767,7 @@ END ADD VEHICLE
   .menu {
     width: 100%;
     padding: 0;
-    box-shadow: 0 4px 6px rgba(50, 50, 93, .05), 0 1px 3px rgba(0, 0, 0, .05);
+    border: 1px solid rgba(209, 209, 209, 0.25);
   }
 
   .closed {
@@ -733,23 +796,27 @@ END ADD VEHICLE
 
   .logo {
     font-size: 1.3em;
-    font-weight: 700;
-    letter-spacing: -1px;
+    font-weight: 300;
+    letter-spacing: .01em;
     position: absolute;
     top: 30px;
     left: 20px;
     text-transform: uppercase;
   }
 
-  .menu-ul {
-    margin: 70px 0 0 0;
-  }
-
   .logo > span:first-child {
     display: block;
     margin: -6px 0 0 50px;
     padding: 0;
-    font-weight: 500;
+    font-weight: 200;
+  }
+
+  .menu-container {
+    text-align: center;
+  }
+
+  .menu-ul {
+    margin: 70px 0 0 0;
   }
 
   .mobile {
@@ -760,7 +827,7 @@ END ADD VEHICLE
 
   .mobile > span {
     width: 35px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #606c76;;
     display: block;
     transition: all .3s;
   }
@@ -813,7 +880,7 @@ END ADD VEHICLE
   .success, .error {
     width: 90%;
     padding: 20px;
-    background: #7df072;
+    background: #23d160;
     position: fixed;
     top: 20px;
     left: 20px;

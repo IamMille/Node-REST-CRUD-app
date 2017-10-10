@@ -220,7 +220,7 @@ export default class EditVehicle extends Component {
                             </button>
                         </div>
                         <div className="form-group-container-full">
-                            <button className="button button-danger" type="button"
+                            <button className="button button-close" type="button"
                                     onClick={this.props.closeEditModal}>Stäng
                             </button>
                         </div>

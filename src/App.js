@@ -100,7 +100,7 @@ class App extends Component
 
     handleBookModal(event) {
         const target = event.target;
-        if (target.localName === 'section' || target.innerText === 'Stäng') {
+        if (target.localName === 'section' || target.innerText.toLowerCase() === 'stäng') {
             this.setState({
                 bookVehicle: !this.state.bookVehicle
             })
@@ -109,7 +109,7 @@ class App extends Component
 
     handleEditModal(event) {
         const target = event.target;
-        if (target.localName === 'section' || target.innerText === 'Stäng') {
+        if (target.localName === 'section' || target.innerText.toLowerCase() === 'stäng') {
             this.setState({
                 editVehicle: !this.state.editVehicle
             })
@@ -118,7 +118,7 @@ class App extends Component
 
     handleCancelBookingModal = (event) => {
         const target = event.target;
-        if (target.localName === 'section' || target.innerText === 'Stäng') {
+        if (target.localName === 'section' || target.innerText.toLowerCase() === 'stäng') {
             this.setState({
                 cancelBooking: !this.state.cancelBooking
             })
@@ -132,7 +132,7 @@ class App extends Component
     handleAddVehicleModal = (event) => {
         console.log('add vehicle modal');
         const target = event.target;
-        if (target.localName === 'section' || target.innerText === 'Stäng') {
+        if (target.localName === 'section' || target.innerText.toLowerCase() === 'stäng') {
             this.setState({
                 addVehicle: !this.state.addVehicle
             })
