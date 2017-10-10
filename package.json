@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build"
+    "deploy": "npm run build && git add . && git commit -m 'new build' && git push && git push heroku master"
   },
   "proxy": "http://localhost:5000"
 }
