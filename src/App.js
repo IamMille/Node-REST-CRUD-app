@@ -59,8 +59,7 @@ class App extends Component
                 this.handleErrorMessage(error)
             });
 
-        if (window.location.hash === '')
-            window.location.hash = "#vehicles";
+        //if (window.location.hash === '') window.location.hash = "#vehicles";
 
         this.checkUrl();
         window.addEventListener("hashchange", () => {
@@ -80,9 +79,7 @@ class App extends Component
     };
 
     checkUrl() {
-        this.setState({
-            location: window.location.hash.replace('#', '')
-        });
+        //this.setState({ location: window.location.hash.replace('#', '') });
     }
 
     handleLogin()
@@ -227,16 +224,14 @@ class App extends Component
                     handleAddVehicleModal={this.handleAddVehicleModal}
                 />
 
-                <Render if={this.state.location === 'vehicles'}>
-                    <AllVehicles
-                        isAdmin={this.state.admin}
-                        handleClick={this.state.admin ? this.editVehicle.bind(this) : this.vehicleBooking.bind(this)}
-                        data={this.state.database}
-                        handleSuccessMessage={this.handleSuccessMessage}
-                        handleErrorMessage={this.handleErrorMessage}
-                        setState={this.setState.bind(this)}
-                    />
-                </Render>
+                <AllVehicles
+                    isAdmin={this.state.admin}
+                    handleClick={this.state.admin ? this.editVehicle.bind(this) : this.vehicleBooking.bind(this)}
+                    data={this.state.database}
+                    handleSuccessMessage={this.handleSuccessMessage}
+                    handleErrorMessage={this.handleErrorMessage}
+                    setState={this.setState.bind(this)}
+                />
 
                 <CancelBooking
                     if={this.state.cancelBooking}
