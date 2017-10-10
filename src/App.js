@@ -39,7 +39,7 @@ class App extends Component
     }
 
     componentDidMount() {
-        fetch( '/api/vehicle/read' )
+        fetch( config.apiRoot + 'vehicle/read' )
             .then(resp => resp.text()) //text()
             .then(text => {
                 try {
