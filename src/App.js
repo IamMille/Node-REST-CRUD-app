@@ -17,7 +17,7 @@ class App extends Component
     constructor(props) {
         super(props);
         this.state = {
-            admin: true,
+            admin: false,
             location: '',
             bookVehicle: false,
             editVehicle: false,
@@ -85,7 +85,13 @@ class App extends Component
         });
     }
 
-    handleLogin() {
+    handleLogin()
+    {
+        this.handleSuccessMessage({
+            result: 'ok',
+            message: `Du har blivit ${ !this.state.admin ? 'inloggad!' : 'utloggad' }`
+        });
+
         this.setState({
             admin: !this.state.admin
         });

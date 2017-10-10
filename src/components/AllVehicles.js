@@ -24,9 +24,6 @@ export default class AllVehicles extends Component {
                 delete filters[prop]
         }
 
-        let url = config.apiRoot + "vehicle/read?" + this.serializeUpdateObject(filters);
-        console.log(url);
-
         fetch(config.apiRoot + "vehicle/read?" + this.serializeUpdateObject(filters))
             .then(resp => resp.json())
             .then(json => {

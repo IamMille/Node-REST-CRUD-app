@@ -25,6 +25,8 @@ export default class BookVehicle extends Component
             .then(json => {
                 let disabledDays = [];
 
+                disabledDays.push({ before: new Date() }); // disable days in the past
+
                 json.data.forEach(booking => {
                     disabledDays.push({
                         after: new Date(booking.dateFrom).addDays(-1),
@@ -37,7 +39,7 @@ export default class BookVehicle extends Component
             .catch(error => {
                 console.warn("API error:", error);
             });
-        console.log("bookVehicle did mount");
+        //console.log("bookVehicle did mount");
 
     }
 
@@ -125,7 +127,7 @@ export default class BookVehicle extends Component
             <div className="book-vehicle-container">
 
                 <div className="image-container-book">
-                    <img src={this.props.data[0].image || "http://via.placeholder.com/150x150"} alt="bild"/>
+                    <img src={this.props.data[0].image || "https://via.placeholder.com/150x150"} alt="bild"/>
                 </div>
 
                 <div className="list-container">

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-export default class Menu extends Component {
+export default class Menu extends Component
+{
     constructor(props) {
         super(props);
         this.state = {
@@ -37,14 +38,14 @@ export default class Menu extends Component {
                     <div className={this.state.menuIsShowing || !this.state.onMobile ? 'menu-container' : 'hidden'}>
                         {!this.props.admin &&
                         <ul className="menu-ul">
-                            <li className="menu-li"><a href="#vehicles" onClick={this.props.checkUrl}>Boka</a></li>
+                            <li className="menu-li menu-li-active"><a href="#vehicles" onClick={this.props.checkUrl}>Boka</a></li>
                             <li className="menu-li"><a onClick={this.props.handleCancelBookingModal}>Avboka</a></li>
                         </ul>
                         }
 
                         {this.props.admin &&
                         <ul className="menu-ul">
-                            <li className="menu-li"><a href="#vehicles" onClick={this.props.checkUrl}>Visa fordon</a>
+                            <li className="menu-li menu-li-active"><a href="#vehicles" onClick={this.props.checkUrl}>Visa fordon</a>
                             </li>
                             <li className="menu-li"><a onClick={this.props.handleAddVehicleModal}>Lägg till fordon</a>
                             </li>
