@@ -16,7 +16,7 @@ body {
 }
 
 .hidden {
-  display: none!important;
+  display: none !important;
 }
 
 /*
@@ -271,18 +271,32 @@ VEHICLE LIST
   margin: 0 auto;
 }
 
+.all-vehicles > ul {
+  display: flex;
+  flex-flow: row wrap;
+  list-style: none;
+}
+
 .all-vehicles > ul > li {
   min-height: 70px;
-  display: flex;
+  width: calc(20% - 16px);
   align-items: center;
   text-transform: capitalize;
-  margin: 10px 0 10px 0;
+  margin: 10px 10px 10px 10px;
   background: #ffffff;
   cursor: pointer;
   transition: all .3s;
   border: 1px solid rgba(209, 209, 209, 0.25);
   border-radius: 3px;
   padding: 5px 0 5px 5px;
+}
+
+.all-vehicles > ul > li:nth-child(5n) {
+  margin-right: 0;
+}
+
+.all-vehicles > ul > li:nth-child(5n+1), li:first-child {
+  margin-left: 0;
 }
 
 .all-vehicles > ul > li:hover {
@@ -299,6 +313,8 @@ VEHICLE LIST
   white-space: nowrap;
   overflow: hidden;
   font-weight: 200;
+  display: block;
+  padding: 15px 5px 10px 0;
 }
 
 /*.all-vehicles > ul > li > .span-container > span{*/
@@ -310,24 +326,25 @@ VEHICLE LIST
 
 .image-container {
   text-align: left;
-  min-width: 140px;
-  min-height: 110px;
+  min-width: calc(100% - 5px);
+  min-height: 120px;
   max-width: 140px;
-  max-height: 110px;
+  max-height: 150px;
   background: #cccccc;
+  padding: 0;
 }
 
 .image-container > img {
   vertical-align: middle;
   object-fit: cover;
-  width: 140px;
-  height: 110px;
+  width: 100%;
+  height: 150px;
   background: url('./ring.gif') center no-repeat;
   background-size: 25%;
 }
 
 .vehicle-search-head {
-  display: flex;
+  display: none;
   align-items: center;
   text-transform: capitalize;
   background: #ffffff;
@@ -441,7 +458,7 @@ BOOK VEHICLE
 }
 
 .book-vehicle-container > .list-container > ul > li {
-  padding: 15px 0 15px 0;
+  padding: 10px 0 10px 0;
 }
 
 .book-vehicle-container > .list-container > ul > li:nth-child(1) {
@@ -452,7 +469,7 @@ BOOK VEHICLE
 
 .book-vehicle-container > .list-container > ul > li:nth-child(2) {
   font-size: 1.2em;
-  padding: 0 0 40px 0;
+  padding: 0 0 20px 0;
 }
 
 .book-vehicle-container > .list-container > ul > li:nth-child(4), li:nth-child(6), li:nth-child(7) {
@@ -468,7 +485,7 @@ BOOK VEHICLE
 }
 
 .book-vehicle-container > .button-container {
-  padding: 20px 0 20px 0;
+  padding: 0 0 20px 0;
   clear: both;
 }
 
@@ -611,8 +628,47 @@ END ADD VEHICLE
   .all-vehicles {
     width: 90%;
   }
+
   .menu {
     width: 90%;
+  }
+
+  .all-vehicles > ul > li {
+    min-height: 70px;
+    width: calc(25% - 15px);
+    align-items: center;
+    text-transform: capitalize;
+    margin: 10px 10px 10px 10px;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all .3s;
+    border: 1px solid rgba(209, 209, 209, 0.25);
+    border-radius: 3px;
+    padding: 5px 0 5px 5px;
+  }
+
+  .all-vehicles > ul > li:nth-child(5n) {
+    color: #606c76;
+    margin: 10px;
+  }
+
+  .all-vehicles > ul > li:nth-child(5n+1) {
+    color: #606c76;
+    margin: 10px;
+  }
+
+  .all-vehicles > ul > li:first-child {
+    margin-left: 0;
+  }
+
+  .all-vehicles > ul > li:nth-child(4n) {
+    color: #606c76;
+    margin-right: 0;
+  }
+
+  .all-vehicles > ul > li:nth-child(4n+1) {
+    color: #606c76;
+    margin-left: 0;
   }
 }
 
@@ -652,45 +708,58 @@ END ADD VEHICLE
   }
 
   .all-vehicles > ul > li {
-    display: block;
+    min-height: 70px;
+    width: calc(50% - 10px);
+    align-items: center;
+    text-transform: capitalize;
+    margin: 10px 10px 10px 10px;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all .3s;
+    border: 1px solid rgba(209, 209, 209, 0.25);
+    border-radius: 3px;
+    padding: 5px 0 5px 5px;
   }
 
-  .image-container {
-    float: left;
-    margin: 0 10px 0 0;
+  .all-vehicles > ul > li:nth-child(5n) {
+    color: #606c76;
+    margin: 10px;
   }
 
-  br {
-    clear: both;
+  .all-vehicles > ul > li:nth-child(5n+1) {
+    color: #606c76;
+    margin: 10px;
   }
 
-  .all-vehicles > ul > li > span:nth-child(4) {
-    display: none;
+  .all-vehicles > ul > li:first-child {
+    margin-left: 0;
   }
 
-  .all-vehicles > ul > li > span:nth-child(2) {
-    margin: 20px 0 0 0;
+  .all-vehicles > ul > li:nth-child(4n) {
+    color: #606c76;
+    margin: 10px;
   }
 
-  .all-vehicles > ul > li > span:nth-child(3) {
-    display: inline-block;
-    width: 45%;
+  .all-vehicles > ul > li:nth-child(4n+1) {
+    color: #606c76;
+    margin: 10px;
   }
 
-  .all-vehicles > ul > li > span:nth-child(5) {
-    display: inline-block;
-    text-align: right;
-    width: 15%;
-    float: right;
-    margin: 0 10px 0 0;
+  .all-vehicles > ul > li:nth-child(2n) {
+    color: #606c76;
+    margin-right: 0;
+  }
+
+  .all-vehicles > ul > li:nth-child(2n+1) {
+    color: #606c76;
+    margin-left: 0;
   }
 
   /*.all-vehicles > ul > li > span:nth-child(5):after {*/
-    /*content: ' kr';*/
-    /*text-transform: none;*/
-    /*display: inline;*/
+  /*content: ' kr';*/
+  /*text-transform: none;*/
+  /*display: inline;*/
   /*}*/
-
   .all-vehicles > ul > li {
     padding: 6px 6px 4px 6px;
   }
@@ -700,35 +769,21 @@ END ADD VEHICLE
     margin-left: 20px;
   }
 
-  .image-container {
-    display: inline-block;
-    width: 100px;
-  }
-
-  .image-container {
-    text-align: left;
-    min-width: 100px;
-    min-height: 80px;
-    max-width: 100px;
-    max-height: 80px;
-    background: #cccccc;
-  }
-
-  .image-container > img {
-    padding: 0;
-    border-radius: 0;
-    object-fit: cover;
-    width: 100px;
-    height: 80px;
-  }
-
   .all-vehicles > ul > li > span {
     display: block;
-    text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    width: 50%;
+    padding: 15px 0 15px 0;
+  }
+
+  .image-container {
+    max-width: 100%;
+    max-height: 120px;
+  }
+
+  .image-container > img {
+    height: 120px;
   }
 
   /*
@@ -763,7 +818,6 @@ END ADD VEHICLE
   /*
   NAV
    */
-
   .menu {
     width: 100%;
     padding: 0;
