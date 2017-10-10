@@ -247,6 +247,8 @@ class App extends Component
                     handleSuccessMessage={this.handleSuccessMessage}
                     handleErrorMessage={this.handleErrorMessage}
                     handleAddVehicleModal={this.handleAddVehicleModal}
+                    setState={this.setState.bind(this)}
+                    getState={{...this.state}}
                 />
 
                 <Render if={this.state.editVehicle && this.state.admin}>
