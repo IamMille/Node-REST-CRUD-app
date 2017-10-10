@@ -30,6 +30,11 @@ body {
 a {
   cursor: pointer;
   color: #44c6ff;
+  transition: all .35s;
+}
+
+a:hover {
+  color: #606c76;
 }
 
 /*
@@ -40,6 +45,7 @@ MENU
   width: 1200px;
   margin: 0 auto 0 auto;
   position: relative;
+  user-select: none;
 }
 
 .menu-container {
@@ -50,6 +56,11 @@ MENU
   display: inline-block;
   text-decoration: none;
   color: #44c6ff;
+  transition: all .35s;
+}
+
+.menu-li > a:hover {
+  color: #606c76;
 }
 
 .menu-li {
@@ -126,6 +137,7 @@ select {
   background: #fafafa;
   transition: all .25s;
   font-weight: 200;
+  cursor: pointer;
 }
 
 select:focus {
@@ -278,7 +290,7 @@ VEHICLE LIST
 }
 
 .all-vehicles > ul > li {
-  min-height: 70px;
+  height: 300px;
   width: calc(20% - 16px);
   align-items: center;
   text-transform: capitalize;
@@ -289,6 +301,17 @@ VEHICLE LIST
   border: 1px solid rgba(209, 209, 209, 0.25);
   border-radius: 3px;
   padding: 5px 0 5px 5px;
+}
+
+.all-vehicles > ul > li > span:nth-child(2) {
+  font-weight: 400;
+  padding-bottom: 0;
+  padding-top: 15px;
+}
+
+.all-vehicles > ul > li > span:nth-child(3) {
+  font-weight: 400;
+  padding-top: 0;
 }
 
 .all-vehicles > ul > li:nth-child(5n) {
@@ -314,7 +337,7 @@ VEHICLE LIST
   overflow: hidden;
   font-weight: 200;
   display: block;
-  padding: 15px 5px 10px 0;
+  padding: 10px 5px 5px 0;
 }
 
 /*.all-vehicles > ul > li > .span-container > span{*/
@@ -380,6 +403,7 @@ FILTERS
   border-radius: 4px;
   padding: 0 0 20px 0;
   border: 1px solid rgba(209, 209, 209, 0.25);
+  margin-bottom: 10px;
 }
 
 .center-select {
@@ -762,6 +786,7 @@ END ADD VEHICLE
   /*}*/
   .all-vehicles > ul > li {
     padding: 6px 6px 4px 6px;
+    height: 275px;
   }
 
   .span-container {
@@ -774,7 +799,7 @@ END ADD VEHICLE
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    padding: 15px 0 15px 0;
+    padding: 10px 5px 5px 0;
   }
 
   .image-container {
