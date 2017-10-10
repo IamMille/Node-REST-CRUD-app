@@ -110,6 +110,18 @@ export default class AddVehicle extends Component {
                         </div>
 
                         <div className="form-group-container">
+                            <label htmlFor="fuel">Drivmedel</label>
+                            <select id="fuel" onChange={this.handleChange} value={this.state.fuel || ""}>
+                                <option value="" disabled>Välj</option>
+                                <option value="95">95</option>
+                                <option value="E85">E85</option>
+                                <option value="diesel">diesel</option>
+                                <option value="gas">gas</option>
+                                <option value="jetbränsle">jetbränsle</option>
+                            </select>
+                        </div>
+
+                        <div className="form-group-container-full">
                             <label htmlFor="image">Bildlänk</label>
                             <input type="text" placeholder="http://example.com" id="image" onChange={this.handleChange}
                                    value={this.state.image || ""}/>
@@ -124,7 +136,7 @@ export default class AddVehicle extends Component {
                                     <button className="button" type="button" onClick={this.handleSubmit}>Lägg till</button>
                                 </div>
                                 <div className="form-group-container-full">
-                                    <button className="button button-danger" type="button" onClick={this.props.handleAddVehicleModal}>Stäng</button>
+                                    <button className="button button-close" type="button" onClick={this.props.handleAddVehicleModal}>Stäng</button>
                                 </div>
                             </div>
 
