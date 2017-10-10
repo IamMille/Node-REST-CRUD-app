@@ -70,8 +70,12 @@ MENU
   font-weight: 200;
 }
 
-.menu-li-active {
-  background-color: #eee;
+.menu-li > .menu-li-active {
+  color: #606c76;
+}
+
+.menu-li > .menu-li-active:hover {
+  color: #44c6ff;
 }
 
 .menu-ul {
@@ -737,10 +741,10 @@ END ADD VEHICLE
 
   .all-vehicles > ul > li {
     min-height: 70px;
-    width: calc(50% - 10px);
+    width: calc(50% - 3px);
     align-items: center;
     text-transform: capitalize;
-    margin: 10px 10px 10px 10px;
+    margin: 10px 3px 10px 3px;
     background: #ffffff;
     cursor: pointer;
     transition: all .3s;
@@ -751,12 +755,12 @@ END ADD VEHICLE
 
   .all-vehicles > ul > li:nth-child(5n) {
     color: #606c76;
-    margin: 10px;
+    margin: 10px 3px 10px 3px;
   }
 
   .all-vehicles > ul > li:nth-child(5n+1) {
     color: #606c76;
-    margin: 10px;
+    margin: 10px 3px 10px 3px;
   }
 
   .all-vehicles > ul > li:first-child {
@@ -765,12 +769,12 @@ END ADD VEHICLE
 
   .all-vehicles > ul > li:nth-child(4n) {
     color: #606c76;
-    margin: 10px;
+    margin: 10px 3px 10px 3px;
   }
 
   .all-vehicles > ul > li:nth-child(4n+1) {
     color: #606c76;
-    margin: 10px;
+    margin: 10px 3px 10px 3px;
   }
 
   .all-vehicles > ul > li:nth-child(2n) {
@@ -852,7 +856,7 @@ END ADD VEHICLE
     padding: 0;
     border: 1px solid rgba(209, 209, 209, 0.25);
   }
-
+  
   .closed {
     min-height: 100px;
     max-height: 100px;
