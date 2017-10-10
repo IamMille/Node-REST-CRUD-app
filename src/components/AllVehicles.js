@@ -111,7 +111,7 @@ export default class AllVehicles extends Component {
                             <li key={index} data-id={vehicle._id}
                                 onClick={this.props.handleClick}>
                                 <div className="image-container">
-                                    <img src={vehicle.image || "http://via.placeholder.com/150x150"} alt=""
+                                    <img src={vehicle.image || "https://via.placeholder.com/150x150"} alt=""
                                          width="120"/>
                                 </div>
                                 <span>{vehicle.brand || 'Ingen data'}</span>
