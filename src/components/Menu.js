@@ -38,14 +38,14 @@ export default class Menu extends Component
                     <div className={this.state.menuIsShowing || !this.state.onMobile ? 'menu-container' : 'hidden'}>
                         {!this.props.admin &&
                         <ul className="menu-ul">
-                            <li className="menu-li"><a href="#vehicles" onClick={this.props.checkUrl} className="menu-li-active">Boka</a></li>
+                            <li className="menu-li"><a href="/" onClick={this.props.checkUrl} className="menu-li-active">Boka</a></li>
                             <li className="menu-li"><a onClick={this.props.handleCancelBookingModal}>Avboka</a></li>
                         </ul>
                         }
 
                         {this.props.admin &&
                         <ul className="menu-ul">
-                            <li className="menu-li"><a href="#vehicles" onClick={this.props.checkUrl} className="menu-li-active">Visa fordon</a>
+                            <li className="menu-li"><a href="/" onClick={this.props.checkUrl} className="menu-li-active">Visa fordon</a>
                             </li>
                             <li className="menu-li"><a onClick={this.props.handleAddVehicleModal}>Lägg till fordon</a>
                             </li>
