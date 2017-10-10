@@ -85,7 +85,13 @@ class App extends Component
         });
     }
 
-    handleLogin() {
+    handleLogin()
+    {
+        this.handleSuccessMessage({
+            result: 'ok',
+            message: `Du har blivit ${ !this.state.admin ? 'inloggad!' : 'utloggad' }`
+        });
+
         this.setState({
             admin: !this.state.admin
         });

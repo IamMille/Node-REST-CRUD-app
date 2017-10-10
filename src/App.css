@@ -59,6 +59,10 @@ MENU
   font-weight: 200;
 }
 
+.menu-li-active {
+  background-color: #eee;
+}
+
 .menu-ul {
   display: inline-block;
 }
