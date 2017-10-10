@@ -61,7 +61,7 @@ export default class AllVehicles extends Component {
                     <div className="form-group-container">
                         <label htmlFor="license">Körkort</label>
                         <select id="license" onChange={this.handleChange} value={this.state.license}>
-                            <option value="" disabled>Välj</option>
+                            <option value="">Välj</option>
                             <option value="A">A</option>
                             <option value="A1">A1</option>
                             <option value="A2">A2</option>
