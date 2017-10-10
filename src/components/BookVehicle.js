@@ -136,7 +136,8 @@ export default class BookVehicle extends Component
                         <li>Fordonstyp: {this.props.data[0].type || 'Information saknas.'}</li>
                         <li>Körkortkrav: {this.props.data[0].license || 'Information saknas.'}</li>
                         <li>Växellåda: {this.props.data[0].gearbox || 'Information saknas.'}</li>
-                        <li>Dagshyra: {this.props.data[0].price || 'Information saknas.'}</li>
+                        <li>Drivmedel: {this.props.data[0].fuel || 'Information saknas.'}</li>
+                        <li>Dagshyra: {this.props.data[0].price + ':-' || 'Information saknas.'}</li>
                         <li>Anteckningar: {this.props.data[0].note || 'Inga anmärkningar.'}</li>
                     </ul>
                 </div>
@@ -154,13 +155,13 @@ export default class BookVehicle extends Component
                 <div className="button-container">
                     {
                         ! this.state.isBookingComplate
-                        ? <button className="button" onClick={this.handleSubmit}>Boka</button>
+                        ? <button className="button" type="button" onClick={this.handleSubmit}>Boka</button>
                         : <center>
                             <p>Fordonet har bokats! Boknings ID: {this.state.isBookingComplate}</p>
                             <p>Spara ditt boknings ID för ev. avbokning.</p>
                         </center>
                     }
-                    <button className="button" onClick={this.props.closeBookModal}>Stäng</button>
+                    <button className="button button-close" type="button" onClick={this.props.closeBookModal}>Stäng</button>
                 </div>
 
             </div>

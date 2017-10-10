@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import config from '../config.json';
 import Render from './Render';
 
-export default class AllVehicles extends Component
-{
+export default class AllVehicles extends Component {
     constructor() {
         super(...arguments);
         this.state = {
@@ -15,7 +14,8 @@ export default class AllVehicles extends Component
 
     handleChange = (event) => {
         const {id, value} = event.target;
-        this.setState({ [id]: value }); console.log("handelChange:", value);
+        this.setState({[id]: value});
+        console.log("handelChange:", value);
 
         let filters = {...this.state, [id]: value};
 
@@ -24,12 +24,14 @@ export default class AllVehicles extends Component
                 delete filters[prop]
         }
 
-        let url = config.apiRoot + "vehicle/read?" + this.serializeUpdateObject(filters);  console.log(url);
+        let url = config.apiRoot + "vehicle/read?" + this.serializeUpdateObject(filters);
+        console.log(url);
 
-        fetch( config.apiRoot + "vehicle/read?" + this.serializeUpdateObject(filters) )
+        fetch(config.apiRoot + "vehicle/read?" + this.serializeUpdateObject(filters))
             .then(resp => resp.json())
             .then(json => {
-                this.props.setState({ database: json.data.reverse() });  console.log("API response (filter):", json.data);
+                this.props.setState({database: json.data.reverse()});
+                console.log("API response (filter):", json.data);
                 this.props.handleSuccessMessage(json)
             })
             .catch(error => {
@@ -57,40 +59,40 @@ export default class AllVehicles extends Component
 
             <div className="filter-container">
                 <h3 className="section-heading">Filter</h3>
+                <div className="center-select">
+                    <div className="form-group-container">
+                        <label htmlFor="type">Typ</label>
+                        <select id="type" onChange={this.handleChange} value={this.state.type}>
+                            <option value="">Visa alla</option>
+                            <option value="personbil">Personbil</option>
+                            <option value="motorcykel">Motorcykel</option>
+                            <option value="atv">ATV</option>
+                            <option value="trehjuling">Trehjuling</option>
+                            <option value="lätt lastbil">Lätt lastbil</option>
+                        </select>
+                    </div>
 
-                <div className="form-group-container">
-                    <label htmlFor="type">Typ</label>
-                    <select id="type" onChange={this.handleChange} value={this.state.type}>
-                        <option value="">Visa alla</option>
-                        <option value="personbil">Personbil</option>
-                        <option value="motorcykel">Motorcykel</option>
-                        <option value="atv">ATV</option>
-                        <option value="trehjuling">Trehjuling</option>
-                        <option value="lätt lastbil">Lätt lastbil</option>
-                    </select>
-                </div>
+                    <div className="form-group-container">
+                        <label htmlFor="gearbox">Växellåda</label>
+                        <select id="gearbox" onChange={this.handleChange} value={this.state.gearbox}>
+                            <option value="">Visa alla</option>
+                            <option value="manuell">Manuell</option>
+                            <option value="automat">Automat</option>
+                        </select>
+                    </div>
 
-                <div className="form-group-container">
-                    <label htmlFor="gearbox">Växellåda</label>
-                    <select id="gearbox" onChange={this.handleChange} value={this.state.gearbox}>
-                        <option value="">Visa alla</option>
-                        <option value="manuell">Manuell</option>
-                        <option value="automat">Automat</option>
-                    </select>
+                    <div className="form-group-container">
+                        <label htmlFor="fuel">Drivmedel</label>
+                        <select id="fuel" onChange={this.handleChange} value={this.state.fuel}>
+                            <option value="">Visa alla</option>
+                            <option value="95">95</option>
+                            <option value="E85">E85</option>
+                            <option value="diesel">diesel</option>
+                            <option value="gas">gas</option>
+                            <option value="jetbränsle">jetbränsle</option>
+                        </select>
+                    </div>
                 </div>
-                
-                <div className="form-group-container">
-                    <label htmlFor="fuel">Drivmedel</label>
-                    <select id="fuel" onChange={this.handleChange} value={this.state.fuel}>
-                        <option value="">Visa alla</option>
-                        <option value="95">95</option>
-                        <option value="E85">E85</option>
-                        <option value="diesel">diesel</option>
-                        <option value="gas">gas</option>
-                        <option value="jetbränsle">jetbränsle</option>
-                    </select>
-                </div>
-
             </div>
 
             <div className="vehicle-search-head">
@@ -102,7 +104,7 @@ export default class AllVehicles extends Component
             </div>
 
             <Render if={allVehicles.length === 0}>
-                <p>Inget matchar ditt filter</p>
+                <p className="filter-message">Inget matchar ditt filter</p>
             </Render>
 
             <Render if={allVehicles.length > 0}>

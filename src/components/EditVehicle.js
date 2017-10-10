@@ -10,6 +10,10 @@ export default class EditVehicle extends Component {
         }
     }
 
+    componentDidMount() {
+        console.log(this.state.vehicleData)
+    }
+
     componentWillReceiveProps() {
         console.log('recieved new props')
         this.setState({
@@ -61,14 +65,14 @@ export default class EditVehicle extends Component {
             });
 
         // close modal
-        this.props.setState({ editVehicle: false });
+        this.props.setState({editVehicle: false});
 
         // uppdate global state
         let updatedDatabase = this.props.getState.database.filter(
             vehicle => (vehicle._id !== deleteVehicle._id)
         );
 
-        this.props.setState({ database: updatedDatabase });
+        this.props.setState({database: updatedDatabase});
     }
 
     handleSubmit() {
@@ -80,8 +84,7 @@ export default class EditVehicle extends Component {
                 console.log("API response:", json);
                 this.props.handleSuccessMessage(json);
 
-                if (json.result === 'ok')
-                {
+                if (json.result === 'ok') {
                     // close modal
                     this.props.setState({editVehicle: false});
 
@@ -171,6 +174,18 @@ export default class EditVehicle extends Component {
                                value={this.state.vehicleData[0].price}
                                onChange={this.handleChange.bind(this)}/>
                     </div>
+                    <div className="form-group-container">
+                        <label htmlFor="fuel">Drivmedel</label>
+                        <select id="fuel" onChange={this.handleChange.bind(this)}
+                                value={this.state.vehicleData[0].fuel || ""}>
+                            <option value="" disabled>Välj</option>
+                            <option value="95">95</option>
+                            <option value="E85">E85</option>
+                            <option value="diesel">diesel</option>
+                            <option value="gas">gas</option>
+                            <option value="jetbränsle">jetbränsle</option>
+                        </select>
+                    </div>
                     <div className="form-group-container-full">
                         <label htmlFor="image">Bildlänk</label>
                         <input type="text" placeholder="ex. http://url.se" id="image"
@@ -202,6 +217,11 @@ export default class EditVehicle extends Component {
                         <div className="form-group-container-full">
                             <button className="button button-danger" type="button"
                                     onClick={this.handleDelete.bind(this)}>Ta bort fordon
+                            </button>
+                        </div>
+                        <div className="form-group-container-full">
+                            <button className="button button-close" type="button"
+                                    onClick={this.props.closeEditModal}>Stäng
                             </button>
                         </div>
                     </div>
