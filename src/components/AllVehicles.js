@@ -57,15 +57,23 @@ export default class AllVehicles extends Component {
             <div className="filter-container">
                 <h3 className="section-heading">Filter</h3>
                 <div className="center-select">
+
                     <div className="form-group-container">
-                        <label htmlFor="type">Typ</label>
-                        <select id="type" onChange={this.handleChange} value={this.state.type}>
-                            <option value="">Visa alla</option>
-                            <option value="personbil">Personbil</option>
-                            <option value="motorcykel">Motorcykel</option>
-                            <option value="atv">ATV</option>
-                            <option value="trehjuling">Trehjuling</option>
-                            <option value="lätt lastbil">Lätt lastbil</option>
+                        <label htmlFor="license">Körkort</label>
+                        <select id="license" onChange={this.handleChange} value={this.state.license}>
+                            <option value="" disabled>Välj</option>
+                            <option value="A">A</option>
+                            <option value="A1">A1</option>
+                            <option value="A2">A2</option>
+                            <option value="AM">AM</option>
+                            <option value="B">B</option>
+                            <option value="BE">BE</option>
+                            <option value="C">C</option>
+                            <option value="CE">CE</option>
+                            <option value="C1">C1</option>
+                            <option value="C1E">C1E</option>
+                            <option value="D">D</option>
+                            <option value="D1E">D1E</option>
                         </select>
                     </div>
 
