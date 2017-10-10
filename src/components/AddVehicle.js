@@ -7,12 +7,12 @@ export default class AddVehicle extends Component {
         this.state = { // data for testing
             type: 'personbil',
             license: 'B',
-            brand: 'Mille',
-            model: 'Modell123',
+            brand: 'Olssons',
+            model: 'Modell 123',
             year: 2017,
             gearbox: 'manuell',
             price: 999,
-            note: 'Exempeldata är förifylld. (Formuläret är fungerande och ihopkopplat med API/DB.)'
+            note: 'Förifylld exempeldata i formuläret.'
         };
     }
 
@@ -29,10 +29,19 @@ export default class AddVehicle extends Component {
     handleSubmit = () => {
         fetch(config.apiRoot + "vehicle/create?" + this.serializeObject(this.state))
             .then(resp => resp.json())
-            .then(json => {
-                // show success message to the user
+            .then(json =>
+            {
                 console.log("API response:", json);
                 this.props.handleSuccessMessage(json);
+
+                if (json.result === 'ok') {
+                    // close modal
+                    this.props.setState({ addVehicle: false });
+
+                    // uppdate global state
+                    let updatedDatabase = [json.data, ...this.props.getState.database];
+                    this.props.setState({database: updatedDatabase});
+                }
             })
             .catch(error => {
                 // show error message to the user (validation is handles by the api/model)
