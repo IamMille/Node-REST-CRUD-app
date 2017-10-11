@@ -127,7 +127,7 @@ export default class BookVehicle extends Component
             <div className="book-vehicle-container">
 
                 <div className="image-container-book">
-                    <img src={this.props.data[0].image || "http://loslonelyboysmovie.com/wp-content/uploads/2017/06/1644c9b3a6faa81a6b9ad3c39ea80858-300x164.jpg"} alt="bild"/>
+                    <img src={this.props.data[0].image || "https://loslonelyboysmovie.com/wp-content/uploads/2017/06/1644c9b3a6faa81a6b9ad3c39ea80858-300x164.jpg"} alt="bild"/>
                 </div>
 
                 <div className="list-container">
