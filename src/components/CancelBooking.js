@@ -48,8 +48,6 @@ export default class CancelBooking extends Component
                 console.warn("API error:", error);
                 this.props.handleErrorMessage(error.message);
             });
-
-        console.log("bookVehicle did mount");
     };
 
     render() {

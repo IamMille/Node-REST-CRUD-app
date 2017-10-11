@@ -203,7 +203,6 @@ class App extends Component
 
                 <Menu
                     admin={this.state.admin}
-                    checkUrl={this.checkUrl.bind(this)}
                     handleLogin={this.handleLogin.bind(this)}
                     handleCancelBookingModal={this.handleCancelBookingModal}
                     handleAddVehicleModal={this.handleAddVehicleModal}

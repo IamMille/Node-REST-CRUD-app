@@ -63,7 +63,6 @@ export default class Menu extends Component
 }
 
 Menu.propTypes = {
-    checkUrl: PropTypes.func.isRequired,
     admin: PropTypes.bool.isRequired,
     handleLogin: PropTypes.func.isRequired
 };
