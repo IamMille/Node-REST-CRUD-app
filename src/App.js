@@ -18,7 +18,6 @@ class App extends Component
         super(props);
         this.state = {
             admin: false,
-            location: '',
             bookVehicle: false,
             editVehicle: false,
             cancelBooking: false,
@@ -40,31 +39,20 @@ class App extends Component
 
     componentDidMount() {
         fetch( config.apiRoot + 'vehicle/read' )
-            .then(resp => resp.text()) //text()
-            .then(text => {
-                try {
-                    //console.log("fetch:", text);
-                    let json = JSON.parse(text);
-                    this.setState({
-                        database: json.data.reverse(), // newest first
-                        finished: true
-                    });
-                    this.handleSuccessMessage(json)
-                } catch(err) {
-                    console.log("Catched error:", err);
-                }
+            .then(resp => resp.json())
+            .then(json =>
+            {
+                this.setState({
+                    database: json.data.reverse(), // newest first
+                    finished: true
+                });
+
+                this.handleSuccessMessage(json)
             })
             .catch(error => {
                 console.error("API error:", error);
                 this.handleErrorMessage(error)
             });
-
-        //if (window.location.hash === '') window.location.hash = "#vehicles";
-
-        this.checkUrl();
-        window.addEventListener("hashchange", () => {
-            this.checkUrl()
-        });
 
         document.addEventListener("keydown", this.escFunction, false);
     }
@@ -74,16 +62,12 @@ class App extends Component
     }
 
     escFunction = (event) => {
-        if (event.keyCode !== 27) return;
-        this.setState({ bookVehicle: false, editVehicle: false, cancelBooking: false, addVehicle: false })
+        if (event.keyCode === 27)
+            this.setState({ bookVehicle: false, editVehicle: false, cancelBooking: false, addVehicle: false })
     };
 
-    checkUrl() {
-        //this.setState({ location: window.location.hash.replace('#', '') });
-    }
 
-    handleLogin()
-    {
+    handleLogin() {
         this.handleSuccessMessage({
             result: 'ok',
             message: `Du har blivit ${ !this.state.admin ? 'inloggad!' : 'utloggad' }`
@@ -95,10 +79,8 @@ class App extends Component
     }
 
     vehicleBooking(event) {
-        let target = event.currentTarget;
-
         const clonedArray = JSON.parse(JSON.stringify(this.state.database));
-        const clickedVehicleId = target.getAttribute('data-id');
+        const clickedVehicleId = event.currentTarget.getAttribute('data-id'); // currentTarget = where eventListener is
         const clickedVehicle = clonedArray.filter(vehicle => vehicle._id.indexOf(clickedVehicleId) > -1);
 
         this.setState({
@@ -109,6 +91,7 @@ class App extends Component
 
     handleBookModal(event) {
         const target = event.target;
+
         if (target.localName === 'section' || target.innerText.toLowerCase() === 'stäng') {
             this.setState({
                 bookVehicle: !this.state.bookVehicle
@@ -118,6 +101,7 @@ class App extends Component
 
     handleEditModal(event) {
         const target = event.target;
+
         if (target.localName === 'section' || target.innerText.toLowerCase() === 'stäng') {
             this.setState({
                 editVehicle: !this.state.editVehicle
@@ -127,6 +111,7 @@ class App extends Component
 
     handleCancelBookingModal = (event) => {
         const target = event.target;
+
         if (target.localName === 'section' || target.innerText.toLowerCase() === 'stäng') {
             this.setState({
                 cancelBooking: !this.state.cancelBooking
@@ -139,8 +124,8 @@ class App extends Component
     };
 
     handleAddVehicleModal = (event) => {
-        console.log('add vehicle modal');
         const target = event.target;
+
         if (target.localName === 'section' || target.innerText.toLowerCase() === 'stäng') {
             this.setState({
                 addVehicle: !this.state.addVehicle
@@ -218,7 +203,6 @@ class App extends Component
 
                 <Menu
                     admin={this.state.admin}
-                    checkUrl={this.checkUrl.bind(this)}
                     handleLogin={this.handleLogin.bind(this)}
                     handleCancelBookingModal={this.handleCancelBookingModal}
                     handleAddVehicleModal={this.handleAddVehicleModal}

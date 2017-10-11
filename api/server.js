@@ -29,9 +29,6 @@ app.listen(PORT, () => {
 
 // ---------------------------------------------------------------------
 
-const handleError = (error, context) => (error ? console.log(error) : undefined);
-
-mongoose.Promise = global.Promise; // not needed unless using promises?
 mongoose.connect(DATABASE, {useMongoClient: true}, (err) => {
     if (err) console.log('*** Error connecting to server: %s', err) || process.exit(); //hacky
     else console.log('*** Server connected to database: %s', mongoose.connection.name);
